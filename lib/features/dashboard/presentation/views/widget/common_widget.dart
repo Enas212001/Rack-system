@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'custom_app_bar.dart';
+import 'icon_with_circle.dart';
+import 'notifications_number.dart';
 
 class CommonWidget extends StatelessWidget {
   const CommonWidget({super.key});
@@ -28,9 +31,9 @@ class CommonWidget extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              IconWithBorder(icon: Icons.zoom_out_map_outlined),
-              IconWithBorder(icon: Icons.notifications_none_outlined),
-              IconWithBorder(icon: Icons.person_2_outlined),
+              IconWithCircle(icon: Icons.zoom_out_map_outlined),
+              IconWithCircle(icon: Icons.notifications_none_outlined),
+              IconWithCircle(icon: Icons.person_2_outlined),
             ],
           ),
         ),
