@@ -9,6 +9,7 @@ ThemeData getThemeData() {
       elevation: 0,
     ),
     textTheme: TextTheme(
+      bodySmall: TextStyle(fontSize: 8.sp, color: Colors.black),
       displaySmall: TextStyle(
         fontSize: 10.sp,
         fontWeight: FontWeight.bold,
@@ -18,7 +19,7 @@ ThemeData getThemeData() {
       titleMedium: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
       titleSmall: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
       headlineLarge: TextStyle(fontSize: 48.sp, fontWeight: FontWeight.w800),
-      headlineMedium: TextStyle(fontSize: 40.sp, fontWeight: FontWeight.w800),
+      headlineMedium: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.w800),
     ),
   );
 }

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_assets.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+
+import 'widget/common_widget.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});
@@ -12,45 +15,18 @@ class DashboardView extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            CustomAppBar(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 28.w,
-                    vertical: 12.h,
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Welcome Back Mohand',
-                                style: Theme.of(context).textTheme.titleSmall,
-                              ),
-                              SizedBox(height: 8.h),
-                              NotificationsNumberWidget(),
-                            ],
-                          ),
-                          const Spacer(),
-                          IconWithBorder(icon: Icons.zoom_out_map_outlined),
-                          IconWithBorder(
-                            icon: Icons.notifications_none_outlined,
-                          ),
-                          IconWithBorder(icon: Icons.person_2_outlined),
-                        ],
-                      ),
-                      SizedBox(height: 29.h),
-                      AddClientWidget(),
-                      ImageGridView(),
-                    ],
-                  ),
-                ),
+            CommonWidget(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 12.h),
+              child: Column(
+                children: [
+                  SizedBox(height: 15.h),
+                  AddClientWidget(),
+                  SizedBox(height: 20.h),
+                ],
               ),
             ),
+            Expanded(child: SingleChildScrollView(child: ImageGridView())),
           ],
         ),
       ),
@@ -59,9 +35,7 @@ class DashboardView extends StatelessWidget {
 }
 
 class NotificationsNumberWidget extends StatelessWidget {
-  const NotificationsNumberWidget({
-    super.key,
-  });
+  const NotificationsNumberWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,18 +46,13 @@ class NotificationsNumberWidget extends StatelessWidget {
         children: [
           TextSpan(
             text: ' 2 Unread',
-            style: Theme.of(context)
-                .textTheme
-                .titleSmall!
-                .copyWith(
-                  color: AppColors.primaryColor,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall!.copyWith(color: AppColors.primaryColor),
           ),
           TextSpan(
             text: ' Notifications',
-            style: Theme.of(
-              context,
-            ).textTheme.titleSmall,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
       ),
@@ -151,7 +120,12 @@ class ImageGridView extends StatelessWidget {
         childAspectRatio: 2,
       ),
       itemBuilder: (context, index) {
-        return Image.asset(imagePaths[index]);
+        return GestureDetector(
+          onTap: () {
+            GoRouter.of(context).push('/building');
+          },
+          child: Image.asset(imagePaths[index]),
+        );
       },
     );
   }
