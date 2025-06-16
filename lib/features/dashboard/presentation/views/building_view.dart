@@ -3,6 +3,7 @@ import 'package:flutter_application_1/core/utils/app_assets.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/features/dashboard/presentation/views/widget/common_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class BuildingView extends StatelessWidget {
   const BuildingView({super.key});
@@ -22,13 +23,18 @@ class BuildingView extends StatelessWidget {
             SliverToBoxAdapter(child: SizedBox(height: 10.h)),
             SliverToBoxAdapter(child: TableData()),
             SliverToBoxAdapter(child: SizedBox(height: 20.h)),
-            SliverToBoxAdapter(child: AddBuildingButton()),
+            SliverToBoxAdapter(
+              child: AddBuildingButton(textButton: '+ Add Building'),
+            ),
             SliverToBoxAdapter(child: SizedBox(height: 20.h)),
-
-            // The grid
             SliverGrid(
               delegate: SliverChildBuilderDelegate(
-                (context, index) => BuildingItem(),
+                (context, index) => GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).push('/racks');
+                  },
+                  child: BuildingItem(),
+                ),
                 childCount: 5,
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -64,7 +70,7 @@ class BuildingItem extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Buildind',
+                  'Building',
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     color: AppColors.darkBlueColor,
                   ),
@@ -93,28 +99,36 @@ class BuildingInfo extends StatelessWidget {
     return Padding(
       padding:
           EdgeInsets.symmetric(vertical: 12.h) + EdgeInsets.only(left: 28.w),
-      child: Row(
+      child: Column(
         children: [
-          Text.rich(
-            TextSpan(
-              text: 'Steigenberge ',
-              style: Theme.of(context).textTheme.titleSmall,
-              children: [
-                TextSpan(
-                  text: '/Buildings',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w400),
-                ),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconTextWithBG(icon: Icons.calendar_month_outlined, text: 'Date'),
+              SizedBox(width: 8.w),
+              IconTextWithBG(text: 'Export', icon: Icons.open_in_new),
+              SizedBox(width: 8.w),
+              Image.asset(Assets.imagesAddIcon),
+            ],
           ),
-          Spacer(),
-          IconTextWithBG(icon: Icons.calendar_month_outlined, text: 'Date'),
-          SizedBox(width: 8.w),
-          IconTextWithBG(text: 'Export', icon: Icons.open_in_new),
-          SizedBox(width: 8.w),
-          Image.asset(Assets.imagesAddIcon),
+          Row(
+            children: [
+              Text.rich(
+                TextSpan(
+                  text: 'Steigenberge ',
+                  style: Theme.of(context).textTheme.titleSmall,
+                  children: [
+                    TextSpan(
+                      text: '/Buildings',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -122,8 +136,8 @@ class BuildingInfo extends StatelessWidget {
 }
 
 class AddBuildingButton extends StatelessWidget {
-  const AddBuildingButton({super.key});
-
+  const AddBuildingButton({super.key, required this.textButton});
+  final String textButton;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -136,7 +150,7 @@ class AddBuildingButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(30.r),
         ),
         child: Text(
-          '+ Add Building',
+          textButton,
           style: Theme.of(
             context,
           ).textTheme.titleSmall!.copyWith(color: AppColors.whiteColor),
