@@ -32,29 +32,7 @@ class DashboardView extends StatelessWidget {
                                 style: Theme.of(context).textTheme.titleSmall,
                               ),
                               SizedBox(height: 8.h),
-                              Text.rich(
-                                TextSpan(
-                                  text: 'You have',
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                  children: [
-                                    TextSpan(
-                                      text: ' 2 Unread',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(
-                                            color: AppColors.primaryColor,
-                                          ),
-                                    ),
-                                    TextSpan(
-                                      text: ' Notifications',
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.titleSmall,
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              NotificationsNumberWidget(),
                             ],
                           ),
                           const Spacer(),
@@ -66,32 +44,7 @@ class DashboardView extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 29.h),
-                      Row(
-                        children: [
-                          Text(
-                            'Our Clients',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          Spacer(),
-                          Row(
-                            children: [
-                              Container(
-                                color: Colors.black,
-                                width: 86.w,
-                                height: 19.h,
-                                alignment: Alignment.center,
-                                child: Text(
-                                  '+Add User',
-                                  style: Theme.of(context).textTheme.titleSmall!
-                                      .copyWith(color: Colors.white),
-                                ),
-                              ),
-                              SizedBox(width: 5.w),
-                              Image.asset(Assets.imagesAddIcon),
-                            ],
-                          ),
-                        ],
-                      ),
+                      AddClientWidget(),
                       ImageGridView(),
                     ],
                   ),
@@ -101,6 +54,71 @@ class DashboardView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class NotificationsNumberWidget extends StatelessWidget {
+  const NotificationsNumberWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text.rich(
+      TextSpan(
+        text: 'You have',
+        style: Theme.of(context).textTheme.titleSmall,
+        children: [
+          TextSpan(
+            text: ' 2 Unread',
+            style: Theme.of(context)
+                .textTheme
+                .titleSmall!
+                .copyWith(
+                  color: AppColors.primaryColor,
+                ),
+          ),
+          TextSpan(
+            text: ' Notifications',
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class AddClientWidget extends StatelessWidget {
+  const AddClientWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text('Our Clients', style: Theme.of(context).textTheme.titleMedium),
+        Spacer(),
+        Row(
+          children: [
+            Container(
+              color: Colors.black,
+              width: 86.w,
+              height: 19.h,
+              alignment: Alignment.center,
+              child: Text(
+                '+Add User',
+                style: Theme.of(
+                  context,
+                ).textTheme.titleSmall!.copyWith(color: Colors.white),
+              ),
+            ),
+            SizedBox(width: 5.w),
+            Image.asset(Assets.imagesAddIcon),
+          ],
+        ),
+      ],
     );
   }
 }
@@ -128,12 +146,12 @@ class ImageGridView extends StatelessWidget {
       shrinkWrap: true,
       itemCount: imagePaths.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, // 3 columns
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
+        crossAxisCount: 2,
+        crossAxisSpacing: 5,
+        childAspectRatio: 2,
       ),
       itemBuilder: (context, index) {
-        return Image.asset(imagePaths[index], fit: BoxFit.cover);
+        return Image.asset(imagePaths[index]);
       },
     );
   }
