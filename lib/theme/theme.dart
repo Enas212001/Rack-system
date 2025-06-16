@@ -15,7 +15,7 @@ ThemeData getThemeData() {
         fontWeight: FontWeight.bold,
         color: AppColors.primaryColor,
       ),
-      titleLarge: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w800),
+      titleLarge: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
       titleMedium: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
       titleSmall: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
       headlineLarge: TextStyle(fontSize: 48.sp, fontWeight: FontWeight.w800),

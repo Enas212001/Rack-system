@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'table_item.dart';
 
@@ -14,9 +15,21 @@ class TableData extends StatelessWidget {
         TableRow(
           decoration: BoxDecoration(color: AppColors.primaryColor),
           children: [
-            TableItem(text: 'Vlan Name', color: AppColors.primaryColor),
-            TableItem(text: 'Vlan ID', color: AppColors.primaryColor),
-            TableItem(text: 'Colour Code', color: AppColors.primaryColor),
+            TableItem(
+              text: 'Vlan Name',
+              color: AppColors.primaryColor,
+              height: 50.h,
+            ),
+            TableItem(
+              text: 'Vlan ID',
+              color: AppColors.primaryColor,
+              height: 50.h,
+            ),
+            TableItem(
+              text: 'Colour Code',
+              color: AppColors.primaryColor,
+              height: 50.h,
+            ),
           ],
         ),
         TableRow(
