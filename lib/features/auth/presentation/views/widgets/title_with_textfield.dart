@@ -14,7 +14,13 @@ class TitleWithTextField extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
         ),
         SizedBox(height: 8.h),
-        TextField(
+        TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter $title';
+            }
+            return null;
+          },
           decoration: InputDecoration(
             border: InputBorder.none,
             filled: true,
