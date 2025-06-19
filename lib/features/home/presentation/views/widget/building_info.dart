@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'icon_with_text_bg.dart';
 
 class BuildingInfo extends StatelessWidget {
-  const BuildingInfo({super.key});
-
+  const BuildingInfo({super.key, required this.hotelName});
+final String hotelName;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,7 +28,7 @@ class BuildingInfo extends StatelessWidget {
             children: [
               Text.rich(
                 TextSpan(
-                  text: 'Steigenberge ',
+                  text: hotelName,
                   style: Theme.of(context).textTheme.titleSmall,
                   children: [
                     TextSpan(

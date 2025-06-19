@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_application_1/core/api/api_consumer.dart';
+import 'package:flutter_application_1/core/error/server_failure.dart';
 
 class DioConsumer extends ApiConsumer {
   final Dio dio;
@@ -32,7 +33,7 @@ class DioConsumer extends ApiConsumer {
       );
       return response.data;
     } on DioException catch (e) {
-      throw e.message ?? 'An error occurred';
+      throw handleDioException(e);
     }
   }
 
@@ -50,7 +51,7 @@ class DioConsumer extends ApiConsumer {
       );
       return response.data;
     } on DioException catch (e) {
-      throw e.message ?? 'An error occurred';
+      handleDioException(e);
     }
   }
 
@@ -69,7 +70,7 @@ class DioConsumer extends ApiConsumer {
       );
       return response.data;
     } on DioException catch (e) {
-      throw e.message ?? 'An error occurred';
+      handleDioException(e);
     }
   }
 
@@ -88,7 +89,7 @@ class DioConsumer extends ApiConsumer {
       );
       return response.data;
     } on DioException catch (e) {
-      throw e.message ?? 'An error occurred';
+      handleDioException(e);
     }
   }
 }

@@ -3,8 +3,8 @@ import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BuildingItem extends StatelessWidget {
-  const BuildingItem({super.key});
-
+  const BuildingItem({super.key, required this.building});
+  final String building;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +29,7 @@ class BuildingItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '1',
+                  building,
                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                     color: AppColors.darkBlueColor,
                   ),

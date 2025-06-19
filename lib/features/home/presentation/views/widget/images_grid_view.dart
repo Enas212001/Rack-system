@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/features/home/presentation/manager/cubit/home_cubit.dart';
+import 'package:flutter_application_1/core/utils/api_key.dart';
+import 'package:flutter_application_1/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,11 +13,11 @@ class ImageGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        if (state is HomeLoading) {
+        if (state is HotelLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is HomeFailure) {
+        } else if (state is HotelFailure) {
           return Center(child: Text(state.message));
-        } else if (state is HomeSuccess) {
+        } else if (state is HotelSuccess) {
           return GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -25,25 +28,19 @@ class ImageGridView extends StatelessWidget {
               childAspectRatio: 2,
             ),
             itemBuilder: (context, index) {
+              final hotel = state.buildings[index];
               return GestureDetector(
                 onTap: () {
-                  GoRouter.of(context).push('/building');
+                  BlocProvider.of<HomeCubit>(context).getBuildings();
+                  GoRouter.of(context).push('/building', extra: hotel);
                 },
-                child:
-                    //  Image.network(
-                    //   state.buildings[index].logo!,
-                    //   errorBuilder: (context, error, stackTrace) =>
-                    //       const Icon(Icons.error),
-                    // ),
-                    Center(
-                      child: Text(
-                        state.buildings[index].name ?? 'No Name',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                child: Image.network(
+                  '${Endpoints.baseUrlImage}/${hotel.logo?.trim()}',
+                  errorBuilder: (context, error, stackTrace) {
+                    log('Image error: $error'); // Log the exact issue
+                    return const Icon(Icons.error);
+                  },
+                ),
               );
             },
           );

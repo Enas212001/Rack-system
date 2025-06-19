@@ -23,3 +23,11 @@ ThemeData getThemeData() {
     ),
   );
 }
+
+abstract class CustomTextStyles {
+  static final text16Bold = TextStyle(
+    color: AppColors.whiteColor,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.bold,
+  );
+}

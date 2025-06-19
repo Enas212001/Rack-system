@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/features/home/data/models/hotel_model/hotel_model.dart';
 import 'package:flutter_application_1/features/home/presentation/views/building_view.dart';
 import 'package:flutter_application_1/features/home/presentation/views/rack_info_view.dart';
 import 'package:flutter_application_1/features/home/presentation/views/racks_view.dart';
@@ -22,13 +24,37 @@ class AppRoutes {
         builder: (context, state) => const DashboardView(),
       ),
       GoRoute(
-        path: building,
-        builder: (context, state) => const BuildingView(),
+        path: '/building',
+        builder: (context, state) {
+          final hotel = state.extra;
+          if (hotel is! HotelModel) {
+            return const Scaffold(
+              body: Center(child: Text('Invalid hotel data')),
+            );
+          }
+          return BuildingView(hotelAsset: hotel.logo ?? '', hotelName: hotel);
+        },
       ),
-      GoRoute(path: racks, builder: (context, state) => const RacksView()),
+
+      GoRoute(
+        path: racks,
+        builder: (context, state) {
+          final logo = state.extra;
+          if (logo is! String) {
+            return const Scaffold(body: Center(child: Text('Invalid logo')));
+          }
+          return RacksView(hotelAsset: logo);
+        },
+      ),
       GoRoute(
         path: rackInfo,
-        builder: (context, state) => const RackInfoView(),
+        builder: (context, state) {
+          final logo = state.extra;
+          if (logo is! String) {
+            return const Scaffold(body: Center(child: Text('Invalid logo')));
+          }
+          return RackInfoView(hotelAsset: logo);
+        },
       ),
     ],
   );
