@@ -2,6 +2,18 @@ class ApiKey {
   static const String email = 'email';
   static const String password = 'password';
   static const String loginId = 'id';
+  static const String hotelId = 'hotel_id';
+  static const String buildingName = 'building_name';
+  static const String rackId = 'rack_id';
+  static const String buildingRackId = 'building_r_id';
+  static const String switchId = 'switch_id';
+  static const String productPanel = 'product_panal';
+  static const String productSerial = 'product_serial';
+  static const String productMac = 'product_mac';
+  static const String productModel = 'product_model';
+  static const String productPort = 'product_port';
+  static const String deviceName = 'device_name';
+  static const String siteName = 'site_name';
 }
 
 class Endpoints {
@@ -9,6 +21,13 @@ class Endpoints {
   static const String baseUrlImage = 'https://rack.powersmtp.solutions';
   static const String login = '$baseUrl/login.php';
   static const String getHotels = '$baseUrl/get_hotels.php';
-  static const String getBuildings = '$baseUrl/get_buildings.php';
+  static const String addRack = '$baseUrl/add_rack.php';
+  static String getBuildings(String hotelId) {
+    return '$baseUrl/get_buildings.php?hotel_id=$hotelId';
+  }
+
   static const String getRacksInfo = '$baseUrl/get_rack_info.php';
+  static String addBuilding(String hotelId) {
+    return '$baseUrl/add_building.php?hotel_id=$hotelId';
+  }
 }

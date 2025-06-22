@@ -30,4 +30,9 @@ abstract class CustomTextStyles {
     fontSize: 16.sp,
     fontWeight: FontWeight.bold,
   );
+
+  static final text20Bold = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.bold,
+  );
 }

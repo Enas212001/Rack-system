@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
+import 'package:flutter_application_1/features/home/data/models/hotel_model/hotel_model.dart';
 import 'package:flutter_application_1/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -7,8 +8,8 @@ import 'package:go_router/go_router.dart';
 import 'building_item.dart';
 
 class BuildingGridView extends StatelessWidget {
-  const BuildingGridView({super.key, required this.hotelAsset});
-  final String hotelAsset;
+  const BuildingGridView({super.key, required this.hotelModel});
+  final HotelModel hotelModel;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -26,7 +27,7 @@ class BuildingGridView extends StatelessWidget {
               (context, index) => GestureDetector(
                 onTap: () {
                   BlocProvider.of<HomeCubit>(context).getRacksInfo();
-                  GoRouter.of(context).push(AppRoutes.racks, extra: hotelAsset);
+                  GoRouter.of(context).push(AppRoutes.racks, extra: hotelModel);
                 },
                 child: BuildingItem(building: buildings[index].id!),
               ),

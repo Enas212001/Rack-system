@@ -32,8 +32,10 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<ServerFailure, List<BuildingModel>>> getBuildings() async {
-    final response = await api.get(Endpoints.getBuildings);
+  Future<Either<ServerFailure, List<BuildingModel>>> getBuildings({
+    required String hotelId,
+  }) async {
+    final response = await api.get(Endpoints.getBuildings(hotelId));
     try {
       final buildings = (response as List)
           .map((item) => BuildingModel.fromJson(item))
@@ -55,6 +57,65 @@ class HomeRepoImpl implements HomeRepo {
           .map((item) => RackInfoModel.fromJson(item))
           .toList();
       return right(racks);
+    } on ServerFailure catch (e) {
+      log('Error parsing buildings: $e');
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, BuildingModel>> addBuilding({
+    required String buildingName,
+    required String rackId,
+    required String buildingRackId,
+    required String hotelId,
+  }) async {
+    try {
+      final response = await api.post(
+        Endpoints.addBuilding(hotelId),
+        data: {
+          ApiKey.buildingName: buildingName,
+          ApiKey.rackId: int.parse(rackId),
+          ApiKey.buildingRackId: buildingRackId,
+        },
+      );
+      final building = BuildingModel.fromJson(response);
+      return right(building);
+    } on ServerFailure catch (e) {
+      log('Error parsing buildings: $e');
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, RackInfoModel>> addRack({
+    required String buildingRId,
+    required String switchId,
+    required String productPanel,
+    required String productSerial,
+    required String productMac,
+    required String productModel,
+    required String productPort,
+    required String deviceName,
+    required String siteName,
+  }) async {
+    try {
+      final response = await api.post(
+        Endpoints.addRack,
+        data: {
+          ApiKey.buildingRackId: buildingRId,
+          ApiKey.switchId: switchId,
+          ApiKey.productPanel: productPanel,
+          ApiKey.productSerial: productSerial,
+          ApiKey.productMac: productMac,
+          ApiKey.productModel: productModel,
+          ApiKey.productPort: productPort,
+          ApiKey.deviceName: deviceName,
+          ApiKey.siteName: siteName,
+        },
+      );
+      final rack = RackInfoModel.fromJson(response);
+      return right(rack);
     } on ServerFailure catch (e) {
       log('Error parsing buildings: $e');
       return left(e);

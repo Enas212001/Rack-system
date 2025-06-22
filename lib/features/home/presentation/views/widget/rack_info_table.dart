@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
+import 'package:flutter_application_1/features/home/data/models/rack_info_model/rack_info_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'table_item.dart';
 
 class RockInfoTable extends StatelessWidget {
-  const RockInfoTable({super.key});
-
+  const RockInfoTable({super.key, required this.rackInfoModel});
+  final List<RackInfoModel> rackInfoModel;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -64,39 +65,33 @@ class RockInfoTable extends StatelessWidget {
               ),
             ],
           ),
-          TableRow(
-            children: [
-              TableItem(text: '101'),
-              TableItem(text: 'SN123456'),
-              TableItem(text: '00:1A:2B:3C:4D:5E'),
-              TableItem(text: 'GWN7664'),
-              TableItem(text: 'Building 100'),
-              TableItem(text: '1'),
-              TableItem(text: '2'),
-            ],
-          ),
-          TableRow(
-            children: [
-              TableItem(text: '101'),
-              TableItem(text: 'SN123456'),
-              TableItem(text: '00:1A:2B:3C:4D:5E'),
-              TableItem(text: 'GWN7664'),
-              TableItem(text: 'Building 100'),
-              TableItem(text: '1'),
-              TableItem(text: '2'),
-            ],
-          ),
-          TableRow(
-            children: [
-              TableItem(text: '101'),
-              TableItem(text: 'SN123456'),
-              TableItem(text: '00:1A:2B:3C:4D:5E'),
-              TableItem(text: 'GWN7664'),
-              TableItem(text: 'Building 100'),
-              TableItem(text: '1'),
-              TableItem(text: '2'),
-            ],
-          ),
+          for (final rack in rackInfoModel)
+            TableRow(
+              children: [
+                TableItem(text: rack.deviceName ?? ''),
+                TableItem(text: rack.productSerial ?? ''),
+                TableItem(text: rack.productMac ?? ''),
+                TableItem(text: rack.productModel ?? ''),
+                TableItem(text: rack.siteName ?? ''),
+                TableItem(text: rack.productPort ?? ''),
+                TableItem(text: rack.productPanal ?? ''),
+              ],
+            ),
+          // ...rackInfoModel
+          //     .map(
+          //       (rack) => TableRow(
+          //         children: [
+          //           TableItem(text: rack.deviceName ?? ''),
+          //           TableItem(text: rack.productSerial ?? ''),
+          //           TableItem(text: rack.productMac ?? ''),
+          //           TableItem(text: rack.productModel ?? ''),
+          //           TableItem(text: rack.siteName ?? ''),
+          //           TableItem(text: rack.productPort ?? ''),
+          //           TableItem(text: rack.productPanal ?? ''),
+          //         ],
+          //       ),
+          //     )
+          //     .toList(),
         ],
       ),
     );

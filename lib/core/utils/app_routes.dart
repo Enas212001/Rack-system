@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/home/data/models/hotel_model/hotel_model.dart';
+import 'package:flutter_application_1/features/home/presentation/views/add_building_view.dart';
+import 'package:flutter_application_1/features/home/presentation/views/add_rack_view.dart';
 import 'package:flutter_application_1/features/home/presentation/views/building_view.dart';
 import 'package:flutter_application_1/features/home/presentation/views/rack_info_view.dart';
 import 'package:flutter_application_1/features/home/presentation/views/racks_view.dart';
@@ -15,6 +17,8 @@ class AppRoutes {
   static const String building = '/building';
   static const String racks = '/racks';
   static const String rackInfo = '/rack-info';
+  static const String addBuilding = '/add_building';
+  static const String addRack = '/add_rack';
   static final router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (context, state) => SplashView()),
@@ -24,7 +28,7 @@ class AppRoutes {
         builder: (context, state) => const DashboardView(),
       ),
       GoRoute(
-        path: '/building',
+        path: building,
         builder: (context, state) {
           final hotel = state.extra;
           if (hotel is! HotelModel) {
@@ -32,30 +36,38 @@ class AppRoutes {
               body: Center(child: Text('Invalid hotel data')),
             );
           }
-          return BuildingView(hotelAsset: hotel.logo ?? '', hotelName: hotel);
+          return BuildingView(hotelName: hotel);
         },
       ),
 
       GoRoute(
         path: racks,
         builder: (context, state) {
-          final logo = state.extra;
-          if (logo is! String) {
-            return const Scaffold(body: Center(child: Text('Invalid logo')));
+          final model = state.extra;
+          if (model is! HotelModel) {
+            return const Scaffold(body: Center(child: Text('Invalid rack')));
           }
-          return RacksView(hotelAsset: logo);
+          return RacksView(hotelModel: model);
         },
       ),
       GoRoute(
         path: rackInfo,
         builder: (context, state) {
-          final logo = state.extra;
-          if (logo is! String) {
+          final model = state.extra;
+          if (model is! HotelModel) {
             return const Scaffold(body: Center(child: Text('Invalid logo')));
           }
-          return RackInfoView(hotelAsset: logo);
+          return RackInfoView(hotelModel: model);
         },
       ),
+      GoRoute(
+        path: addBuilding,
+        builder: (context, state) {
+          final id = state.extra;
+          return AddBuildingView(hotelId: id.toString());
+        },
+      ),
+      GoRoute(path: addRack, builder: (context, state) => const AddRackView()),
     ],
   );
 }

@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'icon_with_text_bg.dart';
 
 class RacksInfo extends StatelessWidget {
-  const RacksInfo({super.key});
+  const RacksInfo({super.key, required this.hotelName, required this.id});
+final String hotelName,id;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +27,11 @@ class RacksInfo extends StatelessWidget {
             children: [
               Text.rich(
                 TextSpan(
-                  text: 'Steigenberge ',
+                  text: hotelName,
                   style: Theme.of(context).textTheme.titleSmall,
                   children: [
                     TextSpan(
-                      text: '/Buildings > Building 1',
+                      text: '/Buildings > Building $id',
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.w400,
                       ),

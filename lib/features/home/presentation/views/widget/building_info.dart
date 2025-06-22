@@ -6,7 +6,7 @@ import 'icon_with_text_bg.dart';
 
 class BuildingInfo extends StatelessWidget {
   const BuildingInfo({super.key, required this.hotelName});
-final String hotelName;
+  final String hotelName;
   @override
   Widget build(BuildContext context) {
     return Padding(

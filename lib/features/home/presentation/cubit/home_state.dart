@@ -21,12 +21,12 @@ final class HotelFailure extends HomeState {
 }
 
 final class HotelSuccess extends HomeState {
-  final List<HotelModel> buildings;
+  final List<HotelModel> hotels;
 
-  const HotelSuccess({required this.buildings});
+  const HotelSuccess({required this.hotels});
 
   @override
-  List<Object> get props => [buildings];
+  List<Object> get props => [hotels];
 }
 
 final class BuildingLoading extends HomeState {}
@@ -48,7 +48,9 @@ final class BuildingFailure extends HomeState {
   @override
   List<Object> get props => [message];
 }
+
 final class RacksLoading extends HomeState {}
+
 final class RacksSuccess extends HomeState {
   final List<RackInfoModel> racks;
 
@@ -57,6 +59,7 @@ final class RacksSuccess extends HomeState {
   @override
   List<Object> get props => [racks];
 }
+
 final class RacksFailure extends HomeState {
   final String message;
 
@@ -64,4 +67,32 @@ final class RacksFailure extends HomeState {
 
   @override
   List<Object> get props => [message];
+}
+
+final class AddBuildingLoading extends HomeState {}
+
+final class AddBuildingSuccess extends HomeState {
+  final BuildingModel building;
+
+  const AddBuildingSuccess({required this.building});
+}
+
+final class AddBuildingFailure extends HomeState {
+  final String message;
+
+  const AddBuildingFailure({required this.message});
+}
+
+final class AddRackLoading extends HomeState {}
+
+final class AddRackFailure extends HomeState {
+  final String message;
+
+  const AddRackFailure({required this.message});
+}
+
+final class AddRackSuccess extends HomeState {
+  final RackInfoModel rack;
+
+  const AddRackSuccess({required this.rack});
 }

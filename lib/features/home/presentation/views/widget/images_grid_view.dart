@@ -21,17 +21,19 @@ class ImageGridView extends StatelessWidget {
           return GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: state.buildings.length,
+            itemCount: state.hotels.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 5,
               childAspectRatio: 2,
             ),
             itemBuilder: (context, index) {
-              final hotel = state.buildings[index];
+              final hotel = state.hotels[index];
               return GestureDetector(
                 onTap: () {
-                  BlocProvider.of<HomeCubit>(context).getBuildings();
+                  BlocProvider.of<HomeCubit>(
+                    context,
+                  ).getBuildings(hotelId: hotel.id!);
                   GoRouter.of(context).push('/building', extra: hotel);
                 },
                 child: Image.network(

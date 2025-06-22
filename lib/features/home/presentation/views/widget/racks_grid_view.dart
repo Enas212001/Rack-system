@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
+import 'package:flutter_application_1/features/home/data/models/hotel_model/hotel_model.dart';
 import 'package:flutter_application_1/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,8 +9,8 @@ import 'package:go_router/go_router.dart';
 import 'rack_item.dart';
 
 class RacksGridView extends StatelessWidget {
-  const RacksGridView({super.key, required this.hotelAssets});
-  final String hotelAssets;
+  const RacksGridView({super.key, required this.hotelModel});
+  final HotelModel hotelModel;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -31,9 +32,10 @@ class RacksGridView extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) => GestureDetector(
                 onTap: () {
+                  BlocProvider.of<HomeCubit>(context).getRacksInfo();
                   GoRouter.of(
                     context,
-                  ).push(AppRoutes.rackInfo, extra: hotelAssets);
+                  ).push(AppRoutes.rackInfo, extra: hotelModel);
                 },
                 child: RackItem(id: racks[index].id!),
               ),

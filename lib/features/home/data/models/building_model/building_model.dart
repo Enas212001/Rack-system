@@ -20,13 +20,13 @@ class BuildingModel extends Equatable {
   });
 
   factory BuildingModel.fromJson(Map<String, dynamic> json) => BuildingModel(
-    id: json['id'] as String?,
-    rackId: json['rack_id'] as String?,
-    buildingRId: json['building_r_id'] as String?,
-    buildingName: json['building_name'] as String?,
-    hotelId: json['hotel_id'] as String?,
-    createdAt: json['created_at'] as dynamic,
-    updatedAt: json['updated_at'] as dynamic,
+    id: json['id']?.toString(),
+    rackId: json['rack_id']?.toString(),
+    buildingRId: json['building_r_id']?.toString(),
+    buildingName: json['building_name']?.toString(),
+    hotelId: json['hotel_id']?.toString(),
+    createdAt: json['created_at'],
+    updatedAt: json['updated_at'],
   );
 
   Map<String, dynamic> toJson() => {
