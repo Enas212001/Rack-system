@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/features/auth/presentation/views/widgets/title_with_textfield.dart';
-import 'package:flutter_application_1/features/home/presentation/cubit/home_cubit.dart';
+import 'package:flutter_application_1/features/home/presentation/manager/cubit/rack_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,12 +14,12 @@ class AddRackForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HomeCubit homeCubit = BlocProvider.of<HomeCubit>(context);
-    return BlocConsumer<HomeCubit, HomeState>(
+    RackCubit rackCubit = BlocProvider.of<RackCubit>(context);
+    return BlocConsumer<RackCubit, RackState>(
       listener: (context, state) {
         if (state is AddRackSuccess) {
           showToast('Rack added successfully');
-          homeCubit.getRacksInfo();
+          rackCubit.getRacksInfo();
           Navigator.pop(context);
         } else if (state is AddRackFailure) {
           log(state.message);
@@ -30,7 +30,7 @@ class AddRackForm extends StatelessWidget {
       },
       builder: (context, state) {
         return Form(
-          key: homeCubit.formAddRackKey,
+          key: rackCubit.formAddRackKey,
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -38,24 +38,24 @@ class AddRackForm extends StatelessWidget {
                 Text('Add New Rack', style: CustomTextStyles.text20Bold),
                 SizedBox(height: 20),
                 DropdownButtonFormField<String>(
-                  value: homeCubit.selectedSwitchId,
+                  value: rackCubit.selectedSwitchId,
                   decoration: InputDecoration(
                     labelText: 'Switch ID',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  items: homeCubit.switchIds.map((id) {
+                  items: rackCubit.switchIds.map((id) {
                     return DropdownMenuItem(value: id, child: Text(id));
                   }).toList(),
                   onChanged: (value) {
-                    homeCubit.selectedSwitchId = value;
+                    rackCubit.selectedSwitchId = value;
                   },
                   validator: (value) => value == null ? 'Required' : null,
                 ),
                 SizedBox(height: 10),
                 DropdownButtonFormField<String>(
-                  value: homeCubit.selectedBuildingId,
+                  value: rackCubit.selectedBuildingId,
                   decoration: InputDecoration(
                     labelText: 'Building Rack ID',
                     border: OutlineInputBorder(
@@ -66,61 +66,61 @@ class AddRackForm extends StatelessWidget {
                       vertical: 16,
                     ),
                   ),
-                  items: homeCubit.buildingRackIds.map((id) {
+                  items: rackCubit.buildingRackIds.map((id) {
                     return DropdownMenuItem(value: id, child: Text(id));
                   }).toList(),
                   onChanged: (value) {
-                    homeCubit.selectedBuildingId = value;
+                    rackCubit.selectedBuildingId = value;
                   },
                   validator: (value) => value == null ? 'Required' : null,
                 ),
                 SizedBox(height: 10),
                 TitleWithTextField(
                   title: 'Product Panel',
-                  controller: homeCubit.productPanelController,
+                  controller: rackCubit.productPanelController,
                   hintText: 'Enter Product Panel',
                 ),
                 SizedBox(height: 10),
                 TitleWithTextField(
                   title: 'Product Serial',
-                  controller: homeCubit.productSerialController,
+                  controller: rackCubit.productSerialController,
                   hintText: 'Enter Product Serial',
                 ),
                 SizedBox(height: 10),
                 TitleWithTextField(
                   title: 'Product Mac',
-                  controller: homeCubit.productMacController,
+                  controller: rackCubit.productMacController,
                   hintText: 'Enter Product Mac',
                 ),
                 SizedBox(height: 10),
                 TitleWithTextField(
                   title: 'ProductModel',
-                  controller: homeCubit.productModelController,
+                  controller: rackCubit.productModelController,
                   hintText: 'Enter ProductModel',
                 ),
                 SizedBox(height: 10),
                 TitleWithTextField(
                   title: 'Product Port',
-                  controller: homeCubit.productPortController,
+                  controller: rackCubit.productPortController,
                   hintText: 'Enter Product Port',
                 ),
                 SizedBox(height: 10),
                 TitleWithTextField(
                   title: 'Device Name',
-                  controller: homeCubit.deviceNameController,
+                  controller: rackCubit.deviceNameController,
                   hintText: 'Enter Device Name',
                 ),
                 SizedBox(height: 10),
                 TitleWithTextField(
                   title: 'Site Name',
-                  controller: homeCubit.siteNameController,
+                  controller: rackCubit.siteNameController,
                   hintText: 'Enter Site Name',
                 ),
                 SizedBox(height: 10),
                 AddFullSizeButton(
                   onPressed: () {
-                    if (homeCubit.formAddRackKey.currentState!.validate()) {
-                      homeCubit.addRack();
+                    if (rackCubit.formAddRackKey.currentState!.validate()) {
+                      rackCubit.addRack();
                     }
                   },
                   text: 'Add Rack',

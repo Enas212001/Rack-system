@@ -121,4 +121,28 @@ class HomeRepoImpl implements HomeRepo {
       return left(e);
     }
   }
+
+  @override
+  Future<Either<ServerFailure, HotelModel>> addHotel({
+    required String hotelName,
+    required String buildingNumber,
+    required image,
+  }) async {
+    try {
+      final response = await api.post(
+        Endpoints.addHotel,
+        isFormData: true,
+        data: {
+          ApiKey.hotelName: hotelName,
+          ApiKey.buildingNumber: buildingNumber,
+          ApiKey.image: image,
+        },
+      );
+      final hotel = HotelModel.fromJson(response);
+      return right(hotel);
+    } on ServerFailure catch (e) {
+      log('Error parsing Hotels: $e');
+      return left(e);
+    }
+  }
 }

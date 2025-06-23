@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/api_key.dart';
-import 'package:flutter_application_1/features/home/presentation/cubit/home_cubit.dart';
+import 'package:flutter_application_1/core/utils/app_routes.dart';
+import 'package:flutter_application_1/features/home/presentation/manager/cubit/hotel_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,7 +12,7 @@ class ImageGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocBuilder<HotelCubit, HotelState>(
       builder: (context, state) {
         if (state is HotelLoading) {
           return const Center(child: CircularProgressIndicator());
@@ -31,10 +32,7 @@ class ImageGridView extends StatelessWidget {
               final hotel = state.hotels[index];
               return GestureDetector(
                 onTap: () {
-                  BlocProvider.of<HomeCubit>(
-                    context,
-                  ).getBuildings(hotelId: hotel.id!);
-                  GoRouter.of(context).push('/building', extra: hotel);
+                  GoRouter.of(context).push(AppRoutes.building, extra: hotel);
                 },
                 child: Image.network(
                   '${Endpoints.baseUrlImage}/${hotel.logo?.trim()}',

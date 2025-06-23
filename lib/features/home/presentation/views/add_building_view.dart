@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/features/home/presentation/manager/cubit/building_cubit.dart';
+import 'package:flutter_application_1/features/home/presentation/views/widget/add_form_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'widget/add_building_form.dart';
 
@@ -10,18 +13,9 @@ class AddBuildingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Add New Building')),
-      body: Center(
-        child: Card(
-          margin: EdgeInsets.all(16),
-          elevation: 8,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: AddBuildingForm(hotelId: hotelId),
-          ),
-        ),
+      body: BlocProvider(
+        create: (context) => BuildingCubit(),
+        child: AddFormWidget(childWidget: AddBuildingForm(hotelId: hotelId)),
       ),
     );
   }

@@ -14,6 +14,9 @@ class ApiKey {
   static const String productPort = 'product_port';
   static const String deviceName = 'device_name';
   static const String siteName = 'site_name';
+  static const String image = 'logo';
+  static const String buildingNumber = 'building_id';
+  static const String hotelName = 'name';
 }
 
 class Endpoints {
@@ -22,6 +25,7 @@ class Endpoints {
   static const String login = '$baseUrl/login.php';
   static const String getHotels = '$baseUrl/get_hotels.php';
   static const String addRack = '$baseUrl/add_rack.php';
+  static const String addHotel = '$baseUrl/add_hotel.php';
   static String getBuildings(String hotelId) {
     return '$baseUrl/get_buildings.php?hotel_id=$hotelId';
   }

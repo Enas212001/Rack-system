@@ -3,7 +3,6 @@ import 'package:flutter_application_1/core/utils/api_key.dart';
 import 'package:flutter_application_1/features/home/data/models/hotel_model/hotel_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'back_and_next_button.dart';
 import 'common_widget.dart';
 import 'rack_info.dart';
 import 'rack_info_builder.dart';
@@ -26,7 +25,7 @@ class RackInfoViewBody extends StatelessWidget {
         SizedBox(height: 10.h),
         RackInfoBuilder(),
         SizedBox(height: 20.h),
-        BackAndNextButton(),
+        // BackAndNextButton(),
       ],
     );
   }

@@ -4,12 +4,12 @@ import 'package:flutter_application_1/features/home/data/models/hotel_model/hote
 import 'widget/building_view_body.dart';
 
 class BuildingView extends StatelessWidget {
-  const BuildingView({super.key, required this.hotelName});
-  final HotelModel hotelName;
+  const BuildingView({super.key, required this.hotelModel});
+  final HotelModel hotelModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: BuildingViewBody(hotelName: hotelName)),
+      body: SafeArea(child: BuildingViewBody(hotelModel: hotelModel)),
     );
   }
 }

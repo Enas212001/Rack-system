@@ -5,7 +5,7 @@ import 'package:flutter_application_1/core/cache/cache_helper.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
 import 'package:flutter_application_1/features/auth/presentation/cubit/login_cubit.dart';
-import 'package:flutter_application_1/features/home/presentation/cubit/home_cubit.dart';
+import 'package:flutter_application_1/features/home/presentation/manager/cubit/hotel_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -26,7 +26,7 @@ class LoginForm extends StatelessWidget {
           log(state.message);
         } else if (state is LoginSuccess) {
           GoRouter.of(context).pushReplacement('/dashboard');
-          BlocProvider.of<HomeCubit>(context).getHotels();
+          context.read<HotelCubit>().getHotels();
           getIt.get<CacheHelper>().saveData(key: 'isLogin', value: true);
         }
       },
