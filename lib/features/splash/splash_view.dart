@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/cache/cache_helper.dart';
+import 'package:flutter_application_1/core/utils/app_assets.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
 import 'package:go_router/go_router.dart';
@@ -16,11 +17,11 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     bool isLogin = getIt.get<CacheHelper>().getData(key: 'isLogin') ?? false;
     if (isLogin) {
-      Future.delayed(const Duration(microseconds: 2), () {
+      Future.delayed(const Duration(seconds: 1), () {
         GoRouter.of(context).pushReplacement(AppRoutes.dashboard);
       });
     } else {
-      Future.delayed(const Duration(microseconds: 2), () {
+      Future.delayed(const Duration(seconds: 1), () {
         GoRouter.of(context).pushReplacement(AppRoutes.login);
       });
     }
@@ -29,6 +30,12 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Image.asset(Assets.imagesLogoblack, fit: BoxFit.cover),
+        ),
+      ),
+    );
   }
 }

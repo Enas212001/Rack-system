@@ -7,10 +7,13 @@ class TitleWithTextField extends StatelessWidget {
     required this.title,
     required this.controller,
     this.hintText,
+    this.isPassword = false,
   });
   final String title;
   final TextEditingController controller;
   final String? hintText;
+  final bool isPassword;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,6 +28,7 @@ class TitleWithTextField extends StatelessWidget {
           controller: controller,
           title: title,
           hintText: hintText,
+          isPassword: isPassword,
         ),
       ],
     );
@@ -37,15 +41,16 @@ class CustomTextFormField extends StatelessWidget {
     required this.controller,
     required this.title,
     this.hintText,
+    this.isPassword = false,
   });
 
   final TextEditingController controller;
   final String title;
   final String? hintText;
+  final bool isPassword;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      
       controller: controller,
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -53,7 +58,7 @@ class CustomTextFormField extends StatelessWidget {
         }
         return null;
       },
-
+      obscureText: isPassword,
       decoration: InputDecoration(
         border: InputBorder.none,
         hintText: hintText,

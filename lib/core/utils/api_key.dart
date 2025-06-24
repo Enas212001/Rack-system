@@ -1,7 +1,9 @@
 class ApiKey {
   static const String email = 'email';
   static const String password = 'password';
-  static const String loginId = 'id';
+  static const String rememberMe = 'remember_me';
+  static const String loginName = 'name';
+  static const String roleId = 'role_id';
   static const String hotelId = 'hotel_id';
   static const String buildingName = 'building_name';
   static const String rackId = 'rack_id';

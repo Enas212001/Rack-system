@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/api/dio_consumer.dart';
+import 'package:flutter_application_1/core/cache/cache_helper.dart';
+import 'package:flutter_application_1/core/utils/api_key.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
 import 'package:flutter_application_1/features/auth/data/model/login/login_model.dart';
 import 'package:flutter_application_1/features/auth/data/repo/auth_repo.dart';
@@ -16,24 +18,46 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  // bool rememberMe = false; // ✅ add this
+  bool rememberMe = false; // ✅ add this
 
-  // void toggleRememberMe(bool? value) {
-  //   rememberMe = value ?? false;
-  //   emit(LoginCheckboxChanged(rememberMe: rememberMe)); // new state
-  // }
+  void toggleRememberMe({required value}) {
+    rememberMe = value;
+    if (rememberMe) {
+      getIt.get<CacheHelper>().saveData(
+        key: ApiKey.email,
+        value: emailController.text,
+      );
+      getIt.get<CacheHelper>().saveData(
+        key: ApiKey.password,
+        value: passwordController.text,
+      );
+      getIt.get<CacheHelper>().saveData(key: ApiKey.rememberMe, value: true);
+    } else {
+      getIt.get<CacheHelper>().removeData(key: ApiKey.email);
+      getIt.get<CacheHelper>().removeData(key: ApiKey.password);
+      getIt.get<CacheHelper>().saveData(key: ApiKey.rememberMe, value: false);
+    }
 
-  // void loadRememberedCredentials() {
-  //   final savedEmail = getIt.get<CacheHelper>().getData(key: 'email');
-  //   final savedPassword = getIt.get<CacheHelper>().getData(key: 'password');
+    emit(LoginCheckboxChanged(rememberMe: rememberMe));
+  }
 
-  //   if (savedEmail != null && savedPassword != null) {
-  //     emailController.text = savedEmail;
-  //     passwordController.text = savedPassword;
-  //     rememberMe = true;
-  //     emit(LoginCheckboxChanged(rememberMe: true)); // ✅ trigger UI update
-  //   }
-  // }
+  void loadRememberedCredentials() {
+    final savedEmail = getIt.get<CacheHelper>().getData(key: ApiKey.email);
+    final savedPassword = getIt.get<CacheHelper>().getData(
+      key: ApiKey.password,
+    );
+    final savedRememberMe =
+        getIt.get<CacheHelper>().getData(key: ApiKey.rememberMe) ?? false;
+
+    if (savedEmail != null &&
+        savedPassword != null &&
+        savedRememberMe == true) {
+      emailController.text = savedEmail;
+      passwordController.text = savedPassword;
+      rememberMe = true;
+      emit(LoginCheckboxChanged(rememberMe: rememberMe));
+    }
+  }
 
   Future<void> login() async {
     emit(LoginLoading());

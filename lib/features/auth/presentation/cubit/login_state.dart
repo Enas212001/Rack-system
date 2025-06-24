@@ -1,30 +1,26 @@
 part of 'login_cubit.dart';
-
-sealed class LoginState extends Equatable {
-  const LoginState();
+sealed class LoginState extends Equatable{
+  final bool rememberMe;
+  const LoginState({this.rememberMe = false});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [rememberMe];
 }
 
-final class LoginInitial extends LoginState {}
+class LoginInitial extends LoginState {}
 
-final class LoginFailure extends LoginState {
+class LoginLoading extends LoginState {}
+
+class LoginFailure extends LoginState {
   final String message;
   const LoginFailure({required this.message});
 }
 
-final class LoginSuccess extends LoginState {
+class LoginSuccess extends LoginState {
   final LoginModel user;
   const LoginSuccess({required this.user});
-
-  @override
-  List<Object> get props => [user];
 }
 
 class LoginCheckboxChanged extends LoginState {
-  final bool rememberMe;
-  const LoginCheckboxChanged({required this.rememberMe});
+  const LoginCheckboxChanged({required super.rememberMe});
 }
-
-final class LoginLoading extends LoginState {}

@@ -25,8 +25,12 @@ class AuthRepoImpl extends AuthRepo {
       );
       final user = LoginModel.fromJson(response);
       getIt.get<CacheHelper>().saveData(
-        key: ApiKey.loginId,
-        value: user.user!.id,
+        key: ApiKey.loginName,
+        value: user.user!.name,
+      );
+      getIt.get<CacheHelper>().saveData(
+        key: ApiKey.roleId,
+        value: user.user!.roleId,
       );
       return right(user);
     } on ServerFailure catch (e) {

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData getThemeData() {
   return ThemeData(
+    scaffoldBackgroundColor: AppColors.whiteColor,
     appBarTheme: const AppBarTheme(
       surfaceTintColor: Colors.transparent,
       elevation: 0,
@@ -35,4 +36,6 @@ abstract class CustomTextStyles {
     fontSize: 20.sp,
     fontWeight: FontWeight.bold,
   );
+
+  static final text14Regular = TextStyle(fontSize: 14.sp);
 }

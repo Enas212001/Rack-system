@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/features/home/data/models/hotel_model/hotel_model.dart';
-import 'package:flutter_application_1/features/home/presentation/manager/cubit/building_cubit.dart';
-import 'package:flutter_application_1/features/home/presentation/manager/cubit/hotel_cubit.dart';
-import 'package:flutter_application_1/features/home/presentation/views/add_building_view.dart';
-import 'package:flutter_application_1/features/home/presentation/views/add_hotel_view.dart';
-import 'package:flutter_application_1/features/home/presentation/views/add_rack_view.dart';
-import 'package:flutter_application_1/features/home/presentation/views/building_view.dart';
-import 'package:flutter_application_1/features/home/presentation/views/rack_info_view.dart';
-import 'package:flutter_application_1/features/home/presentation/views/racks_view.dart';
+import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
+import 'package:flutter_application_1/features/home/Buildings/cubit/building_cubit.dart';
+import 'package:flutter_application_1/features/home/Hotels/cubit/hotel_cubit.dart';
+import 'package:flutter_application_1/features/home/Racks/cubit/rack_cubit.dart';
+import 'package:flutter_application_1/features/home/Buildings/presentation/views/add_building_view.dart';
+import 'package:flutter_application_1/features/home/Hotels/presentation/views/add_hotel_view.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/views/add_rack_view.dart';
+import 'package:flutter_application_1/features/home/Buildings/presentation/views/building_view.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/views/rack_info_view.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/views/racks_view.dart';
 import 'package:flutter_application_1/features/splash/splash_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/views/login_view.dart';
-import '../../features/home/presentation/views/dashboard_view.dart';
+import '../../features/home/Hotels/presentation/views/dashboard_view.dart';
 
 class AppRoutes {
   static const String login = '/login';
@@ -44,7 +45,6 @@ class AppRoutes {
           return BuildingView(hotelModel: hotel);
         },
       ),
-
       GoRoute(
         path: racks,
         builder: (context, state) {
@@ -69,20 +69,23 @@ class AppRoutes {
         path: addBuilding,
         builder: (context, state) {
           final args = state.extra;
-          if (args is! Map<String, dynamic>) {
+          if (args is! AddBuildingArgs) {
             return const Scaffold(body: Center(child: Text('Invalid data')));
           }
 
-          final hotel = args['hotel'] as HotelModel;
-          final buildingCubit = args['cubit'] as BuildingCubit;
-
           return BlocProvider.value(
-            value: buildingCubit,
-            child: AddBuildingView(hotelId: hotel.id!),
+            value: args.buildingCubit,
+            child: AddBuildingView(hotelId: args.hotel.id!),
           );
         },
       ),
-      GoRoute(path: addRack, builder: (context, state) => const AddRackView()),
+      GoRoute(
+        path: addRack,
+        builder: (context, state) {
+          final rackCubit = state.extra as RackCubit;
+          return BlocProvider.value(value: rackCubit, child: AddRackView());
+        },
+      ),
       GoRoute(
         path: addHotel,
         builder: (context, state) {
