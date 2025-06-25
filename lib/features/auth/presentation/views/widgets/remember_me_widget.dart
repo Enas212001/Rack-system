@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,6 +20,7 @@ class RememberMeWidget extends StatelessWidget {
           children: [
             Checkbox(
               value: isChecked,
+              activeColor: AppColors.primaryColor,
               onChanged: (newValue) {
                 context.read<LoginCubit>().toggleRememberMe(value: newValue);
               },

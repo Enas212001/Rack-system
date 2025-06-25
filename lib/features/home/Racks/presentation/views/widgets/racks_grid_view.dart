@@ -50,7 +50,10 @@ class RacksGridView extends StatelessWidget {
                     ),
                   );
                 },
-                child: RackItem(id: racks[index].buildingRId!),
+                child: RackItem(
+                  rackId: buildingModel.rackId!,
+                  buildingRId: buildingModel.buildingRId!,
+                ),
               ),
               childCount: racks.length,
             ),

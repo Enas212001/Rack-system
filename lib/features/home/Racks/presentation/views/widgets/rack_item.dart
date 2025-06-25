@@ -3,8 +3,8 @@ import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RackItem extends StatelessWidget {
-  const RackItem({super.key, required this.id});
-  final String id;
+  const RackItem({super.key, required this.rackId, required this.buildingRId});
+  final String rackId, buildingRId;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +30,7 @@ class RackItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  id,
+                  '$rackId  $buildingRId',
                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                     color: AppColors.darkBlueColor,
                   ),
