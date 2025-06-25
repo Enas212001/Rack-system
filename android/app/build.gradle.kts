@@ -29,38 +29,36 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.powetSMTP.rack_manager"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
-
     signingConfigs {
     create("release") {
-        if (keystoreProperties.isNotEmpty()) {
-            keyAlias = keystoreProperties["keyAlias"]?.toString()
-            keyPassword = keystoreProperties["keyPassword"]?.toString()
-            storePassword = keystoreProperties["storePassword"]?.toString()
-            storeFile = keystoreProperties["storeFile"]?.toString()?.let { file(it) }
+        val keyAliasValue = requireNotNull(keystoreProperties["keyAlias"]) { "Missing keyAlias in key.properties" }
+        val keyPasswordValue = requireNotNull(keystoreProperties["keyPassword"]) { "Missing keyPassword in key.properties" }
+        val storePasswordValue = requireNotNull(keystoreProperties["storePassword"]) { "Missing storePassword in key.properties" }
+        val storeFileValue = requireNotNull(keystoreProperties["storeFile"]) { "Missing storeFile in key.properties" }
+
+        keyAlias = keyAliasValue as String
+        keyPassword = keyPasswordValue as String
+        storePassword = storePasswordValue as String
+        storeFile = file(storeFileValue as String)
         }
-      }
     }
+
 
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now,
-            // so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+        getByName("release") {
             signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false
+            isShrinkResources = false
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
-
 }
 
 flutter {

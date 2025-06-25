@@ -26,13 +26,13 @@ class RackCubit extends Cubit<RackState> {
   String? selectedBuildingId;
   String? selectedSwitchId;
 
-  List<String> buildingRackIds = ['R_u14', 'R_u15'];
+  List<String> buildingRackIds = ['R_u14', 'R_u13'];
   List<String> switchIds = ['1', '2', '3'];
 
-  Future<void> getRacksInfo() async {
+  Future<void> getRacksInfo({required String buildingRId}) async {
     emit(RacksLoading());
     try {
-      final result = await homeRepo.getRacksInfo();
+      final result = await homeRepo.getRacksInfo(buildingRId: buildingRId);
       result.fold(
         (failure) => emit(RacksFailure(message: failure.failure.errorMessage)),
         (racks) => emit(RacksSuccess(racks: racks)),

@@ -27,7 +27,13 @@ class BuildingGridView extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) => GestureDetector(
                 onTap: () {
-                  GoRouter.of(context).push(AppRoutes.racks, extra: hotelModel);
+                  GoRouter.of(context).push(
+                    AppRoutes.racks,
+                    extra: GetRackArg(
+                      hotel: hotelModel,
+                      buildingModel: buildings[index],
+                    ),
+                  );
                 },
                 child: BuildingItem(building: buildings[index].id!),
               ),

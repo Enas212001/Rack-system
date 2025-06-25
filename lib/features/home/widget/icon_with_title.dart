@@ -13,20 +13,15 @@ class IconWithTitle extends StatelessWidget {
   final Color color;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Row(
-        children: [
-          Image.asset(image, width: 32.w, height: 38.h),
-          Text(
-            title,
-            style: Theme.of(
-              context,
-            ).textTheme.displaySmall!.copyWith(color: color),
-          ),
-          SizedBox(width: 5.w),
-        ],
-      ),
+    return Row(
+      children: [
+        Image.asset(image, width: 32.w, height: 38.h),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(color: color),
+        ),
+        SizedBox(width: 5.w),
+      ],
     );
   }
 }

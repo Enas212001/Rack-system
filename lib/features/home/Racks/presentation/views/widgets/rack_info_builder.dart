@@ -5,12 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'rack_info_table.dart';
 
 class RackInfoBuilder extends StatelessWidget {
-  const RackInfoBuilder({super.key});
+  const RackInfoBuilder({super.key, required this.buildingId});
+  final String buildingId;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RackCubit()..getRacksInfo(),
+      create: (context) => RackCubit()..getRacksInfo(buildingRId: buildingId),
       child: BlocBuilder<RackCubit, RackState>(
         builder: (context, state) {
           if (state is RacksLoading) {

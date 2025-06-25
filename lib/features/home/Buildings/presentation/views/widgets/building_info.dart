@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../widget/icon_with_text_bg.dart';
+import 'export_building_to_pdf.dart';
 
 class BuildingInfo extends StatelessWidget {
   const BuildingInfo({super.key, required this.hotelName});
@@ -26,7 +26,7 @@ class BuildingInfo extends StatelessWidget {
                 ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w400),
               ),
               Spacer(),
-              IconTextWithBG(text: 'Export', icon: Icons.open_in_new),
+              ExportBuildingToPDF(hotelName: hotelName),
             ],
           ),
         ],

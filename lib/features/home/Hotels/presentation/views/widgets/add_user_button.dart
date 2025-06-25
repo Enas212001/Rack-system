@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/features/home/Hotels/cubit/hotel_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,15 +17,14 @@ class AddUserButton extends StatelessWidget {
         GoRouter.of(context).push(AppRoutes.addHotel, extra: hotelCubit);
       },
       child: Container(
-        color: Colors.black,
-        width: 86.w,
-        height: 19.h,
         alignment: Alignment.center,
+        color: AppColors.blackColor,
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.r),
         child: Text(
           '+ Add Hotel',
           style: Theme.of(
             context,
-          ).textTheme.titleSmall!.copyWith(color: Colors.white),
+          ).textTheme.titleSmall!.copyWith(color: AppColors.whiteColor),
         ),
       ),
     );

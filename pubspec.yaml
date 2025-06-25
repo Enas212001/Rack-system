@@ -43,6 +43,8 @@ dependencies:
   get_it: ^8.0.3
   go_router: ^15.2.0
   image_picker: ^1.1.2
+  pdf: ^3.11.3
+  printing: ^5.14.2
   shared_preferences: ^2.5.3
 
 dev_dependencies:
@@ -95,7 +97,7 @@ flutter_icons:
   ios: true
   image_path: "assets/images/LogoblackIcon.png"
 flutter_native_splash:
-  color: "#ffffff"                 # match your Flutter splash background
+  color: "#ffffff" # match your Flutter splash background
   image: assets/images/Logoblack.png # your logo/image
   android_gravity: center
   fullscreen: true

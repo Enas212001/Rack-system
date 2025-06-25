@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/features/home/Buildings/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Buildings/cubit/building_cubit.dart';
 import 'package:flutter_application_1/features/home/Hotels/cubit/hotel_cubit.dart';
@@ -48,21 +49,27 @@ class AppRoutes {
       GoRoute(
         path: racks,
         builder: (context, state) {
-          final model = state.extra;
-          if (model is! HotelModel) {
+          final args = state.extra;
+          if (args is! GetRackArg) {
             return const Scaffold(body: Center(child: Text('Invalid rack')));
           }
-          return RacksView(hotelModel: model);
+          return RacksView(
+            hotelModel: args.hotel,
+            buildingModel: args.buildingModel,
+          );
         },
       ),
       GoRoute(
         path: rackInfo,
         builder: (context, state) {
-          final model = state.extra;
-          if (model is! HotelModel) {
+          final args = state.extra;
+          if (args is! GetRackArg) {
             return const Scaffold(body: Center(child: Text('Invalid logo')));
           }
-          return RackInfoView(hotelModel: model);
+          return RackInfoView(
+            hotelModel: args.hotel,
+            buildingModel: args.buildingModel,
+          );
         },
       ),
       GoRoute(
@@ -82,8 +89,14 @@ class AppRoutes {
       GoRoute(
         path: addRack,
         builder: (context, state) {
-          final rackCubit = state.extra as RackCubit;
-          return BlocProvider.value(value: rackCubit, child: AddRackView());
+          final args = state.extra;
+          if (args is! AddRackArgs) {
+            return const Scaffold(body: Center(child: Text('Invalid data')));
+          }
+          return BlocProvider.value(
+            value: args.rackCubit,
+            child: AddRackView(buildingRId: args.buildingModel.buildingRId!),
+          );
         },
       ),
       GoRoute(
@@ -105,4 +118,16 @@ class AddBuildingArgs {
   final BuildingCubit buildingCubit;
 
   AddBuildingArgs({required this.hotel, required this.buildingCubit});
+}
+
+class GetRackArg {
+  final HotelModel hotel;
+  final BuildingModel buildingModel;
+  GetRackArg({required this.hotel, required this.buildingModel});
+}
+
+class AddRackArgs {
+  final RackCubit rackCubit;
+  final BuildingModel buildingModel;
+  AddRackArgs({required this.rackCubit, required this.buildingModel});
 }

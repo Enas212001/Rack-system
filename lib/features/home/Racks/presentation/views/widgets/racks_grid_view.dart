@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
+import 'package:flutter_application_1/features/home/Buildings/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Racks/cubit/rack_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,8 +10,13 @@ import 'package:go_router/go_router.dart';
 import 'rack_item.dart';
 
 class RacksGridView extends StatelessWidget {
-  const RacksGridView({super.key, required this.hotelModel});
+  const RacksGridView({
+    super.key,
+    required this.hotelModel,
+    required this.buildingModel,
+  });
   final HotelModel hotelModel;
+  final BuildingModel buildingModel;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RackCubit, RackState>(
@@ -20,9 +26,7 @@ class RacksGridView extends StatelessWidget {
             child: const Center(child: CircularProgressIndicator()),
           );
         } else if (state is RacksFailure) {
-          return SliverToBoxAdapter(
-            child: Center(child: Text(state.message)),
-          );
+          return SliverToBoxAdapter(child: Center(child: Text(state.message)));
         } else if (state is RacksSuccess) {
           final racks = state.racks;
           if (racks.isEmpty) {
@@ -34,10 +38,16 @@ class RacksGridView extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) => GestureDetector(
                 onTap: () {
-                  context.read<RackCubit>().getRacksInfo();
-                  GoRouter.of(
-                    context,
-                  ).push(AppRoutes.rackInfo, extra: hotelModel);
+                  context.read<RackCubit>().getRacksInfo(
+                    buildingRId: state.racks[index].buildingRId!,
+                  );
+                  GoRouter.of(context).push(
+                    AppRoutes.rackInfo,
+                    extra: GetRackArg(
+                      hotel: hotelModel,
+                      buildingModel: buildingModel,
+                    ),
+                  );
                 },
                 child: RackItem(id: racks[index].id!),
               ),

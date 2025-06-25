@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_assets.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
+import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import 'icon_with_title.dart';
 
@@ -30,17 +32,14 @@ class CustomAppBar extends StatelessWidget {
             color: AppColors.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 6.w),
           ),
-          IconWithTitle(image: Assets.imagesClients, title: 'Our Clients'),
-          IconWithTitle(title: 'Buildings', image: Assets.imagesBuildings),
-          IconWithTitle(
-            title: 'Settings',
-            image: Assets.imagesSettings,
-            color: AppColors.blackColor,
-          ),
-          IconWithTitle(
-            title: 'Help Center',
-            image: Assets.imagesHelpCenter,
-            color: AppColors.blackColor,
+          GestureDetector(
+            onTap: () {
+              GoRouter.of(context).go(AppRoutes.dashboard);
+            },
+            child: IconWithTitle(
+              image: Assets.imagesClients,
+              title: 'Our Clients',
+            ),
           ),
         ],
       ),

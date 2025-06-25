@@ -50,16 +50,45 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<ServerFailure, List<RackInfoModel>>> getRacksInfo() async {
+  Future<Either<ServerFailure, List<RackInfoModel>>> getRacksInfo({
+    required String buildingRId,
+  }) async {
     try {
-      final response = await api.get(Endpoints.getRacksInfo);
-      final racks = (response as List)
-          .map((item) => RackInfoModel.fromJson(item))
-          .toList();
-      return right(racks);
+      final response = await api.get(Endpoints.getRacksInfo(buildingRId));
+
+      // ✅ Check for error
+      if (response is Map<String, dynamic>) {
+        if (response['status'] == 'error') {
+          throw ServerFailure(failure: FailureModel.fromJson(response));
+        }
+
+        // ✅ Now safely extract the `data` list
+        final data = response['data'] as List<dynamic>;
+
+        final racks = data
+            .map((item) => RackInfoModel.fromJson(item as Map<String, dynamic>))
+            .toList();
+
+        return right(racks);
+      }
+
+      // Unexpected structure
+      throw ServerFailure(
+        failure: FailureModel(
+          status: 'error',
+          errorMessage: 'Unexpected response format.',
+        ),
+      );
     } on ServerFailure catch (e) {
-      log('Error parsing buildings: $e');
+      log('Error parsing racks: $e');
       return left(e);
+    } catch (e) {
+      log('Unexpected error: $e');
+      return left(
+        ServerFailure(
+          failure: FailureModel(status: 'error', errorMessage: e.toString()),
+        ),
+      );
     }
   }
 

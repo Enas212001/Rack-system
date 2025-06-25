@@ -30,7 +30,7 @@ class RackInfoModel extends Equatable {
   });
 
   factory RackInfoModel.fromJson(Map<String, dynamic> json) => RackInfoModel(
-    id: json['id'] as String?,
+    id: json['id']?.toString(),
     buildingRId: json['building_r_id'] as String?,
     switchId: json['switch_id'] as String?,
     productPanal: json['product_panal'] as String?,

@@ -9,7 +9,9 @@ abstract class HomeRepo {
   Future<Either<ServerFailure, List<BuildingModel>>> getBuildings({
     required String hotelId,
   });
-  Future<Either<ServerFailure, List<RackInfoModel>>> getRacksInfo();
+  Future<Either<ServerFailure, List<RackInfoModel>>> getRacksInfo({
+    required String buildingRId,
+  });
   Future<Either<ServerFailure, HotelModel>> addHotel({
     required String hotelName,
     required String buildingNumber,

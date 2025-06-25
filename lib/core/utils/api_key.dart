@@ -32,7 +32,10 @@ class Endpoints {
     return '$baseUrl/get_buildings.php?hotel_id=$hotelId';
   }
 
-  static const String getRacksInfo = '$baseUrl/get_rack_info.php';
+  static String getRacksInfo(String buildingId) {
+    return '$baseUrl/get_rack_info.php?building_r_id=$buildingId';
+  }
+
   static String addBuilding(String hotelId) {
     return '$baseUrl/add_building.php?hotel_id=$hotelId';
   }

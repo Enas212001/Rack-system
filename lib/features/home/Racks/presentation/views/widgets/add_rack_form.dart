@@ -11,8 +11,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../widget/add_full_button.dart';
 
 class AddRackForm extends StatelessWidget {
-  const AddRackForm({super.key});
-
+  const AddRackForm({super.key, required this.buildingRId});
+  final String buildingRId;
   @override
   Widget build(BuildContext context) {
     RackCubit rackCubit = BlocProvider.of<RackCubit>(context);
@@ -20,7 +20,7 @@ class AddRackForm extends StatelessWidget {
       listener: (context, state) {
         if (state is AddRackSuccess) {
           showToast('Rack added successfully');
-          rackCubit.getRacksInfo();
+          rackCubit.getRacksInfo(buildingRId: buildingRId);
           Navigator.pop(context);
         } else if (state is AddRackFailure) {
           log(state.message);
