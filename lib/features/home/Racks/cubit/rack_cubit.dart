@@ -23,10 +23,8 @@ class RackCubit extends Cubit<RackState> {
   final TextEditingController deviceNameController = TextEditingController();
   final TextEditingController siteNameController = TextEditingController();
 
-  String? selectedBuildingId;
   String? selectedSwitchId;
 
-  List<String> buildingRackIds = ['R_u14', 'R_u13'];
   List<String> switchIds = ['1', '2', '3'];
 
   Future<void> getRacksInfo({required String buildingRId}) async {
@@ -42,11 +40,10 @@ class RackCubit extends Cubit<RackState> {
     }
   }
 
-  Future<void> addRack() async {
+  Future<void> addRack({required String buildingRId}) async {
     emit(AddRackLoading());
     try {
       final response = await homeRepo.addRack(
-        buildingRId: selectedBuildingId!,
         switchId: selectedSwitchId!,
         productPanel: productPanelController.text,
         productSerial: productSerialController.text,
@@ -55,6 +52,7 @@ class RackCubit extends Cubit<RackState> {
         productPort: productPortController.text,
         deviceName: deviceNameController.text,
         siteName: siteNameController.text,
+        buildingRId: buildingRId,
       );
       response.fold(
         (failure) =>
@@ -69,7 +67,6 @@ class RackCubit extends Cubit<RackState> {
           deviceNameController.clear();
           siteNameController.clear();
           selectedSwitchId = null;
-          selectedBuildingId = null;
         },
       );
     } catch (e) {

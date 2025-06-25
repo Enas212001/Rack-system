@@ -104,7 +104,7 @@ class HomeRepoImpl implements HomeRepo {
         Endpoints.addBuilding(hotelId),
         data: {
           ApiKey.buildingName: buildingName,
-          ApiKey.rackId: int.parse(rackId),
+          ApiKey.rackId: rackId,
           ApiKey.buildingRackId: buildingRackId,
         },
       );

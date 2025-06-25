@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/home/Racks/models/rack_info_model.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -20,6 +21,10 @@ Future<void> exportRackAsPdf(
             level: 0,
             child: pw.Text(
               'Racks Report for ${hotelName[0].toUpperCase()}${hotelName.substring(1).toLowerCase()}',
+              style: pw.TextStyle(
+                fontSize: 16.sp,
+                fontWeight: pw.FontWeight.bold,
+              ),
             ),
           ),
           pw.GridView(
@@ -36,7 +41,13 @@ Future<void> exportRackAsPdf(
                   children: [
                     pw.Text('ID: ${rack.id}'),
                     pw.Text('Name: ${rack.deviceName}'),
-                    // Add more fields as needed
+                    pw.Text('Serial Number: ${rack.productSerial}'),
+                    pw.Text('MAC Address: ${rack.productMac}'),
+                    pw.Text('Model: ${rack.productModel}'),
+                    pw.Text('Port: ${rack.productPort}'),
+                    pw.Text('Site Name: ${rack.siteName}'),
+                    pw.Text('Panel: ${rack.productPanal}'),
+                    
                   ],
                 ),
               );

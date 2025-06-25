@@ -7,6 +7,7 @@ import 'package:flutter_application_1/features/home/Buildings/cubit/building_cub
 import 'package:flutter_application_1/features/home/widget/add_full_button.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddBuildingForm extends StatelessWidget {
   const AddBuildingForm({super.key, required this.hotelId});
@@ -35,27 +36,27 @@ class AddBuildingForm extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text('Add New Building', style: CustomTextStyles.text20Bold),
-                SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 TitleWithTextField(
                   title: 'Rack ID',
                   controller: buildingCubit.rackIdController,
                   hintText: 'Enter Rack ID',
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 10.h),
                 TitleWithTextField(
                   title: 'Building Rack ID',
                   controller: buildingCubit.buildingRackIdController,
                   hintText: 'Enter Building Rack ID',
                 ),
 
-                SizedBox(height: 10),
+                SizedBox(height: 10.h),
                 TitleWithTextField(
                   title: 'Building Name',
                   controller: buildingCubit.buildingNameController,
                   hintText: 'Enter Building Name',
                 ),
-                SizedBox(height: 10),
-                SizedBox(height: 20),
+                SizedBox(height: 10.h),
+                SizedBox(height: 20.h),
                 AddFullSizeButton(
                   onPressed: () {
                     if (buildingCubit.formAddBuildingKey.currentState!.validate()) {

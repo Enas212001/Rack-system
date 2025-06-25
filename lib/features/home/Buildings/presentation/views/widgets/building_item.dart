@@ -21,6 +21,7 @@ class BuildingItem extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(7.w),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Building',

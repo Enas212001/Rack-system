@@ -36,7 +36,6 @@ Future<void> exportBuildingsAsPdf(
                   children: [
                     pw.Text('ID: ${building.id}'),
                     pw.Text('Name: ${building.buildingName}'),
-                    // Add more fields as needed
                   ],
                 ),
               );

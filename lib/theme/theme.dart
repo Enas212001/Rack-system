@@ -20,7 +20,7 @@ ThemeData getThemeData() {
       titleMedium: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
       titleSmall: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
       headlineLarge: TextStyle(fontSize: 48.sp, fontWeight: FontWeight.w800),
-      headlineMedium: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.w800),
+      headlineMedium: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w800),
     ),
   );
 }

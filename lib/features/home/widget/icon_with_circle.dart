@@ -10,8 +10,8 @@ class IconWithCircle extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 5.w),
       child: Container(
-        width: 36.r,
-        height: 36.r,
+        width: 36.w,
+        height: 36.h,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(color: Colors.grey, width: 1.w),
