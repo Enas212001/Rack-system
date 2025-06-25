@@ -27,11 +27,7 @@ class RackViewBody extends StatelessWidget {
       slivers: [
         SliverToBoxAdapter(child: CommonWidget(popUp: true)),
         SliverToBoxAdapter(
-          child: RacksInfo(
-            hotelName: hotelModel.name!,
-            id: hotelModel.id!,
-            rackId: buildingModel.id!,
-          ),
+          child: RacksInfo(hotelName: hotelModel.name!, id: buildingModel.id!),
         ),
         SliverToBoxAdapter(child: SizedBox(height: 20.h)),
         SliverToBoxAdapter(

@@ -3,13 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'export_rack_to_pdf.dart';
 
-class RacksInfo extends StatelessWidget {
-  const RacksInfo({
+class RacksInfoId extends StatelessWidget {
+  const RacksInfoId({
     super.key,
     required this.hotelName,
     required this.id,
+    required this.rackId,
   });
-  final String hotelName, id;
+  final String hotelName, id, rackId;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,12 @@ class RacksInfo extends StatelessWidget {
               ),
               Text(
                 ' /Buildings > Building $id',
+                style: Theme.of(
+                  context,
+                ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w400),
+              ),
+              Text(
+                ' > Racks $rackId',
                 style: Theme.of(
                   context,
                 ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w400),

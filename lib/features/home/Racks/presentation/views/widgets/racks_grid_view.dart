@@ -46,6 +46,7 @@ class RacksGridView extends StatelessWidget {
                     extra: GetRackArg(
                       hotel: hotelModel,
                       buildingModel: buildingModel,
+                      rackInfoModel: racks[index],
                     ),
                   );
                 },

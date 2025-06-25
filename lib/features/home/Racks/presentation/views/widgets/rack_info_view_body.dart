@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/api_key.dart';
 import 'package:flutter_application_1/features/home/Buildings/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
+import 'package:flutter_application_1/features/home/Racks/models/rack_info_model.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/views/widgets/rack_info_id.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../widget/common_widget.dart';
-import 'rack_info.dart';
 import 'rack_info_builder.dart';
 
 class RackInfoViewBody extends StatelessWidget {
@@ -13,17 +14,22 @@ class RackInfoViewBody extends StatelessWidget {
     super.key,
     required this.hotelModel,
     required this.buildingModel,
+    required this.rackInfoModel,
   });
   final HotelModel hotelModel;
   final BuildingModel buildingModel;
-
+  final RackInfoModel rackInfoModel;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CommonWidget(popUp: true),
         SizedBox(height: 50.h),
-        RacksInfo(hotelName: hotelModel.name!, id: hotelModel.id!, rackId: buildingModel.id!),
+        RacksInfoId(
+          hotelName: hotelModel.name!,
+          id: buildingModel.id!,
+          rackId: rackInfoModel.id!,
+        ),
         SizedBox(height: 20.h),
         Image.network(
           '${Endpoints.baseUrlImage}/${hotelModel.logo!.trim()}',

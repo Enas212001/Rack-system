@@ -6,6 +6,7 @@ import 'package:flutter_application_1/features/home/Hotels/cubit/hotel_cubit.dar
 import 'package:flutter_application_1/features/home/Racks/cubit/rack_cubit.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/views/add_building_view.dart';
 import 'package:flutter_application_1/features/home/Hotels/presentation/views/add_hotel_view.dart';
+import 'package:flutter_application_1/features/home/Racks/models/rack_info_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/add_rack_view.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/views/building_view.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/rack_info_view.dart';
@@ -69,6 +70,7 @@ class AppRoutes {
           return RackInfoView(
             hotelModel: args.hotel,
             buildingModel: args.buildingModel,
+            rackInfoModel: args.rackInfoModel,
           );
         },
       ),
@@ -123,7 +125,12 @@ class AddBuildingArgs {
 class GetRackArg {
   final HotelModel hotel;
   final BuildingModel buildingModel;
-  GetRackArg({required this.hotel, required this.buildingModel});
+  final RackInfoModel rackInfoModel;
+  GetRackArg({
+    this.rackInfoModel = const RackInfoModel(),
+    required this.hotel,
+    required this.buildingModel,
+  });
 }
 
 class AddRackArgs {

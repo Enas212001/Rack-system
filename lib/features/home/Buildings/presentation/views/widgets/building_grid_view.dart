@@ -33,6 +33,7 @@ class BuildingGridView extends StatelessWidget {
                       hotel: hotelModel,
                       buildingModel: buildings[index],
                     ),
+                      
                   );
                 },
                 child: BuildingItem(building: buildings[index].id!),
