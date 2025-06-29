@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_single_quotes
 class Assets {
   Assets._();
-
+  
   /// Assets for imagesAddIcon
   /// assets/images/addIcon.png
   static const String imagesAddIcon = "assets/images/addIcon.png";
@@ -62,9 +62,17 @@ class Assets {
   /// assets/images/hotl11.png
   static const String imagesHotl11 = "assets/images/hotl11.png";
 
+  /// Assets for imagesIconLogo
+  /// assets/images/IconLogo.svg
+  static const String imagesIconLogo = "assets/images/IconLogo.svg";
+
   /// Assets for imagesLogoblack
   /// assets/images/Logoblack.png
   static const String imagesLogoblack = "assets/images/Logoblack.png";
+
+  /// Assets for imagesLogoblackIcon
+  /// assets/images/LogoblackIcon.png
+  static const String imagesLogoblackIcon = "assets/images/LogoblackIcon.png";
 
   /// Assets for imagesPowerSMTPLogo
   /// assets/images/PowerSMTPLogo.png
@@ -77,4 +85,9 @@ class Assets {
   /// Assets for imagesSettings
   /// assets/images/settings.png
   static const String imagesSettings = "assets/images/settings.png";
+
+  /// Assets for imagesVector
+  /// assets/images/Vector.svg
+  static const String imagesVector = "assets/images/Vector.svg";
 }
+

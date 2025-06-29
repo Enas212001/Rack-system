@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/app_colors.dart';
+import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TitleWithTextField extends StatelessWidget {
@@ -22,7 +24,9 @@ class TitleWithTextField extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+          style: CustomTextStyles.text14Regular.copyWith(
+            color: AppColors.textColor,
+          ),
         ),
         SizedBox(height: 8.h),
         CustomTextFormField(
@@ -64,12 +68,24 @@ class CustomTextFormField extends StatelessWidget {
         return null;
       },
       obscureText: isPassword,
+
       decoration: InputDecoration(
-        border: InputBorder.none,
+        border: borderTextField(),
+        focusedBorder: borderTextField(),
+        enabledBorder: borderTextField(),
+
         hintText: hintText,
-        filled: true,
-        fillColor: Color(0xffEAEAE8),
+        hintStyle: CustomTextStyles.text14Regular.copyWith(
+          color: AppColors.textColor,
+        ),
       ),
+    );
+  }
+
+  OutlineInputBorder borderTextField() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8.r),
+      borderSide: BorderSide(color: AppColors.darkBlueColor, width: 1.w),
     );
   }
 }

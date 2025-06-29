@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,11 +11,13 @@ class LoginButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        color: Color(0xff4C90CD),
-        width: 195.w,
-        height: 51.h,
+        decoration: BoxDecoration(
+          color: AppColors.primaryColor,
+          borderRadius: BorderRadius.circular(50.r),
+        ),
+        padding: EdgeInsets.all(11.r),
         alignment: Alignment.center,
-        child: Text('LOGIN', style: CustomTextStyles.text16Bold),
+        child: Text('Login', style: CustomTextStyles.text16Bold),
       ),
     );
   }

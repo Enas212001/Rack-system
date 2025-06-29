@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData getThemeData() {
   return ThemeData(
-    scaffoldBackgroundColor: AppColors.whiteColor,
+    scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
+    primaryColor: AppColors.primaryColor,
+    fontFamily: 'Inter',
     appBarTheme: const AppBarTheme(
       surfaceTintColor: Colors.transparent,
       elevation: 0,
@@ -18,7 +20,7 @@ ThemeData getThemeData() {
       ),
       titleLarge: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
       titleMedium: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
-      titleSmall: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+      titleSmall: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
       headlineLarge: TextStyle(fontSize: 48.sp, fontWeight: FontWeight.w800),
       headlineMedium: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w800),
     ),

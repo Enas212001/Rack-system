@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/features/auth/presentation/cubit/login_cubit.dart';
+import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RememberMeWidget extends StatelessWidget {
@@ -27,7 +28,12 @@ class RememberMeWidget extends StatelessWidget {
                 );
               },
             ),
-            const Text('Remember Me'),
+            Text(
+              'Remember Me',
+              style: CustomTextStyles.text14Regular.copyWith(
+                color: AppColors.textColor,
+              ),
+            ),
           ],
         );
       },

@@ -44,6 +44,7 @@ class LoginForm extends StatelessWidget {
                     title: 'Email',
                     controller: loginCubit.emailController,
                     focusNode: focusNode,
+                    hintText: 'Enter your email',
                   );
                 },
                 itemBuilder: (context, suggestion) {
@@ -73,23 +74,18 @@ class LoginForm extends StatelessWidget {
                       )
                       .toList();
                 },
-                emptyBuilder: (context) {
-                  final currentInput = loginCubit.emailController.text;
-                  if (currentInput.isEmpty) {
-                    return const SizedBox.shrink(); // Return empty widget (nothing)
-                  }
-                  return const SizedBox.shrink(); // Return empty widget (nothing)
-                },
+                emptyBuilder: (context) => const SizedBox.shrink(),
               ),
               SizedBox(height: 13.h),
               TitleWithTextField(
                 title: 'Password',
                 controller: loginCubit.passwordController,
                 isPassword: true,
+                hintText: 'Enter your password',
               ),
               SizedBox(height: 8.h),
               RememberMeWidget(),
-              SizedBox(height: 28.h),
+              SizedBox(height: 50.h),
               LoginButton(
                 onTap: () {
                   if (loginCubit.loginKey.currentState!.validate()) {
