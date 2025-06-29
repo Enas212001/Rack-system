@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -20,43 +22,48 @@ class LoginCubit extends Cubit<LoginState> {
 
   bool rememberMe = false; // ✅ add this
 
-  void toggleRememberMe({required value}) {
+  final cache = getIt.get<CacheHelper>();
+  void toggleRememberMe({required bool value}) {
     rememberMe = value;
     if (rememberMe) {
-      getIt.get<CacheHelper>().saveData(
-        key: ApiKey.email,
-        value: emailController.text,
+      // Save email list
+      List<String> emailList = List<String>.from(
+        cache.getData(key: ApiKey.emailList) ?? [],
       );
-      getIt.get<CacheHelper>().saveData(
-        key: ApiKey.password,
-        value: passwordController.text,
+      if (!emailList.contains(emailController.text)) {
+        emailList.add(emailController.text);
+        cache.saveData(key: ApiKey.emailList, value: emailList);
+      }
+
+      // Save password per email
+      final String? jsonString = getIt.get<CacheHelper>().getData(
+        key: ApiKey.passwordsMap,
       );
-      getIt.get<CacheHelper>().saveData(key: ApiKey.rememberMe, value: true);
+      final Map<String, String> passwords = jsonString != null
+          ? Map<String, String>.from(jsonDecode(jsonString))
+          : {};
+
+      passwords[emailController.text] = passwordController.text;
+
+      cache.saveData(key: ApiKey.passwordsMap, value: passwords);
+
+      // Remember the currently selected email and its flag
+      cache.saveData(key: ApiKey.email, value: emailController.text);
+      cache.saveData(key: ApiKey.rememberMe, value: true);
     } else {
-      getIt.get<CacheHelper>().removeData(key: ApiKey.email);
-      getIt.get<CacheHelper>().removeData(key: ApiKey.password);
-      getIt.get<CacheHelper>().saveData(key: ApiKey.rememberMe, value: false);
+      cache.removeData(key: ApiKey.email);
+      cache.removeData(key: ApiKey.passwordsMap);
+      cache.saveData(key: ApiKey.rememberMe, value: false);
     }
 
     emit(LoginCheckboxChanged(rememberMe: rememberMe));
   }
 
-  void loadRememberedCredentials() {
-    final savedEmail = getIt.get<CacheHelper>().getData(key: ApiKey.email);
-    final savedPassword = getIt.get<CacheHelper>().getData(
-      key: ApiKey.password,
-    );
-    final savedRememberMe =
-        getIt.get<CacheHelper>().getData(key: ApiKey.rememberMe) ?? false;
+  List<String> emailSuggestions = [];
 
-    if (savedEmail != null &&
-        savedPassword != null &&
-        savedRememberMe == true) {
-      emailController.text = savedEmail;
-      passwordController.text = savedPassword;
-      rememberMe = true;
-      emit(LoginCheckboxChanged(rememberMe: rememberMe));
-    }
+  void loadEmailSuggestions() {
+    final list = getIt.get<CacheHelper>().getData(key: ApiKey.emailList);
+    emailSuggestions = List<String>.from(list ?? []);
   }
 
   Future<void> login() async {
@@ -68,7 +75,12 @@ class LoginCubit extends Cubit<LoginState> {
       );
       response.fold(
         (failure) => emit(LoginFailure(message: failure.failure.errorMessage)),
-        (user) => emit(LoginSuccess(user: user)),
+        (user) {
+          emit(LoginSuccess(user: user));
+          emailController.clear();
+          passwordController.clear();
+          rememberMe = false;
+        },
       );
     } catch (e) {
       emit(LoginFailure(message: e.toString()));

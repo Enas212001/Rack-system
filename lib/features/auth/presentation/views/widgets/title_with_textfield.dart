@@ -8,12 +8,13 @@ class TitleWithTextField extends StatelessWidget {
     required this.controller,
     this.hintText,
     this.isPassword = false,
+    this.focusNode,
   });
   final String title;
   final TextEditingController controller;
   final String? hintText;
   final bool isPassword;
-
+  final FocusNode? focusNode;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,6 +30,7 @@ class TitleWithTextField extends StatelessWidget {
           title: title,
           hintText: hintText,
           isPassword: isPassword,
+          focusNode: focusNode,
         ),
       ],
     );
@@ -42,15 +44,18 @@ class CustomTextFormField extends StatelessWidget {
     required this.title,
     this.hintText,
     this.isPassword = false,
+    this.focusNode,
   });
 
   final TextEditingController controller;
   final String title;
   final String? hintText;
   final bool isPassword;
+  final FocusNode? focusNode;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      focusNode: focusNode,
       controller: controller,
       validator: (value) {
         if (value == null || value.isEmpty) {

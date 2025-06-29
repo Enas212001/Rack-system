@@ -18,7 +18,7 @@ class LoginView extends StatelessWidget {
               child: Image.asset(Assets.imagesRackBack, fit: BoxFit.cover),
             ),
             BlocProvider(
-              create: (context) => LoginCubit()..loadRememberedCredentials(),
+              create: (context) => LoginCubit()..loadEmailSuggestions(),
               child: LoginViewBody(),
             ),
           ],

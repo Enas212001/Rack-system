@@ -22,7 +22,9 @@ class RememberMeWidget extends StatelessWidget {
               value: isChecked,
               activeColor: AppColors.primaryColor,
               onChanged: (newValue) {
-                context.read<LoginCubit>().toggleRememberMe(value: newValue);
+                context.read<LoginCubit>().toggleRememberMe(
+                  value: newValue ?? false,
+                );
               },
             ),
             const Text('Remember Me'),

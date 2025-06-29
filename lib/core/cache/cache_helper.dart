@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 //CacheHelper That's Connect and Talk to local database.
 
@@ -26,6 +28,15 @@ class CacheHelper {
 
     if (value is int) {
       return await sharedPreferences.setInt(key, value);
+    } else if (value is double) {
+      return await sharedPreferences.setDouble(key, value);
+    } else if (value is List<String>) {
+      return await sharedPreferences.setStringList(key, value);
+    } else if (value is Map<String, String>) {
+      return await sharedPreferences.setString(
+        key,
+        jsonEncode(value),
+      ); // 👈 Serialize map to string
     } else {
       return await sharedPreferences.setDouble(key, value);
     }

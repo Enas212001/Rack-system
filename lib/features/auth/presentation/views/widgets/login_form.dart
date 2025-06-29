@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'dart:developer';
-
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/cache/cache_helper.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
@@ -27,27 +28,6 @@ class LoginForm extends StatelessWidget {
           showToast(state.message);
           log(state.message);
         } else if (state is LoginSuccess) {
-          if (loginCubit.rememberMe) {
-            getIt.get<CacheHelper>().saveData(
-              key: ApiKey.email,
-              value: loginCubit.emailController.text,
-            );
-            getIt.get<CacheHelper>().saveData(
-              key: ApiKey.password,
-              value: loginCubit.passwordController.text,
-            );
-            getIt.get<CacheHelper>().saveData(
-              key: ApiKey.rememberMe,
-              value: true,
-            );
-          } else {
-            getIt.get<CacheHelper>().removeData(key: ApiKey.email);
-            getIt.get<CacheHelper>().removeData(key: ApiKey.password);
-            getIt.get<CacheHelper>().saveData(
-              key: ApiKey.rememberMe,
-              value: false,
-            );
-          }
           GoRouter.of(context).pushReplacement(AppRoutes.dashboard);
           getIt.get<CacheHelper>().saveData(key: 'isLogin', value: true);
         }
@@ -58,9 +38,48 @@ class LoginForm extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 14.h),
-              TitleWithTextField(
-                title: 'Email',
-                controller: loginCubit.emailController,
+              TypeAheadField(
+                builder: (context, controller, focusNode) {
+                  return TitleWithTextField(
+                    title: 'Email',
+                    controller: loginCubit.emailController,
+                    focusNode: focusNode,
+                  );
+                },
+                itemBuilder: (context, suggestion) {
+                  return ListTile(title: Text(suggestion));
+                },
+                onSelected: (suggestion) {
+                  loginCubit.emailController.text = suggestion;
+                  final String? jsonString = getIt.get<CacheHelper>().getData(
+                    key: ApiKey.passwordsMap,
+                  );
+                  final Map<String, String> passwords = jsonString != null
+                      ? Map<String, String>.from(jsonDecode(jsonString))
+                      : {};
+                  loginCubit.passwordController.text =
+                      passwords[suggestion] ?? '';
+                },
+                suggestionsCallback: (pattern) {
+                  final List<String> emails = List<String>.from(
+                    getIt.get<CacheHelper>().getData(key: ApiKey.emailList) ??
+                        [],
+                  );
+                  return emails
+                      .where(
+                        (email) => email.toLowerCase().startsWith(
+                          pattern.toLowerCase(),
+                        ),
+                      )
+                      .toList();
+                },
+                emptyBuilder: (context) {
+                  final currentInput = loginCubit.emailController.text;
+                  if (currentInput.isEmpty) {
+                    return const SizedBox.shrink(); // Return empty widget (nothing)
+                  }
+                  return const SizedBox.shrink(); // Return empty widget (nothing)
+                },
               ),
               SizedBox(height: 13.h),
               TitleWithTextField(

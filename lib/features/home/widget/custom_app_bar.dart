@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import 'icon_with_title.dart';
+import 'log_out.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -19,7 +20,7 @@ class CustomAppBar extends StatelessWidget {
           BoxShadow(
             color: AppColors.blackColor.withValues(alpha: 0.1),
             blurRadius: 6,
-            offset: const Offset(0, 8), // shadow below
+            offset: const Offset(0, 8),
           ),
         ],
       ),
@@ -41,6 +42,9 @@ class CustomAppBar extends StatelessWidget {
               title: 'Our Clients',
             ),
           ),
+          Spacer(),
+          LogOut(),
+          SizedBox(width: 10.w),
         ],
       ),
     );
