@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/app_colors.dart';
+import 'package:flutter_application_1/theme/theme.dart';
 
 import 'add_user_button.dart';
 
@@ -9,9 +11,14 @@ class AddClientWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text('Our Clients', style: Theme.of(context).textTheme.titleMedium),
+        Text(
+          'Our Clients',
+          style: CustomTextStyles.text14Regular.copyWith(
+            color: AppColors.primaryColor,
+          ),
+        ),
         Spacer(),
-        Row(children: [AddUserButton()]),
+        AddUserButton(),
       ],
     );
   }

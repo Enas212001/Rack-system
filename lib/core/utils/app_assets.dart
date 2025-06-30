@@ -6,6 +6,22 @@ class Assets {
   /// assets/images/addIcon.png
   static const String imagesAddIcon = "assets/images/addIcon.png";
 
+  /// Assets for imagesAdded
+  /// assets/images/added.gif
+  static const String imagesAdded = "assets/images/added.gif";
+
+  /// Assets for imagesAppIcon
+  /// assets/images/AppIcon.svg
+  static const String imagesAppIcon = "assets/images/AppIcon.svg";
+
+  /// Assets for imagesAppLogo
+  /// assets/images/AppLogo.svg
+  static const String imagesAppLogo = "assets/images/AppLogo.svg";
+
+  /// Assets for imagesBuilding
+  /// assets/images/building.svg
+  static const String imagesBuilding = "assets/images/building.svg";
+
   /// Assets for imagesBuildings
   /// assets/images/buildings.png
   static const String imagesBuildings = "assets/images/buildings.png";
@@ -13,6 +29,10 @@ class Assets {
   /// Assets for imagesClients
   /// assets/images/clients.png
   static const String imagesClients = "assets/images/clients.png";
+
+  /// Assets for imagesDevice
+  /// assets/images/device.svg
+  static const String imagesDevice = "assets/images/device.svg";
 
   /// Assets for imagesHelpCenter
   /// assets/images/help_center.png
@@ -62,9 +82,17 @@ class Assets {
   /// assets/images/hotl11.png
   static const String imagesHotl11 = "assets/images/hotl11.png";
 
-  /// Assets for imagesIconLogo
-  /// assets/images/IconLogo.svg
-  static const String imagesIconLogo = "assets/images/IconLogo.svg";
+  /// Assets for imagesLogo
+  /// assets/images/logo.png
+  static const String imagesLogo = "assets/images/logo.png";
+
+  /// Assets for imagesLogoSqure
+  /// assets/images/logoSqure.webp
+  static const String imagesLogoSqure = "assets/images/logoSqure.webp";
+
+  /// Assets for imagesLogoWhite
+  /// assets/images/LogoWhite.svg
+  static const String imagesLogoWhite = "assets/images/LogoWhite.svg";
 
   /// Assets for imagesLogoblack
   /// assets/images/Logoblack.png
@@ -74,9 +102,21 @@ class Assets {
   /// assets/images/LogoblackIcon.png
   static const String imagesLogoblackIcon = "assets/images/LogoblackIcon.png";
 
+  /// Assets for imagesOne
+  /// assets/images/one.png
+  static const String imagesOne = "assets/images/one.png";
+
   /// Assets for imagesPowerSMTPLogo
   /// assets/images/PowerSMTPLogo.png
   static const String imagesPowerSMTPLogo = "assets/images/PowerSMTPLogo.png";
+
+  /// Assets for imagesProfileImage
+  /// assets/images/ProfileImage.png
+  static const String imagesProfileImage = "assets/images/ProfileImage.png";
+
+  /// Assets for imagesRack
+  /// assets/images/rack.svg
+  static const String imagesRack = "assets/images/rack.svg";
 
   /// Assets for imagesRackBack
   /// assets/images/rackBack.png
@@ -86,8 +126,8 @@ class Assets {
   /// assets/images/settings.png
   static const String imagesSettings = "assets/images/settings.png";
 
-  /// Assets for imagesVector
-  /// assets/images/Vector.svg
-  static const String imagesVector = "assets/images/Vector.svg";
+  /// Assets for imagesWhiteLogo
+  /// assets/images/WhiteLogo.png
+  static const String imagesWhiteLogo = "assets/images/WhiteLogo.png";
 }
 

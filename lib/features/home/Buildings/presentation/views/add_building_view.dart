@@ -10,8 +10,11 @@ class AddBuildingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add New Building')),
-      body: AddFormWidget(childWidget: AddBuildingForm(hotelId: hotelId)),
+      resizeToAvoidBottomInset: true,
+      body: AddFormWidget(
+        title: 'Building',
+        childWidget: AddBuildingForm(hotelId: hotelId),
+      ),
     );
   }
 }

@@ -13,14 +13,13 @@ ThemeData getThemeData() {
     ),
     textTheme: TextTheme(
       bodySmall: TextStyle(fontSize: 8.sp, color: Colors.black),
-      displaySmall: TextStyle(
-        fontSize: 10.sp,
-        fontWeight: FontWeight.bold,
-        color: AppColors.primaryColor,
-      ),
       titleLarge: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
       titleMedium: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
-      titleSmall: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+      titleSmall: TextStyle(
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
+        color: AppColors.primaryColor,
+      ),
       headlineLarge: TextStyle(fontSize: 48.sp, fontWeight: FontWeight.w800),
       headlineMedium: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w800),
     ),
@@ -40,4 +39,23 @@ abstract class CustomTextStyles {
   );
 
   static final text14Regular = TextStyle(fontSize: 14.sp);
+  static final text14W500Primary = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.primaryColor,
+  );
+  static final text13Regular = TextStyle(fontSize: 13.sp);
+  static final text12RegularGrey = TextStyle(
+    fontSize: 12.sp,
+    color: AppColors.greyColor,
+  );
+  static final text12W500Text = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textColor,
+  );
+  static final text11RegularGrey = TextStyle(
+    fontSize: 11.sp,
+    color: AppColors.greyColor,
+  );
 }

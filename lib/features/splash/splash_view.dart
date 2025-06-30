@@ -45,7 +45,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
             getIt.get<CacheHelper>().getData(key: 'isLogin') ?? false;
         GoRouter.of(
           context,
-        ).pushReplacement(isLogin ? AppRoutes.dashboard : AppRoutes.login);
+        ).pushReplacement(isLogin ? AppRoutes.hotels : AppRoutes.login);
       });
     });
   }

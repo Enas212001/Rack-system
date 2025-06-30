@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/app_colors.dart';
+import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'export_building_to_pdf.dart';
@@ -9,7 +11,7 @@ class BuildingInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 20.w),
+      padding: EdgeInsets.all(16.r),
       child: Column(
         children: [
           Row(
@@ -17,13 +19,9 @@ class BuildingInfo extends StatelessWidget {
               Text(
                 hotelName[0].toUpperCase() +
                     hotelName.substring(1).toLowerCase(),
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              Text(
-                '/Buildings',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w400),
+                style: CustomTextStyles.text14Regular.copyWith(
+                  color: AppColors.primaryColor,
+                ),
               ),
               Spacer(),
               ExportBuildingToPDF(hotelName: hotelName),

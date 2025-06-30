@@ -35,7 +35,7 @@ class CustomAppBar extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              GoRouter.of(context).go(AppRoutes.dashboard);
+              GoRouter.of(context).go(AppRoutes.hotels);
             },
             child: IconWithTitle(
               image: Assets.imagesClients,

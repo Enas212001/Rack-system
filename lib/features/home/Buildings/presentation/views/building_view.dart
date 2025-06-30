@@ -11,12 +11,10 @@ class BuildingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: BlocProvider(
-          create: (context) =>
-              BuildingCubit()..getBuildings(hotelId: hotelModel.id!),
-          child: BuildingViewBody(hotelModel: hotelModel),
-        ),
+      body: BlocProvider(
+        create: (context) =>
+            BuildingCubit()..getBuildings(hotelId: hotelModel.id!),
+        child: BuildingViewBody(hotelModel: hotelModel),
       ),
     );
   }

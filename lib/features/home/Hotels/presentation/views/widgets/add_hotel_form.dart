@@ -1,9 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/func/custom_show_dialog.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
+import 'package:flutter_application_1/core/utils/widgets/custom_loading.dart';
 import 'package:flutter_application_1/features/auth/presentation/views/widgets/title_with_textfield.dart';
 import 'package:flutter_application_1/features/home/Hotels/cubit/hotel_cubit.dart';
+import 'package:flutter_application_1/features/home/widget/success_message.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,14 +22,17 @@ class AddHotelForm extends StatelessWidget {
     return BlocConsumer<HotelCubit, HotelState>(
       listener: (context, state) {
         if (state is AddHotelSuccess) {
-          showToast('Hotel added successfully');
           hotelCubit.getHotels();
           Navigator.pop(context);
+          customShowDialog(
+            context,
+            widget: SuccessMessage(messageName: 'hotel'),
+          );
         } else if (state is AddHotelFailure) {
           log(state.message);
           showToast('Failed to add Hotel');
         } else if (state is AddHotelLoading) {
-          showToast('Loading...');
+          CustomLoading();
         }
       },
       builder: (context, state) {
@@ -36,12 +42,15 @@ class AddHotelForm extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Add New Hotel', style: CustomTextStyles.text20Bold),
+                Text(
+                  'Add New Hotel',
+                  style: CustomTextStyles.text14W500Primary,
+                ),
                 SizedBox(height: 20.h),
                 TitleWithTextField(
                   title: 'Hotel Name',
                   controller: hotelCubit.hotelNameController,
-                  hintText: 'Enter Hotel Name',
+                  hintText: 'Enter hotel Name',
                 ),
                 SizedBox(height: 10.h),
                 TitleWithTextField(

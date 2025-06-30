@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
+import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IconTextWithBG extends StatelessWidget {
@@ -11,16 +12,17 @@ class IconTextWithBG extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-        decoration: BoxDecoration(color: AppColors.backgroundColor),
-        child: Row(
-          children: [
-            Icon(icon),
-            SizedBox(width: 4.w),
-            Text(text, style: Theme.of(context).textTheme.bodySmall),
-          ],
-        ),
+      child: Row(
+        children: [
+          Icon(icon, color: AppColors.primaryColor),
+          SizedBox(width: 4.w),
+          Text(
+            text,
+            style: CustomTextStyles.text12RegularGrey.copyWith(
+              color: AppColors.primaryColor,
+            ),
+          ),
+        ],
       ),
     );
   }

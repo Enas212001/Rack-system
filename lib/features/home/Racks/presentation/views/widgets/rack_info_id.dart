@@ -26,7 +26,7 @@ class RacksInfoId extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               Text(
-                ' /Buildings > Building $id',
+                ' > Building $id',
                 style: Theme.of(
                   context,
                 ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w400),

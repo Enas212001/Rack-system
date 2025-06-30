@@ -1,10 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/func/custom_show_dialog.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
+import 'package:flutter_application_1/core/utils/widgets/custom_loading.dart';
 import 'package:flutter_application_1/features/auth/presentation/views/widgets/title_with_textfield.dart';
 import 'package:flutter_application_1/features/home/Buildings/cubit/building_cubit.dart';
 import 'package:flutter_application_1/features/home/widget/add_full_button.dart';
+import 'package:flutter_application_1/features/home/widget/success_message.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,14 +21,17 @@ class AddBuildingForm extends StatelessWidget {
     return BlocConsumer<BuildingCubit, BuildingState>(
       listener: (context, state) {
         if (state is AddBuildingSuccess) {
-          showToast('Building added successfully');
           buildingCubit.getBuildings(hotelId: hotelId);
           Navigator.pop(context);
+          customShowDialog(
+            context,
+            widget: SuccessMessage(messageName: 'Building'),
+          );
         } else if (state is AddBuildingFailure) {
           log(state.message);
           showToast('Failed to add building');
         } else if (state is AddBuildingLoading) {
-          showToast('Loading...');
+          CustomLoading();
         }
       },
       builder: (context, state) {
@@ -35,12 +41,15 @@ class AddBuildingForm extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Add New Building', style: CustomTextStyles.text20Bold),
+                Text(
+                  'Add New Building',
+                  style: CustomTextStyles.text14W500Primary,
+                ),
                 SizedBox(height: 20.h),
                 TitleWithTextField(
                   title: 'Rack ID',
                   controller: buildingCubit.rackIdController,
-                  hintText: 'Enter Rack ID',
+                  hintText: 'Enter your Rack ID',
                 ),
                 SizedBox(height: 10.h),
                 TitleWithTextField(
@@ -48,7 +57,6 @@ class AddBuildingForm extends StatelessWidget {
                   controller: buildingCubit.buildingRackIdController,
                   hintText: 'Enter Building Rack ID',
                 ),
-
                 SizedBox(height: 10.h),
                 TitleWithTextField(
                   title: 'Building Name',
@@ -56,14 +64,14 @@ class AddBuildingForm extends StatelessWidget {
                   hintText: 'Enter Building Name',
                 ),
                 SizedBox(height: 10.h),
-                SizedBox(height: 20.h),
                 AddFullSizeButton(
                   onPressed: () {
-                    if (buildingCubit.formAddBuildingKey.currentState!.validate()) {
+                    if (buildingCubit.formAddBuildingKey.currentState!
+                        .validate()) {
                       buildingCubit.addBuilding(hotelId: hotelId);
                     }
                   },
-                  text: 'Add Building',
+                  text: 'Submit',
                 ),
               ],
             ),

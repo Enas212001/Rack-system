@@ -9,44 +9,34 @@ class TableData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Table(
-      border: TableBorder.all(color: AppColors.blackColor),
-      children: [
-        TableRow(
-          decoration: BoxDecoration(color: AppColors.primaryColor),
-          children: [
-            TableItem(
-              text: 'Vlan Name',
-              color: AppColors.primaryColor,
-              height: 50.h,
-            ),
-            TableItem(
-              text: 'Vlan ID',
-              color: AppColors.primaryColor,
-              height: 50.h,
-            ),
-            TableItem(
-              text: 'Colour Code',
-              color: AppColors.primaryColor,
-              height: 50.h,
-            ),
-          ],
-        ),
-        TableRow(
-          children: [
-            TableItem(text: 'Camera', color: AppColors.backgroundColor),
-            TableItem(text: '60'),
-            TableItem(text: 'Turquoise'),
-          ],
-        ),
-        TableRow(
-          children: [
-            TableItem(text: 'Admin', color: AppColors.backgroundColor),
-            TableItem(text: '80'),
-            TableItem(text: 'Green'),
-          ],
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: Table(
+        border: TableBorder.all(color: AppColors.borderColor),
+        children: [
+          TableRow(
+            children: [
+              TableHeadItem(text: 'Vlan Name', height: 50.h),
+              TableHeadItem(text: 'Vlan ID', height: 50.h),
+              TableHeadItem(text: 'Colour Code', height: 50.h),
+            ],
+          ),
+          TableRow(
+            children: [
+              TableItem(text: 'Camera'),
+              TableItem(text: '60'),
+              TableItem(text: 'Turquoise'),
+            ],
+          ),
+          TableRow(
+            children: [
+              TableItem(text: 'Admin'),
+              TableItem(text: '80'),
+              TableItem(text: 'Green'),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

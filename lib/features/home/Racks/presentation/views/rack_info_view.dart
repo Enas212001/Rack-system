@@ -17,12 +17,10 @@ class RackInfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: RackInfoViewBody(
-          hotelModel: hotelModel,
-          buildingModel: buildingModel,
-          rackInfoModel: rackInfoModel,
-        ),
+      body: RackInfoViewBody(
+        hotelModel: hotelModel,
+        buildingModel: buildingModel,
+        rackInfoModel: rackInfoModel,
       ),
     );
   }

@@ -11,13 +11,16 @@ class AddFullSizeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        minimumSize: Size(MediaQuery.sizeOf(context).width, 48.h),
-        backgroundColor: AppColors.primaryColor,
+    return Padding(
+      padding: EdgeInsets.all(24.r),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size(MediaQuery.sizeOf(context).width, 48.h),
+          backgroundColor: AppColors.primaryColor,
+        ),
+        child: Text(text, style: CustomTextStyles.text16Bold),
       ),
-      child: Text(text, style: CustomTextStyles.text16Bold),
     );
   }
 }

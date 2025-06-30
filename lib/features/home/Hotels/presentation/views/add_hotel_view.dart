@@ -9,8 +9,8 @@ class AddHotelView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add New Hotel')),
-      body: AddFormWidget(childWidget: AddHotelForm()),
+      resizeToAvoidBottomInset: true,
+      body: AddFormWidget(title: 'Hotel', childWidget: AddHotelForm()),
     );
   }
 }

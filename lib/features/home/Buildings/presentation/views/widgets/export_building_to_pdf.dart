@@ -11,7 +11,7 @@ class ExportBuildingToPDF extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconTextWithBG(
       text: 'Export',
-      icon: Icons.open_in_new,
+      icon: Icons.file_upload_outlined,
       onTap: () {
         final cubit = context.read<BuildingCubit>();
         final state = cubit.state;

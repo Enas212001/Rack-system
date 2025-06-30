@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Buildings/cubit/building_cubit.dart';
+import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import 'building_item.dart';
 
-class BuildingGridView extends StatelessWidget {
-  const BuildingGridView({super.key, required this.hotelModel});
+class BuildingListView extends StatelessWidget {
+  const BuildingListView({super.key, required this.hotelModel});
   final HotelModel hotelModel;
 
   @override
@@ -23,7 +25,20 @@ class BuildingGridView extends StatelessWidget {
           return SliverToBoxAdapter(child: Center(child: Text(state.message)));
         } else if (state is BuildingSuccess) {
           final buildings = state.buildings;
-          return SliverGrid(
+          if (buildings.isEmpty) {
+            return SliverToBoxAdapter(
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(16.r),
+                  child: Text(
+                    'No buildings available',
+                    style: CustomTextStyles.text14W500Primary,
+                  ),
+                ),
+              ),
+            );
+          }
+          return SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) => GestureDetector(
                 onTap: () {
@@ -38,10 +53,6 @@ class BuildingGridView extends StatelessWidget {
                 child: BuildingItem(building: buildings[index].buildingRId!),
               ),
               childCount: buildings.length,
-            ),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 2,
             ),
           );
         }

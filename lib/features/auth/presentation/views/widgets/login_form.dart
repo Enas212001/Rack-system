@@ -28,7 +28,7 @@ class LoginForm extends StatelessWidget {
           showToast(state.message);
           log(state.message);
         } else if (state is LoginSuccess) {
-          GoRouter.of(context).pushReplacement(AppRoutes.dashboard);
+          GoRouter.of(context).pushReplacement(AppRoutes.hotels);
           getIt.get<CacheHelper>().saveData(key: 'isLogin', value: true);
         }
       },

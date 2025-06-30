@@ -8,8 +8,11 @@ class AddRackView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add New Rack')),
-      body: AddFormWidget(childWidget: AddRackForm(buildingRId: buildingRId)),
+      resizeToAvoidBottomInset: true,
+      body: AddFormWidget(
+        title: 'Rack',
+        childWidget: AddRackForm(buildingRId: buildingRId),
+      ),
     );
   }
 }

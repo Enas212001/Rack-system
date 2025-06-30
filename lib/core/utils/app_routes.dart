@@ -16,11 +16,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/views/login_view.dart';
-import '../../features/home/Hotels/presentation/views/dashboard_view.dart';
+import '../../features/home/Hotels/presentation/views/hotel_view.dart';
 
 class AppRoutes {
   static const String login = '/login';
-  static const String dashboard = '/dashboard';
+  static const String hotels = '/hotels';
   static const String building = '/building';
   static const String racks = '/racks';
   static const String rackInfo = '/rack-info';
@@ -31,10 +31,7 @@ class AppRoutes {
     routes: [
       GoRoute(path: '/', builder: (context, state) => SplashView()),
       GoRoute(path: login, builder: (context, state) => const LoginView()),
-      GoRoute(
-        path: dashboard,
-        builder: (context, state) => const DashboardView(),
-      ),
+      GoRoute(path: hotels, builder: (context, state) => const HotelsView()),
       GoRoute(
         path: building,
         builder: (context, state) {

@@ -16,15 +16,13 @@ class RacksView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: BlocProvider(
-          create: (context) =>
-              RackCubit()
-                ..getRacksInfo(buildingRId: buildingModel.buildingRId!),
-          child: RackViewBody(
-            hotelModel: hotelModel,
-            buildingModel: buildingModel,
-          ),
+      body: BlocProvider(
+        create: (context) =>
+            RackCubit()
+              ..getRacksInfo(buildingRId: buildingModel.buildingRId!),
+        child: RackViewBody(
+          hotelModel: hotelModel,
+          buildingModel: buildingModel,
         ),
       ),
     );

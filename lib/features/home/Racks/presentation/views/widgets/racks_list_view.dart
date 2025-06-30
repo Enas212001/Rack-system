@@ -3,14 +3,15 @@ import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/features/home/Buildings/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Racks/cubit/rack_cubit.dart';
+import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import 'rack_item.dart';
 
-class RacksGridView extends StatelessWidget {
-  const RacksGridView({
+class RacksListView extends StatelessWidget {
+  const RacksListView({
     super.key,
     required this.hotelModel,
     required this.buildingModel,
@@ -31,10 +32,18 @@ class RacksGridView extends StatelessWidget {
           final racks = state.racks;
           if (racks.isEmpty) {
             return SliverToBoxAdapter(
-              child: Center(child: Text('No racks available')),
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(16.r),
+                  child: Text(
+                    'No racks available',
+                    style: CustomTextStyles.text14W500Primary,
+                  ),
+                ),
+              ),
             );
           }
-          return SliverGrid(
+          return SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) => GestureDetector(
                 onTap: () {
@@ -56,11 +65,6 @@ class RacksGridView extends StatelessWidget {
                 ),
               ),
               childCount: racks.length,
-            ),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 2,
-              mainAxisSpacing: 40.h,
             ),
           );
         }

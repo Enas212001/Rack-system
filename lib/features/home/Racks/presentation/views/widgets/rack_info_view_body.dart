@@ -4,9 +4,9 @@ import 'package:flutter_application_1/features/home/Buildings/models/building_mo
 import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Racks/models/rack_info_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/widgets/rack_info_id.dart';
+import 'package:flutter_application_1/features/home/widget/top_with_back.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../widget/common_widget.dart';
 import 'rack_info_builder.dart';
 
 class RackInfoViewBody extends StatelessWidget {
@@ -23,22 +23,14 @@ class RackInfoViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CommonWidget(popUp: true),
-        SizedBox(height: 50.h),
+        TopWithBack(text: 'Rack'),
         RacksInfoId(
           hotelName: hotelModel.name!,
           id: buildingModel.id!,
           rackId: rackInfoModel.id!,
         ),
-        SizedBox(height: 20.h),
-        Image.network(
-          '${Endpoints.baseUrlImage}/${hotelModel.logo!.trim()}',
-          height: 80.h,
-        ),
-        SizedBox(height: 10.h),
         RackInfoBuilder(buildingId: buildingModel.buildingRId!),
         SizedBox(height: 20.h),
-        // BackAndNextButton(),
       ],
     );
   }
