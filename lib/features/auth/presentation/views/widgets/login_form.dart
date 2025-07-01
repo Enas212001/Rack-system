@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/cache/cache_helper.dart';
@@ -48,7 +49,10 @@ class LoginForm extends StatelessWidget {
                   );
                 },
                 itemBuilder: (context, suggestion) {
-                  return ListTile(title: Text(suggestion));
+                  return ListTile(
+                    title: Text(suggestion),
+                    tileColor: AppColors.whiteColor,
+                  );
                 },
                 onSelected: (suggestion) {
                   loginCubit.emailController.text = suggestion;

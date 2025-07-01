@@ -20,18 +20,37 @@ class HotelCubit extends Cubit<HotelState> {
   final TextEditingController buildingNumberController =
       TextEditingController();
   XFile? imageFromGallery;
-
+  List<HotelModel> _allHotels = [];
   Future<void> getHotels() async {
     emit(HotelLoading());
     try {
       final result = await homeRepo.getHotels();
       result.fold(
         (failure) => emit(HotelFailure(message: failure.failure.errorMessage)),
-        (hotels) => emit(HotelSuccess(hotels: hotels)),
+        (hotels) {
+          _allHotels = hotels;
+          emit(HotelSuccess(hotels: hotels));
+        },
       );
     } catch (e) {
       emit(HotelFailure(message: e.toString()));
     }
+  }
+
+  void searchHotels(String query) {
+    if (state is! HotelSuccess) return;
+
+    if (query.isEmpty) {
+      emit(HotelSuccess(hotels: _allHotels));
+      return;
+    }
+
+    final filtered = _allHotels.where((hotel) {
+      final name = hotel.name?.toLowerCase() ?? '';
+      return name.contains(query.toLowerCase());
+    }).toList();
+
+    emit(HotelSuccess(hotels: filtered));
   }
 
   Future<void> addHotel() async {

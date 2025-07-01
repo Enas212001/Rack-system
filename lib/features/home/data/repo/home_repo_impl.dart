@@ -18,13 +18,12 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<ServerFailure, List<HotelModel>>> getHotels() async {
     final response = await api.get(Endpoints.getHotels);
     try {
-      // response is already a List<dynamic>, so no need to access .data or .statusCode
       final hotels = (response as List)
           .map((item) => HotelModel.fromJson(item))
           .toList();
 
       log('HOTELS COUNT: ${hotels.length}');
-      return right(hotels); // Return the list of hotels wrapped in Either
+      return right(hotels); 
     } on ServerFailure catch (e) {
       log('Error parsing hotels: $e');
       return left(e);
@@ -42,7 +41,7 @@ class HomeRepoImpl implements HomeRepo {
           .toList();
 
       log('BUILDINGS COUNT: ${buildings.length}');
-      return right(buildings); // Return the list of buildings wrapped in Either
+      return right(buildings); 
     } on ServerFailure catch (e) {
       log('Error parsing buildings: $e');
       return left(e);

@@ -22,7 +22,7 @@ class RackViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(child: TopWithBack(text: 'Racks')),
+        SliverToBoxAdapter(child: TopWithBack(text: 'Racks', isRack: true)),
         RacksListView(hotelModel: hotelModel, buildingModel: buildingModel),
         SliverToBoxAdapter(
           child: AddFullSizeButton(

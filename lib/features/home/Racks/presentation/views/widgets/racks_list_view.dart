@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
+import 'package:flutter_application_1/core/utils/widgets/custom_loading.dart';
 import 'package:flutter_application_1/features/home/Buildings/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Racks/cubit/rack_cubit.dart';
@@ -23,9 +24,7 @@ class RacksListView extends StatelessWidget {
     return BlocBuilder<RackCubit, RackState>(
       builder: (context, state) {
         if (state is RacksLoading) {
-          return SliverToBoxAdapter(
-            child: const Center(child: CircularProgressIndicator()),
-          );
+          return SliverToBoxAdapter(child: const CustomLoading());
         } else if (state is RacksFailure) {
           return SliverToBoxAdapter(child: Center(child: Text(state.message)));
         } else if (state is RacksSuccess) {

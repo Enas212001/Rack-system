@@ -33,11 +33,28 @@ class RackCubit extends Cubit<RackState> {
       final result = await homeRepo.getRacksInfo(buildingRId: buildingRId);
       result.fold(
         (failure) => emit(RacksFailure(message: failure.failure.errorMessage)),
-        (racks) => emit(RacksSuccess(racks: racks)),
+        (racks) {
+          filteredRacks = racks;
+          emit(RacksSuccess(racks: racks));
+        },
       );
     } catch (e) {
       emit(RacksFailure(message: e.toString()));
     }
+  }
+
+  List<RackInfoModel> filteredRacks = [];
+  void searchRack(String query) {
+    if (state is! RacksSuccess) return;
+    if (query.isEmpty) {
+      emit(RacksSuccess(racks: filteredRacks));
+      return;
+    }
+    final filtered = filteredRacks.where((hotel) {
+      final name = hotel.deviceName?.toLowerCase() ?? '';
+      return name.contains(query.toLowerCase());
+    }).toList();
+    emit(RacksSuccess(racks: filtered));
   }
 
   Future<void> addRack({required String buildingRId}) async {

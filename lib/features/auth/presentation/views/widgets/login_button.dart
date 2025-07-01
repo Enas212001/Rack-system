@@ -18,7 +18,12 @@ class LoginButton extends StatelessWidget {
         padding: EdgeInsets.all(11.r),
         margin: EdgeInsets.symmetric(horizontal: 20.w),
         alignment: Alignment.center,
-        child: Text('Login', style: CustomTextStyles.text16Bold),
+        child: Text(
+          'Login',
+          style: CustomTextStyles.text14Regular.copyWith(
+            color: AppColors.whiteColor,
+          ),
+        ),
       ),
     );
   }

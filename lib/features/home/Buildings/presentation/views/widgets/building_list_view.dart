@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
+import 'package:flutter_application_1/core/utils/widgets/custom_loading.dart';
+import 'package:flutter_application_1/core/utils/widgets/lost_connection.dart';
 import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Buildings/cubit/building_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';
@@ -18,9 +20,7 @@ class BuildingListView extends StatelessWidget {
     return BlocBuilder<BuildingCubit, BuildingState>(
       builder: (context, state) {
         if (state is BuildingLoading) {
-          return SliverToBoxAdapter(
-            child: const Center(child: CircularProgressIndicator()),
-          );
+          return SliverToBoxAdapter(child: CustomLoading());
         } else if (state is BuildingFailure) {
           return SliverToBoxAdapter(child: Center(child: Text(state.message)));
         } else if (state is BuildingSuccess) {
@@ -50,15 +50,13 @@ class BuildingListView extends StatelessWidget {
                     ),
                   );
                 },
-                child: BuildingItem(building: buildings[index].buildingRId!),
+                child: BuildingItem(building: buildings[index].buildingName!),
               ),
               childCount: buildings.length,
             ),
           );
         }
-        return SliverToBoxAdapter(
-          child: const Center(child: Text('No data available')),
-        );
+        return SliverToBoxAdapter(child: const Center(child: LostConnection()));
       },
     );
   }

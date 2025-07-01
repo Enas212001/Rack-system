@@ -18,6 +18,10 @@ class Assets {
   /// assets/images/AppLogo.svg
   static const String imagesAppLogo = "assets/images/AppLogo.svg";
 
+  /// Assets for imagesBarcelo
+  /// assets/images/barcelo.png
+  static const String imagesBarcelo = "assets/images/barcelo.png";
+
   /// Assets for imagesBuilding
   /// assets/images/building.svg
   static const String imagesBuilding = "assets/images/building.svg";
@@ -26,13 +30,25 @@ class Assets {
   /// assets/images/buildings.png
   static const String imagesBuildings = "assets/images/buildings.png";
 
+  /// Assets for imagesCharmillion
+  /// assets/images/charmillion.png
+  static const String imagesCharmillion = "assets/images/charmillion.png";
+
   /// Assets for imagesClients
   /// assets/images/clients.png
   static const String imagesClients = "assets/images/clients.png";
 
+  /// Assets for imagesConnectivity
+  /// assets/images/Connectivity.png
+  static const String imagesConnectivity = "assets/images/Connectivity.png";
+
   /// Assets for imagesDevice
   /// assets/images/device.svg
   static const String imagesDevice = "assets/images/device.svg";
+
+  /// Assets for imagesDomina
+  /// assets/images/domina.png
+  static const String imagesDomina = "assets/images/domina.png";
 
   /// Assets for imagesHelpCenter
   /// assets/images/help_center.png
@@ -82,6 +98,10 @@ class Assets {
   /// assets/images/hotl11.png
   static const String imagesHotl11 = "assets/images/hotl11.png";
 
+  /// Assets for imagesJaz
+  /// assets/images/jaz.png
+  static const String imagesJaz = "assets/images/jaz.png";
+
   /// Assets for imagesLogo
   /// assets/images/logo.png
   static const String imagesLogo = "assets/images/logo.png";
@@ -122,12 +142,36 @@ class Assets {
   /// assets/images/rackBack.png
   static const String imagesRackBack = "assets/images/rackBack.png";
 
+  /// Assets for imagesSafir
+  /// assets/images/safir.png
+  static const String imagesSafir = "assets/images/safir.png";
+
   /// Assets for imagesSettings
   /// assets/images/settings.png
   static const String imagesSettings = "assets/images/settings.png";
 
+  /// Assets for imagesSonesta
+  /// assets/images/sonesta.png
+  static const String imagesSonesta = "assets/images/sonesta.png";
+
+  /// Assets for imagesSteigenberger
+  /// assets/images/steigenberger.png
+  static const String imagesSteigenberger = "assets/images/steigenberger.png";
+
+  /// Assets for imagesSultanGardens
+  /// assets/images/sultanGardens.png
+  static const String imagesSultanGardens = "assets/images/sultanGardens.png";
+
+  /// Assets for imagesSunRise
+  /// assets/images/sunRise.png
+  static const String imagesSunRise = "assets/images/sunRise.png";
+
   /// Assets for imagesWhiteLogo
   /// assets/images/WhiteLogo.png
   static const String imagesWhiteLogo = "assets/images/WhiteLogo.png";
+
+  /// Assets for imagesXanadu
+  /// assets/images/xanadu.png
+  static const String imagesXanadu = "assets/images/xanadu.png";
 }
 

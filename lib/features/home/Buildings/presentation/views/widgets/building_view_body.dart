@@ -17,10 +17,13 @@ class BuildingViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final buildingCubit = context.read<BuildingCubit>();
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
           child: TopWithBack(
+            onSearchChanged: buildingCubit.searchBuildings,
+            title: 'Building',
             text:
                 hotelModel.name![0].toUpperCase() +
                 hotelModel.name!.substring(1),

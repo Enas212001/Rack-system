@@ -19,7 +19,12 @@ class AddFullSizeButton extends StatelessWidget {
           minimumSize: Size(MediaQuery.sizeOf(context).width, 48.h),
           backgroundColor: AppColors.primaryColor,
         ),
-        child: Text(text, style: CustomTextStyles.text16Bold),
+        child: Text(
+          text,
+          style: CustomTextStyles.text14Regular.copyWith(
+            color: AppColors.whiteColor,
+          ),
+        ),
       ),
     );
   }

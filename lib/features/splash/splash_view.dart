@@ -1,11 +1,11 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/utils/app_colors.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_application_1/core/cache/cache_helper.dart';
-import 'package:flutter_application_1/core/utils/app_assets.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_application_1/core/utils/app_assets.dart';
 import 'package:go_router/go_router.dart';
 
 class SplashView extends StatefulWidget {
@@ -16,85 +16,94 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
-  late AnimationController _rotationController;
-  late AnimationController _transitionController;
-  bool _showFullLogo = false;
-  bool _moveLogo = false;
+  late AnimationController rotateController;
+  late Animation<double> rotation;
+
+  late AnimationController revealController;
+  late Animation<double> widthFactor;
+
+  bool showIcon = true;
 
   @override
   void initState() {
     super.initState();
 
-    _rotationController = AnimationController(
+    // Rotate icon 0° -> 45° -> 0°
+    rotateController = AnimationController(
+      duration: const Duration(milliseconds: 900),
       vsync: this,
-      duration: const Duration(seconds: 1),
+    );
+    rotation =
+        TweenSequence([
+          TweenSequenceItem(tween: Tween(begin: 0.0, end: pi / 4), weight: 50),
+          TweenSequenceItem(tween: Tween(begin: pi / 4, end: 0.0), weight: 50),
+        ]).animate(
+          CurvedAnimation(parent: rotateController, curve: Curves.easeInOut),
+        );
+
+    // Reveal full logo animation
+    revealController = AnimationController(
+      duration: const Duration(milliseconds: 900),
+      vsync: this,
+    );
+    widthFactor = Tween<double>(begin: 0.25, end: 1.0).animate(
+      CurvedAnimation(parent: revealController, curve: Curves.easeInOut),
     );
 
-    _transitionController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 800),
-    );
+    _startAnimation();
+  }
 
-    _rotationController.forward().whenComplete(() {
-      setState(() => _showFullLogo = true);
-      _transitionController.forward();
-      setState(() => _moveLogo = true);
-
-      Timer(const Duration(milliseconds: 900), () {
-        bool isLogin =
-            getIt.get<CacheHelper>().getData(key: 'isLogin') ?? false;
-        GoRouter.of(
-          context,
-        ).pushReplacement(isLogin ? AppRoutes.hotels : AppRoutes.login);
-      });
+  Future<void> _startAnimation() async {
+    await rotateController.forward();
+    setState(() => showIcon = false); // hide icon after rotate
+    await Future.delayed(const Duration(milliseconds: 100));
+    await revealController.forward(); // reveal full image
+    Timer(const Duration(seconds: 5), () {
+      final bool isLogin =
+          getIt<CacheHelper>().getData(key: 'isLogin') ?? false;
+      GoRouter.of(
+        context,
+      ).pushReplacement(isLogin ? AppRoutes.hotels : AppRoutes.login);
     });
   }
 
   @override
   void dispose() {
-    _rotationController.dispose();
-    _transitionController.dispose();
+    rotateController.dispose();
+    revealController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
-      body: Stack(
-        children: [
-          // Background
-          Positioned.fill(child: Container(color: AppColors.whiteColor)),
-
-          // Rotating icon part (hide when full logo is shown)
-          if (!_showFullLogo)
-            Center(
-              child: RotationTransition(
-                turns: Tween<double>(
-                  begin: 0,
-                  end: 1,
-                ).animate(_rotationController),
-                child: Image.asset(Assets.imagesLogoblackIcon, height: 120.h),
+      backgroundColor: Colors.white,
+      body: Center(
+        child: showIcon
+            ? AnimatedBuilder(
+                animation: rotation,
+                builder: (context, child) {
+                  return Transform.rotate(
+                    angle: rotation.value,
+                    child: Image.asset(
+                      Assets.imagesLogoblackIcon,
+                      width: 200.w,
+                    ),
+                  );
+                },
+              )
+            : AnimatedBuilder(
+                animation: widthFactor,
+                builder: (context, child) {
+                  return ClipRect(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      widthFactor: widthFactor.value,
+                      child: Image.asset(Assets.imagesLogoblack, width: 240.w),
+                    ),
+                  );
+                },
               ),
-            ),
-
-          // Full logo appearing and moving to top
-          AnimatedPositioned(
-            duration: const Duration(milliseconds: 800),
-            curve: Curves.easeOut,
-            top: _moveLogo ? screenHeight * 0.046 : screenHeight * 0.5,
-            left: 0,
-            right: 0,
-            child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 800),
-              opacity: _showFullLogo ? 1.0 : 0.0,
-              child: Center(
-                child: Image.asset(Assets.imagesLogoblack, height: 140.h),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

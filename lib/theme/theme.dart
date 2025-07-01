@@ -27,10 +27,10 @@ ThemeData getThemeData() {
 }
 
 abstract class CustomTextStyles {
-  static final text16Bold = TextStyle(
-    color: AppColors.whiteColor,
+  static final text14W600Text = TextStyle(
+    color: AppColors.textColor,
     fontSize: 16.sp,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w600,
   );
 
   static final text20Bold = TextStyle(

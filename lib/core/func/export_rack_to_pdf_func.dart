@@ -27,31 +27,40 @@ Future<void> exportRackAsPdf(
               ),
             ),
           ),
-          pw.GridView(
-            crossAxisCount: 2,
-            childAspectRatio: 2,
-            children: racks.map((rack) {
-              return pw.Container(
-                padding: const pw.EdgeInsets.all(8),
-                decoration: pw.BoxDecoration(
-                  border: pw.Border.all(color: PdfColors.grey),
-                ),
-                child: pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+          pw.Table(
+            border: pw.TableBorder.all(color: PdfColors.black),
+            children: [
+              // Header row
+              pw.TableRow(
+                decoration: const pw.BoxDecoration(color: PdfColors.blue),
+                children: [
+                  _pdfCell('DEVICE NAME', bold: true, color: PdfColors.white),
+                  _pdfCell('SERIAL NUMBER', bold: true, color: PdfColors.white),
+                  _pdfCell('MAC ADDRESS', bold: true, color: PdfColors.white),
+                  _pdfCell('MODEL', bold: true, color: PdfColors.white),
+                  _pdfCell('SITE NAME', bold: true, color: PdfColors.white),
+                  _pdfCell('SWITCH PORT', bold: true, color: PdfColors.white),
+                  _pdfCell(
+                    'PATCH PANEL PORT',
+                    bold: true,
+                    color: PdfColors.white,
+                  ),
+                ],
+              ),
+              ...racks.map(
+                (rack) => pw.TableRow(
                   children: [
-                    pw.Text('ID: ${rack.id}'),
-                    pw.Text('Name: ${rack.deviceName}'),
-                    pw.Text('Serial Number: ${rack.productSerial}'),
-                    pw.Text('MAC Address: ${rack.productMac}'),
-                    pw.Text('Model: ${rack.productModel}'),
-                    pw.Text('Port: ${rack.productPort}'),
-                    pw.Text('Site Name: ${rack.siteName}'),
-                    pw.Text('Panel: ${rack.productPanal}'),
-                    
+                    _pdfCell(rack.deviceName),
+                    _pdfCell(rack.productSerial),
+                    _pdfCell(rack.productMac),
+                    _pdfCell(rack.productModel),
+                    _pdfCell(rack.siteName),
+                    _pdfCell(rack.productPort),
+                    _pdfCell(rack.productPanal),
                   ],
                 ),
-              );
-            }).toList(),
+              ),
+            ],
           ),
         ];
       },
@@ -60,5 +69,19 @@ Future<void> exportRackAsPdf(
 
   await Printing.layoutPdf(
     onLayout: (PdfPageFormat format) async => pdf.save(),
+  );
+}
+
+pw.Widget _pdfCell(String? text, {bool bold = false, PdfColor? color}) {
+  return pw.Container(
+    padding: pw.EdgeInsets.all(4.r),
+    child: pw.Text(
+      text ?? '',
+      style: pw.TextStyle(
+        fontSize: 9.sp,
+        fontWeight: bold ? pw.FontWeight.bold : pw.FontWeight.normal,
+        color: color ?? PdfColors.black,
+      ),
+    ),
   );
 }

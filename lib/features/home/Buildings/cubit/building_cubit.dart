@@ -10,7 +10,6 @@ import 'package:flutter_application_1/features/home/data/repo/home_repo_impl.dar
 part 'building_state.dart';
 
 class BuildingCubit extends Cubit<BuildingState> {
-
   BuildingCubit() : super(BuildingInitial());
   final HomeRepo homeRepo = HomeRepoImpl(api: getIt.get<DioConsumer>());
 
@@ -27,11 +26,31 @@ class BuildingCubit extends Cubit<BuildingState> {
       buildings.fold(
         (failure) =>
             emit(BuildingFailure(message: failure.failure.errorMessage)),
-        (buildings) => emit(BuildingSuccess(buildings: buildings)),
+        (buildings) {
+          buildingsList = buildings;
+          emit(BuildingSuccess(buildings: buildings));
+        },
       );
     } catch (e) {
       emit(BuildingFailure(message: e.toString()));
     }
+  }
+
+  List<BuildingModel> buildingsList = [];
+  void searchBuildings(String query) {
+    if (state is! BuildingSuccess) return;
+
+    if (query.isEmpty) {
+      emit(BuildingSuccess(buildings: buildingsList));
+      return;
+    }
+
+    final filtered = buildingsList.where((building) {
+      final name = building.buildingName?.toLowerCase() ?? '';
+      return name.contains(query.toLowerCase());
+    }).toList();
+
+    emit(BuildingSuccess(buildings: filtered));
   }
 
   Future<void> addBuilding({required String hotelId}) async {

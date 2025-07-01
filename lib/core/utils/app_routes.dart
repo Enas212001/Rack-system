@@ -27,7 +27,11 @@ class AppRoutes {
   static const String addBuilding = '/add_building';
   static const String addRack = '/add_rack';
   static const String addHotel = '/add_hotel';
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
+
   static final router = GoRouter(
+    navigatorKey: navigatorKey,
     routes: [
       GoRoute(path: '/', builder: (context, state) => SplashView()),
       GoRoute(path: login, builder: (context, state) => const LoginView()),
