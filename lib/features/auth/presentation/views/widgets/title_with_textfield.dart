@@ -59,6 +59,8 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorColor: AppColors.primaryColor,
+      enableSuggestions: true,
       focusNode: focusNode,
       controller: controller,
       validator: (value) {

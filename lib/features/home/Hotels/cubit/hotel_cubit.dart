@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -68,6 +70,7 @@ class HotelCubit extends Cubit<HotelState> {
           emit(AddHotelSuccess(hotel: hotel));
           hotelNameController.clear();
           buildingNumberController.clear();
+          imageFromGallery = null;
         },
       );
     } catch (e) {
@@ -77,8 +80,6 @@ class HotelCubit extends Cubit<HotelState> {
 
   Future<void> pickImageWithGallery() async {
     try {
-      emit(PickHotelFromGalleryLoading());
-
       final returnedImage = await ImagePicker().pickImage(
         source: ImageSource.gallery,
       );
@@ -86,9 +87,8 @@ class HotelCubit extends Cubit<HotelState> {
       if (returnedImage == null) return;
 
       imageFromGallery = XFile(returnedImage.path);
-      emit(PickHotelFromGallerySuccess());
     } catch (e) {
-      emit(PickHotelFromGalleryFailure(message: e.toString()));
+      log(e.toString());
     }
   }
 }

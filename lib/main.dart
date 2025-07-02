@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_application_1/core/cache/cache_helper.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
 import 'package:flutter_application_1/simple_bloc_observer.dart';
@@ -10,6 +11,7 @@ void main() async {
   setupServiceLocator();
   Bloc.observer = SimpleBLocObserver();
   await getIt<CacheHelper>().init();
+  debugPaintSizeEnabled = true;
 
   runApp(MyApp());
 }

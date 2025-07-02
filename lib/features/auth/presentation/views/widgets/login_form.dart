@@ -39,14 +39,19 @@ class LoginForm extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 14.h),
-              TypeAheadField(
-                builder: (context, controller, focusNode) {
-                  return TitleWithTextField(
-                    title: 'Email',
-                    controller: loginCubit.emailController,
-                    focusNode: focusNode,
-                    hintText: 'Enter your email',
+              TypeAheadField<String>(
+                suggestionsCallback: (pattern) {
+                  final List<String> emails = List<String>.from(
+                    getIt.get<CacheHelper>().getData(key: ApiKey.emailList) ??
+                        [],
                   );
+                  return emails
+                      .where(
+                        (email) => email.toLowerCase().startsWith(
+                          pattern.toLowerCase(),
+                        ),
+                      )
+                      .toList();
                 },
                 itemBuilder: (context, suggestion) {
                   return ListTile(
@@ -65,18 +70,14 @@ class LoginForm extends StatelessWidget {
                   loginCubit.passwordController.text =
                       passwords[suggestion] ?? '';
                 },
-                suggestionsCallback: (pattern) {
-                  final List<String> emails = List<String>.from(
-                    getIt.get<CacheHelper>().getData(key: ApiKey.emailList) ??
-                        [],
+                builder: (context, controller, focusNode) {
+                  return TitleWithTextField(
+                    title: 'Email',
+                    controller:
+                        controller, // ✅ Use the provided controller here
+                    focusNode: focusNode,
+                    hintText: 'Enter your email',
                   );
-                  return emails
-                      .where(
-                        (email) => email.toLowerCase().startsWith(
-                          pattern.toLowerCase(),
-                        ),
-                      )
-                      .toList();
                 },
                 emptyBuilder: (context) => const SizedBox.shrink(),
               ),

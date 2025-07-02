@@ -26,7 +26,6 @@ class LoginCubit extends Cubit<LoginState> {
   void toggleRememberMe({required bool value}) {
     rememberMe = value;
     if (rememberMe) {
-      // Save email list
       List<String> emailList = List<String>.from(
         cache.getData(key: ApiKey.emailList) ?? [],
       );
@@ -34,20 +33,14 @@ class LoginCubit extends Cubit<LoginState> {
         emailList.add(emailController.text);
         cache.saveData(key: ApiKey.emailList, value: emailList);
       }
-
-      // Save password per email
       final String? jsonString = getIt.get<CacheHelper>().getData(
         key: ApiKey.passwordsMap,
       );
       final Map<String, String> passwords = jsonString != null
           ? Map<String, String>.from(jsonDecode(jsonString))
           : {};
-
       passwords[emailController.text] = passwordController.text;
-
       cache.saveData(key: ApiKey.passwordsMap, value: passwords);
-
-      // Remember the currently selected email and its flag
       cache.saveData(key: ApiKey.email, value: emailController.text);
       cache.saveData(key: ApiKey.rememberMe, value: true);
     } else {
@@ -55,7 +48,6 @@ class LoginCubit extends Cubit<LoginState> {
       cache.removeData(key: ApiKey.passwordsMap);
       cache.saveData(key: ApiKey.rememberMe, value: false);
     }
-
     emit(LoginCheckboxChanged(rememberMe: rememberMe));
   }
 

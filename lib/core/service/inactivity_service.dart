@@ -14,7 +14,7 @@ class InactivityService with WidgetsBindingObserver {
   InactivityService._internal();
 
   Timer? _timer;
-  final Duration timeout = const Duration(minutes: 30);
+  final Duration timeout = const Duration(minutes: 10);
 
   void initialize(BuildContext context) {
     WidgetsBinding.instance.addObserver(this);
@@ -38,9 +38,9 @@ class InactivityService with WidgetsBindingObserver {
       SnackBar(
         content: Text(
           'Session timed out. Please log in again.',
-          style: CustomTextStyles.text14W500Primary,
+          style: CustomTextStyles.text14Regular,
         ),
-        backgroundColor: AppColors.whiteColor,
+        backgroundColor: AppColors.primaryColor,
         duration: const Duration(seconds: 2),
       ),
     );
