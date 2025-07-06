@@ -6,7 +6,7 @@ import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
 import 'package:flutter_application_1/theme/theme.dart';
-import 'package:go_router/go_router.dart'; // Or Navigator
+import 'package:go_router/go_router.dart';
 
 class InactivityService with WidgetsBindingObserver {
   static final InactivityService _instance = InactivityService._internal();

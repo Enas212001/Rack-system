@@ -82,7 +82,6 @@ class AppRoutes {
           if (args is! AddBuildingArgs) {
             return const Scaffold(body: Center(child: Text('Invalid data')));
           }
-
           return BlocProvider.value(
             value: args.buildingCubit,
             child: AddBuildingView(hotelId: args.hotel.id!),

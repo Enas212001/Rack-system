@@ -20,7 +20,7 @@ class UserInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Welcome back !',
+              'Welcome back ${getIt.get<CacheHelper>().getData(key: ApiKey.loginName)} !',
               style: Theme.of(context).textTheme.titleSmall,
             ),
             Text(

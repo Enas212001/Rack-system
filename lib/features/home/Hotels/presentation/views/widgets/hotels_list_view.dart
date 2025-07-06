@@ -34,7 +34,7 @@ class HotelsSliverListView extends StatelessWidget {
           );
         }
 
-        return const SliverToBoxAdapter(child: Center(child: LostConnection()));
+        return  SliverToBoxAdapter(child: Center(child: LostConnection(onTap: () => context.read<HotelCubit>().getHotels(),)));
       },
     );
   }

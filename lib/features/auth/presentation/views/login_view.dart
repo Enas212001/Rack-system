@@ -12,7 +12,7 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: BlocProvider(
-          create: (context) => LoginCubit()..loadEmailSuggestions(),
+          create: (context) => LoginCubit()..loadRememberedCredentials(),
           child: LoginViewBody(),
         ),
       ),

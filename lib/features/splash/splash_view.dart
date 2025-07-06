@@ -56,20 +56,26 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   Future<void> _startAnimation() async {
     await rotateController.forward();
     await revealController.forward();
-
-    /// Trigger upward slide AFTER both animations
-    setState(() {
-      startSlide = true;
-    });
-
-    /// Wait for slide animation (in build) to complete before navigating
-    await Future.delayed(const Duration(milliseconds: 1000));
-
     final bool isLogin = getIt<CacheHelper>().getData(key: 'isLogin') ?? false;
-    GoRouter.of(
-      // ignore: use_build_context_synchronously
-      context,
-    ).pushReplacement(isLogin ? AppRoutes.hotels : AppRoutes.login);
+
+    if (!isLogin) {
+      // Only animate the logo upward for LoginView
+      setState(() {
+        startSlide = true;
+      });
+
+      await Future.delayed(const Duration(milliseconds: 1000));
+
+      // Navigate to Login
+      if (mounted) {
+        GoRouter.of(context).pushReplacement(AppRoutes.login);
+      }
+    } else {
+      // Skip upward animation and go directly to Hotels
+      if (mounted) {
+        GoRouter.of(context).pushReplacement(AppRoutes.hotels);
+      }
+    }
   }
 
   @override

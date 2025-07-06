@@ -101,11 +101,4 @@ flutter_assets:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/LogoblackIcon.png"
-flutter_native_splash:
-  color: "#ffffff" # match your Flutter splash background
-  image: assets/images/Logoblack.png # your logo/image
-  android_gravity: center
-  fullscreen: true
-  android: true
-  ios: false
+  image_path: "assets/images/appIcon.png"

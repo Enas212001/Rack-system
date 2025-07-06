@@ -22,10 +22,11 @@ class _UploadHotelImageState extends State<UploadHotelImage> {
   Future<void> _pickImage() async {
     final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (picked != null) {
+      // ignore: use_build_context_synchronously
       final cubit = context.read<HotelCubit>();
       cubit.imageFromGallery = XFile(picked.path);
       setState(() {
-        selectedImage = File(picked.path); 
+        selectedImage = File(picked.path);
       });
     }
   }
@@ -46,6 +47,10 @@ class _UploadHotelImageState extends State<UploadHotelImage> {
         GestureDetector(
           onTap: _pickImage,
           child: DottedBorder(
+            options: RoundedRectDottedBorderOptions(
+              radius: Radius.circular(4.r),
+              color: AppColors.borderColor,
+            ),
             child: Container(
               padding: EdgeInsets.all(8.r),
               width: double.infinity,

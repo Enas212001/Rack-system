@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/widgets/custom_loading.dart';
+import 'package:flutter_application_1/core/utils/widgets/lost_connection.dart';
 import 'package:flutter_application_1/features/home/Buildings/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Racks/cubit/rack_cubit.dart';
@@ -68,7 +69,13 @@ class RacksListView extends StatelessWidget {
           );
         }
         return SliverToBoxAdapter(
-          child: const Center(child: Text('No data available')),
+          child: Center(
+            child: LostConnection(
+              onTap: () => context.read<RackCubit>().getRacksInfo(
+                buildingRId: buildingModel.buildingRId!,
+              ),
+            ),
+          ),
         );
       },
     );
