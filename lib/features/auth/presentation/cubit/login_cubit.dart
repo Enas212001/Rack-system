@@ -5,7 +5,7 @@ import 'package:flutter_application_1/core/api/dio_consumer.dart';
 import 'package:flutter_application_1/core/cache/cache_helper.dart';
 import 'package:flutter_application_1/core/utils/api_key.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
-import 'package:flutter_application_1/features/auth/data/model/login/login_model.dart';
+import 'package:flutter_application_1/features/auth/data/model/login_model.dart';
 import 'package:flutter_application_1/features/auth/data/repo/auth_repo.dart';
 import 'package:flutter_application_1/features/auth/data/repo/auth_repo_impl.dart';
 
@@ -42,7 +42,6 @@ class LoginCubit extends Cubit<LoginState> {
       getIt.get<CacheHelper>().removeData(key: ApiKey.password);
       getIt.get<CacheHelper>().saveData(key: ApiKey.rememberMe, value: false);
     }
-
     emit(LoginCheckboxChanged(rememberMe: rememberMe));
   }
 
@@ -53,7 +52,6 @@ class LoginCubit extends Cubit<LoginState> {
     );
     final savedRememberMe =
         getIt.get<CacheHelper>().getData(key: ApiKey.rememberMe) ?? false;
-
     if (savedEmail != null &&
         savedPassword != null &&
         savedRememberMe == true) {
@@ -66,8 +64,6 @@ class LoginCubit extends Cubit<LoginState> {
 
   void handleEmailChange() {
     final currentEmail = emailController.text;
-
-    // If the password is set, and email no longer matches remembered email → clear password
     final savedEmail = cache.getData(key: ApiKey.email);
     if (savedEmail != null && savedEmail != currentEmail) {
       passwordController.clear();

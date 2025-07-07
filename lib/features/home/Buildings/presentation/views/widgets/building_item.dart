@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_assets.dart';
+import 'package:flutter_application_1/core/utils/app_strings.dart';
 import 'package:flutter_application_1/features/home/widget/custom_list_tile.dart';
 
 class BuildingItem extends StatelessWidget {
@@ -9,7 +10,7 @@ class BuildingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomListTile(
       image: Assets.imagesBuilding,
-      title: 'Building',
+      title: AppStrings.building,
       subTitle: building,
     );
   }

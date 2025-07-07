@@ -7,22 +7,6 @@ ThemeData getThemeData() {
     scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
     primaryColor: AppColors.primaryColor,
     fontFamily: 'Inter',
-    appBarTheme: const AppBarTheme(
-      surfaceTintColor: Colors.transparent,
-      elevation: 0,
-    ),
-    textTheme: TextTheme(
-      bodySmall: TextStyle(fontSize: 8.sp, color: Colors.black),
-      titleLarge: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
-      titleMedium: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
-      titleSmall: TextStyle(
-        fontSize: 14.sp,
-        fontWeight: FontWeight.w500,
-        color: AppColors.primaryColor,
-      ),
-      headlineLarge: TextStyle(fontSize: 48.sp, fontWeight: FontWeight.w800),
-      headlineMedium: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w800),
-    ),
   );
 }
 

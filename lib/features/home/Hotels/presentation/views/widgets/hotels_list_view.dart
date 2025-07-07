@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/widgets/custom_loading.dart';
 import 'package:flutter_application_1/core/utils/widgets/lost_connection.dart';
-import 'package:flutter_application_1/features/home/Hotels/cubit/hotel_cubit.dart';
+import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 

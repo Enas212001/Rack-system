@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/widgets/custom_loading.dart';
-import 'package:flutter_application_1/features/home/Racks/cubit/rack_cubit.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'rack_info_list_view.dart';

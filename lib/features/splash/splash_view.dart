@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/cache/cache_helper.dart';
+import 'package:flutter_application_1/core/utils/api_key.dart';
 import 'package:flutter_application_1/core/utils/app_assets.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
@@ -18,7 +19,6 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   late AnimationController rotateController;
   late Animation<double> rotation;
-
   late AnimationController revealController;
   late Animation<double> widthFactor;
 
@@ -27,12 +27,10 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-
     rotateController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 900),
     );
-
     rotation =
         TweenSequence([
           TweenSequenceItem(tween: Tween(begin: 0.0, end: pi / 2), weight: 50),
@@ -40,38 +38,29 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
         ]).animate(
           CurvedAnimation(parent: rotateController, curve: Curves.easeInOut),
         );
-
     revealController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1000),
     );
-
     widthFactor = Tween<double>(begin: 0.22, end: 1.0).animate(
       CurvedAnimation(parent: revealController, curve: Curves.easeInOut),
     );
-
     _startAnimation();
   }
 
   Future<void> _startAnimation() async {
     await rotateController.forward();
     await revealController.forward();
-    final bool isLogin = getIt<CacheHelper>().getData(key: 'isLogin') ?? false;
-
+    final bool isLogin = getIt<CacheHelper>().getData(key: ApiKey.isLogin) ?? false;
     if (!isLogin) {
-      // Only animate the logo upward for LoginView
       setState(() {
         startSlide = true;
       });
-
       await Future.delayed(const Duration(milliseconds: 1000));
-
-      // Navigate to Login
       if (mounted) {
         GoRouter.of(context).pushReplacement(AppRoutes.login);
       }
     } else {
-      // Skip upward animation and go directly to Hotels
       if (mounted) {
         GoRouter.of(context).pushReplacement(AppRoutes.hotels);
       }

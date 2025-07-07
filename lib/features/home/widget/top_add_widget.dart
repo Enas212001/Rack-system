@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
+import 'package:flutter_application_1/core/utils/app_strings.dart';
 import 'package:flutter_application_1/features/home/widget/back_icon.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 
@@ -17,7 +18,7 @@ class TopAddWidget extends StatelessWidget {
           BackIcon(),
           Spacer(flex: 2),
           Text(
-            'Add $title',
+            '${AppStrings.add} $title',
             style: CustomTextStyles.text14W500Primary.copyWith(
               color: AppColors.whiteColor,
             ),

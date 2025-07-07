@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/features/home/Racks/models/rack_info_model.dart';
+import 'package:flutter_application_1/features/home/Racks/data/models/rack_info_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -30,7 +30,6 @@ Future<void> exportRackAsPdf(
           pw.Table(
             border: pw.TableBorder.all(color: PdfColors.black),
             children: [
-              // Header row
               pw.TableRow(
                 decoration: const pw.BoxDecoration(color: PdfColors.blue),
                 children: [

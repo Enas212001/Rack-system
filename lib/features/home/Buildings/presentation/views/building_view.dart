@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
-import 'package:flutter_application_1/features/home/Buildings/cubit/building_cubit.dart';
+import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
+import 'package:flutter_application_1/features/home/Buildings/presentation/cubit/building_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'widgets/building_view_body.dart';

@@ -60,8 +60,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         suffixIcon: widget.isPassword
             ? IconButton(
                 icon: Icon(
-                  _obscureText ? Icons.visibility_off : Icons.visibility,
-                  color: AppColors.darkBlueColor,
+                  _obscureText
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  color: AppColors.greyColor,
                 ),
                 onPressed: _toggleVisibility,
               )

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/func/export_rack_to_pdf_func.dart';
-import 'package:flutter_application_1/features/home/Racks/cubit/rack_cubit.dart';
+import 'package:flutter_application_1/core/utils/app_strings.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
 import 'package:flutter_application_1/features/home/widget/icon_with_text_bg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,8 +12,8 @@ class ExportRackToPDF extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconTextWithBG(
-      text: 'Export',
+    return ExportIcon(
+      text: AppStrings.export,
       icon: Icons.file_upload_outlined,
       onTap: () {
         final cubit = context.read<RackCubit>();
@@ -19,9 +21,7 @@ class ExportRackToPDF extends StatelessWidget {
         if (state is RacksSuccess) {
           exportRackAsPdf(context, hotelName, state.racks);
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Cannot export: buildings not loaded')),
-          );
+          showToast( AppStrings.notExportRacks);
         }
       },
     );

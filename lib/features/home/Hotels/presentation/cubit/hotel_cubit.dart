@@ -6,16 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/api/dio_consumer.dart';
 import 'package:flutter_application_1/core/func/upload_image_to_api.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
-import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
-import 'package:flutter_application_1/features/home/data/repo/home_repo.dart';
-import 'package:flutter_application_1/features/home/data/repo/home_repo_impl.dart';
+import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
+import 'package:flutter_application_1/features/home/Hotels/data/repo/hotel_repo.dart';
+import 'package:flutter_application_1/features/home/Hotels/data/repo/hotel_repo_impl.dart';
 import 'package:image_picker/image_picker.dart';
 
 part 'hotel_state.dart';
 
 class HotelCubit extends Cubit<HotelState> {
   HotelCubit() : super(HotelInitial());
-  final HomeRepo homeRepo = HomeRepoImpl(api: getIt.get<DioConsumer>());
+  final HotelRepo homeRepo = HotelRepoImpl(api: getIt.get<DioConsumer>());
 
   final GlobalKey<FormState> formAddHotelKey = GlobalKey<FormState>();
   final TextEditingController hotelNameController = TextEditingController();

@@ -5,7 +5,7 @@ import 'package:flutter_application_1/core/func/custom_show_dialog.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/widgets/custom_loading.dart';
 import 'package:flutter_application_1/features/auth/presentation/views/widgets/title_with_textfield.dart';
-import 'package:flutter_application_1/features/home/Buildings/cubit/building_cubit.dart';
+import 'package:flutter_application_1/features/home/Buildings/presentation/cubit/building_cubit.dart';
 import 'package:flutter_application_1/features/home/widget/add_full_button.dart';
 import 'package:flutter_application_1/features/home/widget/success_message.dart';
 import 'package:flutter_application_1/theme/theme.dart';

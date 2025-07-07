@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/features/home/Buildings/models/building_model.dart';
-import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
-import 'package:flutter_application_1/features/home/Racks/cubit/rack_cubit.dart';
+import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
+import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widgets/rack_view_body.dart';
 

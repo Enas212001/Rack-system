@@ -3,9 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/custom_show_dialog.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
+import 'package:flutter_application_1/core/utils/app_strings.dart';
 import 'package:flutter_application_1/core/utils/widgets/custom_loading.dart';
 import 'package:flutter_application_1/features/auth/presentation/views/widgets/title_with_textfield.dart';
-import 'package:flutter_application_1/features/home/Hotels/cubit/hotel_cubit.dart';
+import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:flutter_application_1/features/home/widget/success_message.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +27,7 @@ class AddHotelForm extends StatelessWidget {
           Navigator.pop(context);
           customShowDialog(
             context,
-            widget: SuccessMessage(messageName: 'hotel'),
+            widget: SuccessMessage(messageName: AppStrings.hotel),
           );
         } else if (state is AddHotelFailure) {
           log(state.message);

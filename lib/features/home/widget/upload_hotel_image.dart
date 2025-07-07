@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
-import 'package:flutter_application_1/features/home/Hotels/cubit/hotel_cubit.dart';
+import 'package:flutter_application_1/core/utils/app_strings.dart';
+import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +23,6 @@ class _UploadHotelImageState extends State<UploadHotelImage> {
   Future<void> _pickImage() async {
     final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (picked != null) {
-      // ignore: use_build_context_synchronously
       final cubit = context.read<HotelCubit>();
       cubit.imageFromGallery = XFile(picked.path);
       setState(() {
@@ -38,7 +38,7 @@ class _UploadHotelImageState extends State<UploadHotelImage> {
       children: [
         SizedBox(height: 10.h),
         Text(
-          'Logo image',
+          AppStrings.logoImage,
           style: CustomTextStyles.text12RegularGrey.copyWith(
             color: AppColors.textColor,
           ),
@@ -76,7 +76,7 @@ class _UploadHotelImageState extends State<UploadHotelImage> {
                           color: AppColors.greyColor,
                         ),
                         Text(
-                          "Upload image",
+                          AppStrings.uploadImage,
                           style: CustomTextStyles.text12RegularGrey,
                         ),
                       ],

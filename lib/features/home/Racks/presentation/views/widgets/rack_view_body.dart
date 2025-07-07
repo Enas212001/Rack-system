@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
-import 'package:flutter_application_1/features/home/Buildings/models/building_model.dart';
-import 'package:flutter_application_1/features/home/Hotels/models/hotel_model.dart';
-import 'package:flutter_application_1/features/home/Racks/cubit/rack_cubit.dart';
+import 'package:flutter_application_1/core/utils/app_strings.dart';
+import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
+import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
 import 'package:flutter_application_1/features/home/widget/add_full_button.dart';
 import 'package:flutter_application_1/features/home/widget/top_with_back.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,11 +23,13 @@ class RackViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(child: TopWithBack(text: 'Racks', isRack: true)),
+        SliverToBoxAdapter(
+          child: TopWithBack(text: AppStrings.racks, isRack: true),
+        ),
         RacksListView(hotelModel: hotelModel, buildingModel: buildingModel),
         SliverToBoxAdapter(
           child: AddFullSizeButton(
-            text: 'Add Rack',
+            text: AppStrings.addRack,
             onPressed: () {
               final rackCubit = context.read<RackCubit>();
               GoRouter.of(context).push(

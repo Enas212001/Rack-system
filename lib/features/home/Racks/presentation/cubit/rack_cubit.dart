@@ -3,15 +3,15 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/api/dio_consumer.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
-import 'package:flutter_application_1/features/home/Racks/models/rack_info_model.dart';
-import 'package:flutter_application_1/features/home/data/repo/home_repo.dart';
-import 'package:flutter_application_1/features/home/data/repo/home_repo_impl.dart';
+import 'package:flutter_application_1/features/home/Racks/data/repo/rack_repo.dart';
+import 'package:flutter_application_1/features/home/Racks/data/repo/rack_repo_impl.dart';
+import 'package:flutter_application_1/features/home/Racks/data/models/rack_info_model.dart';
 
 part 'rack_state.dart';
 
 class RackCubit extends Cubit<RackState> {
   RackCubit() : super(RackInitial());
-  final HomeRepo homeRepo = HomeRepoImpl(api: getIt.get<DioConsumer>());
+  final RackRepo homeRepo = RackRepoImpl(api: getIt.get<DioConsumer>());
 
   final GlobalKey<FormState> formAddRackKey = GlobalKey<FormState>();
 

@@ -3,15 +3,15 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/api/dio_consumer.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
-import 'package:flutter_application_1/features/home/Buildings/models/building_model.dart';
-import 'package:flutter_application_1/features/home/data/repo/home_repo.dart';
-import 'package:flutter_application_1/features/home/data/repo/home_repo_impl.dart';
+import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
+import 'package:flutter_application_1/features/home/Buildings/data/repo/building_repo.dart';
+import 'package:flutter_application_1/features/home/Buildings/data/repo/building_repo_impl.dart';
 
 part 'building_state.dart';
 
 class BuildingCubit extends Cubit<BuildingState> {
   BuildingCubit() : super(BuildingInitial());
-  final HomeRepo homeRepo = HomeRepoImpl(api: getIt.get<DioConsumer>());
+  final BuildingRepo homeRepo = BuildingRepoImpl(api: getIt.get<DioConsumer>());
 
   final GlobalKey<FormState> formAddBuildingKey = GlobalKey<FormState>();
   final TextEditingController rackIdController = TextEditingController();
