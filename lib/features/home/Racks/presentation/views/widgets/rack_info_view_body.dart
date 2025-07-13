@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
@@ -23,21 +24,26 @@ class RackInfoViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rackCubit = context.read<RackCubit>();
-    return Column(
-      children: [
-        TopWithBack(
-          text: 'Rack',
-          title: 'Rack',
-          onSearchChanged: rackCubit.searchRack,
-        ),
-        RacksInfoId(
-          hotelName: hotelModel.name!,
-          id: buildingModel.id!,
-          rackId: rackInfoModel.id!,
-        ),
-        RackInfoBuilder(),
-        SizedBox(height: 20.h),
-      ],
+    return RefreshIndicator(
+      onRefresh: () =>
+          rackCubit.getRacksInfo(buildingRId: buildingModel.buildingRId!),
+      color: AppColors.primaryColor,
+      child: Column(
+        children: [
+          TopWithBack(
+            text: 'Rack',
+            title: 'Rack',
+            onSearchChanged: rackCubit.searchRack,
+          ),
+          RacksInfoId(
+            hotelName: hotelModel.name!,
+            id: buildingModel.id!,
+            rackId: rackInfoModel.id!,
+          ),
+          RackInfoBuilder(),
+          SizedBox(height: 20.h),
+        ],
+      ),
     );
   }
 }

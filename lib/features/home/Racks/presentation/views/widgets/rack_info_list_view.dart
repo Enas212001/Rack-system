@@ -39,7 +39,6 @@ class _RockInfoListViewState extends State<RockInfoListView>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /// Header Row with icon + toggle
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -87,8 +86,6 @@ class _RockInfoListViewState extends State<RockInfoListView>
                     ),
                   ],
                 ),
-
-                /// Details section with vertical animation
                 AnimatedSize(
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut,

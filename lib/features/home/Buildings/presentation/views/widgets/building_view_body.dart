@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/cubit/building_cubit.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
@@ -18,36 +19,40 @@ class BuildingViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final buildingCubit = context.read<BuildingCubit>();
-    return CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: TopWithBack(
-            onSearchChanged: buildingCubit.searchBuildings,
-            title: 'Building',
-            text:
-                hotelModel.name![0].toUpperCase() +
-                hotelModel.name!.substring(1),
+    return RefreshIndicator(
+      onRefresh: () => buildingCubit.getBuildings(hotelId: hotelModel.id!),
+      color: AppColors.primaryColor,
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: TopWithBack(
+              onSearchChanged: buildingCubit.searchBuildings,
+              title: 'Building',
+              text:
+                  hotelModel.name![0].toUpperCase() +
+                  hotelModel.name!.substring(1),
+            ),
           ),
-        ),
-        SliverToBoxAdapter(child: BuildingInfo(hotelName: hotelModel.name!)),
-        SliverToBoxAdapter(child: TableData()),
-        BuildingListView(hotelModel: hotelModel),
-        SliverToBoxAdapter(
-          child: AddFullSizeButton(
-            text: 'Add Building',
-            onPressed: () {
-              final buildingCubit = context.read<BuildingCubit>();
-              GoRouter.of(context).push(
-                AppRoutes.addBuilding,
-                extra: AddBuildingArgs(
-                  hotel: hotelModel,
-                  buildingCubit: buildingCubit,
-                ),
-              );
-            },
+          SliverToBoxAdapter(child: BuildingInfo(hotelName: hotelModel.name!)),
+          SliverToBoxAdapter(child: TableData()),
+          BuildingListView(hotelModel: hotelModel),
+          SliverToBoxAdapter(
+            child: AddFullSizeButton(
+              text: 'Add Building',
+              onPressed: () {
+                final buildingCubit = context.read<BuildingCubit>();
+                GoRouter.of(context).push(
+                  AppRoutes.addBuilding,
+                  extra: AddBuildingArgs(
+                    hotel: hotelModel,
+                    buildingCubit: buildingCubit,
+                  ),
+                );
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

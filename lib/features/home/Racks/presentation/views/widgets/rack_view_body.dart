@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/app_strings.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
@@ -21,28 +22,33 @@ class RackViewBody extends StatelessWidget {
   final BuildingModel buildingModel;
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: TopWithBack(text: AppStrings.racks, isRack: true),
-        ),
-        RacksListView(hotelModel: hotelModel, buildingModel: buildingModel),
-        SliverToBoxAdapter(
-          child: AddFullSizeButton(
-            text: AppStrings.addRack,
-            onPressed: () {
-              final rackCubit = context.read<RackCubit>();
-              GoRouter.of(context).push(
-                AppRoutes.addRack,
-                extra: AddRackArgs(
-                  rackCubit: rackCubit,
-                  buildingModel: buildingModel,
-                ),
-              );
-            },
+    final rackCubit = context.read<RackCubit>();
+    return RefreshIndicator(
+      onRefresh: () =>
+          rackCubit.getRacksInfo(buildingRId: buildingModel.buildingRId!),
+      color: AppColors.primaryColor,
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: TopWithBack(text: AppStrings.racks, isRack: true),
           ),
-        ),
-      ],
+          RacksListView(hotelModel: hotelModel, buildingModel: buildingModel),
+          SliverToBoxAdapter(
+            child: AddFullSizeButton(
+              text: AppStrings.addRack,
+              onPressed: () {
+                GoRouter.of(context).push(
+                  AppRoutes.addRack,
+                  extra: AddRackArgs(
+                    rackCubit: rackCubit,
+                    buildingModel: buildingModel,
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
