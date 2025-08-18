@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/utils/app_routes.dart';
-import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/core/utils/widget/delete_widget.dart';
 import 'package:flutter_application_1/core/utils/widget/item_detail.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
-class BuildingDetails extends StatelessWidget {
-  const BuildingDetails({super.key, required this.building});
-
-  final BuildingModel building;
+class UserDetails extends StatelessWidget {
+  const UserDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +13,12 @@ class BuildingDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ItemDetail(label: 'Hotel ID', value: building.hotelId),
-          ItemDetail(label: 'Rack ID', value: building.rackId),
-          ItemDetail(label: 'Building Rack ID', value: building.buildingRId),
+          ItemDetail(label: 'Email', value: 'email'),
+          ItemDetail(label: 'Role', value: 'role'),
           ItemDetail(
             label: 'Actions',
             isAction: true,
-            onEdit: () {
-              GoRouter.of(context).push(AppRoutes.editBuilding);
-            },
+            isUser: true,
             onDelete: () {
               showDialog(
                 context: context,
@@ -34,7 +26,7 @@ class BuildingDetails extends StatelessWidget {
                   onDelete: () {
                     Navigator.pop(context);
                   },
-                  title: 'Building',
+                  title: 'User',
                 ),
               );
             },

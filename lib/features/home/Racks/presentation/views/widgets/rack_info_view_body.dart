@@ -5,7 +5,7 @@ import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_mod
 import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/rack_info_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/widgets/rack_info_id.dart';
-import 'package:flutter_application_1/features/home/widget/top_with_back.dart';
+import 'package:flutter_application_1/core/utils/widget/top_with_back.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

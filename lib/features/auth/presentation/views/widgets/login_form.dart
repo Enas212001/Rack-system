@@ -5,7 +5,7 @@ import 'package:flutter_application_1/core/cache/cache_helper.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
-import 'package:flutter_application_1/core/utils/widgets/custom_loading.dart';
+import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
 import 'package:flutter_application_1/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

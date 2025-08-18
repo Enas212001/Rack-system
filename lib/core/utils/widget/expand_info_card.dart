@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ExpandableInfoCard extends StatefulWidget {
-  final String title, image;
+  final String title;
   final Widget details;
 
   const ExpandableInfoCard({
     super.key,
     required this.title,
     required this.details,
-    required this.image,
   });
 
   @override
@@ -32,8 +30,6 @@ class _ExpandableInfoCardState extends State<ExpandableInfoCard>
         children: [
           Row(
             children: [
-              SvgPicture.asset(widget.image, width: 16.w, height: 16.h),
-              SizedBox(width: 8.w),
               Expanded(
                 child: Text(
                   widget.title,

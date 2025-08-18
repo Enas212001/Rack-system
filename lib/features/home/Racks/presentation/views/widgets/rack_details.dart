@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/rack_info_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../widget/item_detail.dart';
+import '../../../../../../core/utils/widget/item_detail.dart';
 
 class RackDetails extends StatelessWidget {
   const RackDetails({super.key, required this.rack});

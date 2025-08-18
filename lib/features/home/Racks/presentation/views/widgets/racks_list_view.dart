@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
-import 'package:flutter_application_1/core/utils/widgets/custom_loading.dart';
-import 'package:flutter_application_1/core/utils/widgets/lost_connection.dart';
+import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
+import 'package:flutter_application_1/core/utils/widget/lost_connection.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
@@ -43,28 +44,67 @@ class RacksListView extends StatelessWidget {
               ),
             );
           }
-          return SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => GestureDetector(
-                onTap: () {
-                  context.read<RackCubit>().getRacksInfo(
-                    buildingRId: state.racks[index].buildingRId!,
-                  );
-                  GoRouter.of(context).push(
-                    AppRoutes.rackInfo,
-                    extra: GetRackArg(
-                      hotel: hotelModel,
-                      buildingModel: buildingModel,
-                      rackInfoModel: racks[index],
+          return SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(16.r),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.borderColor, width: 1.r),
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.r,
+                        vertical: 12.r,
+                      ),
+                      width: double.infinity,
+                      color: AppColors.backgroundColor,
+                      child: Text(
+                        'Building Name',
+                        style: CustomTextStyles.text14W500Primary,
+                      ),
                     ),
-                  );
-                },
-                child: RackItem(
-                  rackId: buildingModel.rackId!,
-                  buildingRId: buildingModel.buildingRId!,
+                    Divider(height: 1, color: AppColors.borderColor),
+                    ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: racks.length,
+                      itemBuilder: (context, index) => Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              context.read<RackCubit>().getRacksInfo(
+                                buildingRId: state.racks[index].buildingRId!,
+                              );
+                              GoRouter.of(context).push(
+                                AppRoutes.rackInfo,
+                                extra: GetRackArg(
+                                  hotel: hotelModel,
+                                  buildingModel: buildingModel,
+                                  rackInfoModel: racks[index],
+                                ),
+                              );
+                            },
+                            child: RackItem(
+                              rackInfoModel: racks[index],
+                              buildingModel: buildingModel,
+                            ),
+                          ),
+                          if (index < racks.length - 1)
+                            const Divider(
+                              height: 1,
+                              color: AppColors.borderColor,
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              childCount: racks.length,
             ),
           );
         }

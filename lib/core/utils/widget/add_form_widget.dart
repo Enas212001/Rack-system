@@ -5,9 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'top_add_widget.dart';
 
 class AddFormWidget extends StatelessWidget {
-  const AddFormWidget({super.key, this.childWidget, this.title});
+  const AddFormWidget({
+    super.key,
+    this.childWidget,
+    this.title,
+    this.isEdit = false,
+  });
   final Widget? childWidget;
   final String? title;
+  final bool isEdit;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -16,7 +22,7 @@ class AddFormWidget extends StatelessWidget {
           top: 0,
           left: 0,
           right: 0,
-          child: TopAddWidget(title: title),
+          child: TopAddWidget(title: title, isEdit: isEdit),
         ),
         Padding(
           padding: EdgeInsets.only(top: 90.h),

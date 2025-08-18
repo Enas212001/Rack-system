@@ -13,9 +13,10 @@ class ItemDetail extends StatelessWidget {
     this.isAction = false,
     this.onEdit,
     this.onDelete,
+    this.isUser = false,
   });
   final String? label, value;
-  final bool isAction;
+  final bool isAction, isUser;
   final VoidCallback? onEdit, onDelete;
   @override
   Widget build(BuildContext context) {
@@ -37,10 +38,12 @@ class ItemDetail extends StatelessWidget {
             child: isAction
                 ? Row(
                     children: [
-                      GestureDetector(
-                        onTap: onEdit,
-                        child: SvgPicture.asset(Assets.imagesEdit),
-                      ),
+                      isUser
+                          ? const SizedBox()
+                          : GestureDetector(
+                              onTap: onEdit,
+                              child: SvgPicture.asset(Assets.imagesEdit),
+                            ),
                       GestureDetector(
                         onTap: onDelete,
                         child: SvgPicture.asset(Assets.imagesDelete),

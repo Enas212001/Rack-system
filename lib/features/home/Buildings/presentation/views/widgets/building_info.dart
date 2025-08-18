@@ -3,7 +3,7 @@ import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/cubit/building_cubit.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
-import 'package:flutter_application_1/features/home/widget/add_text_button.dart';
+import 'package:flutter_application_1/core/utils/widget/add_text_button.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,7 +15,8 @@ class BuildingInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.r),
+      padding:
+          EdgeInsets.symmetric(horizontal: 16.r) + EdgeInsets.only(top: 16.h),
       child: Column(
         children: [
           Row(

@@ -10,9 +10,12 @@ import 'package:flutter_application_1/features/home/Hotels/presentation/views/ad
 import 'package:flutter_application_1/features/home/Racks/data/models/rack_info_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/add_rack_view.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/views/building_view.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/views/edit_rack_view.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/rack_info_view.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/racks_view.dart';
 import 'package:flutter_application_1/features/splash/splash_view.dart';
+import 'package:flutter_application_1/features/users/presentation/views/add_user_view.dart';
+import 'package:flutter_application_1/features/users/presentation/views/users_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,6 +32,9 @@ class AppRoutes {
   static const String addRack = '/add_rack';
   static const String addHotel = '/add_hotel';
   static const String editBuilding = '/edit_building';
+  static const String addUser = '/add_user';
+  static const String users = '/users';
+  static const String editRack = '/edit_rack';
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
@@ -108,6 +114,9 @@ class AppRoutes {
           );
         },
       ),
+      GoRoute(path: editRack,
+      builder: (context, state) => EditRackView(),
+      ),
       GoRoute(
         path: addHotel,
         builder: (context, state) {
@@ -116,6 +125,18 @@ class AppRoutes {
             value: hotelCubit,
             child: const AddHotelView(),
           );
+        },
+      ),
+      GoRoute(
+        path: addUser,
+        builder: (context, state) {
+          return const AddUserView();
+        },
+      ),
+      GoRoute(
+        path: users,
+        builder: (context, state) {
+          return const UsersView();
         },
       ),
     ],
