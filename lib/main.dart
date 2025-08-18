@@ -4,7 +4,7 @@ import 'package:flutter_application_1/core/utils/service_locator.dart';
 import 'package:flutter_application_1/core/service/simple_bloc_observer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'core/app/my_app.dart';
+import 'app/my_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

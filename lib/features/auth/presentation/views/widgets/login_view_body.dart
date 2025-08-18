@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_assets.dart';
+import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'login_form.dart';
@@ -49,7 +50,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 children: [
                   Text(
                     'Log In to your Account',
-                    style: Theme.of(context).textTheme.titleSmall,
+                    style: CustomTextStyles.text14W500Primary,
                   ),
                   const LoginForm(),
                 ],

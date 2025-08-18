@@ -11,9 +11,10 @@ class TopWidget extends StatelessWidget {
     this.text,
     this.onSearchChanged,
     this.isRack,
+    this.isText,
   });
   final Widget widget;
-  final bool? isAdd, isRack;
+  final bool? isAdd, isRack, isText;
   final String? text;
   final ValueChanged<String>? onSearchChanged;
 
@@ -32,12 +33,38 @@ class TopWidget extends StatelessWidget {
           bottomRight: Radius.circular(8.r),
         ),
       ),
-      child: isAdd == true || isRack == true
+      child: isAdd == true
           ? widget
+          : isRack == true
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.menu, color: AppColors.whiteColor),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                ),
+                widget,
+                SizedBox(width: 36.w),
+              ],
+            )
           : Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                widget,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.menu, color: AppColors.whiteColor),
+                      onPressed: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                    ),
+                    widget,
+                    SizedBox(width: isText == true ? 36.w : 16.w),
+                  ],
+                ),
                 SizedBox(height: 12.h),
                 SizedBox(
                   height: 35.h,

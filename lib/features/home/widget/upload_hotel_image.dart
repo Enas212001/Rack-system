@@ -57,7 +57,6 @@ class _UploadHotelImageState extends State<UploadHotelImage> {
               height: 120.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.r),
-                color: Colors.grey.shade100,
               ),
               child: selectedImage != null
                   ? ClipRRect(

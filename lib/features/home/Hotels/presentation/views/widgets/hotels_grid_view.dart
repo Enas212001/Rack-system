@@ -4,12 +4,13 @@ import 'package:flutter_application_1/core/utils/widgets/custom_loading.dart';
 import 'package:flutter_application_1/core/utils/widgets/lost_connection.dart';
 import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import 'hotel_item.dart';
 
-class HotelsSliverListView extends StatelessWidget {
-  const HotelsSliverListView({super.key});
+class HotelsSliverGridView extends StatelessWidget {
+  const HotelsSliverGridView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,13 @@ class HotelsSliverListView extends StatelessWidget {
           return SliverToBoxAdapter(child: Center(child: Text(state.message)));
         } else if (state is HotelSuccess) {
           final hotels = state.hotels;
-          return SliverList(
+          return SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 16.h,
+              crossAxisSpacing: 16.w,
+              childAspectRatio: 1.1,
+            ),
             delegate: SliverChildBuilderDelegate((context, index) {
               final hotel = hotels[index];
               return GestureDetector(
@@ -33,8 +40,13 @@ class HotelsSliverListView extends StatelessWidget {
             }, childCount: hotels.length),
           );
         }
-
-        return  SliverToBoxAdapter(child: Center(child: LostConnection(onTap: () => context.read<HotelCubit>().getHotels(),)));
+        return SliverToBoxAdapter(
+          child: Center(
+            child: LostConnection(
+              onTap: () => context.read<HotelCubit>().getHotels(),
+            ),
+          ),
+        );
       },
     );
   }

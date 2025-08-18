@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
+import 'package:flutter_application_1/features/home/Buildings/presentation/views/edit_building_view.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/cubit/building_cubit.dart';
 import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
@@ -27,6 +28,7 @@ class AppRoutes {
   static const String addBuilding = '/add_building';
   static const String addRack = '/add_rack';
   static const String addHotel = '/add_hotel';
+  static const String editBuilding = '/edit_building';
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
@@ -48,6 +50,7 @@ class AppRoutes {
           return BuildingView(hotelModel: hotel);
         },
       ),
+
       GoRoute(
         path: racks,
         builder: (context, state) {
@@ -87,6 +90,10 @@ class AppRoutes {
             child: AddBuildingView(hotelId: args.hotel.id!),
           );
         },
+      ),
+      GoRoute(
+        path: editBuilding,
+        builder: (context, state) => EditBuildingView(),
       ),
       GoRoute(
         path: addRack,

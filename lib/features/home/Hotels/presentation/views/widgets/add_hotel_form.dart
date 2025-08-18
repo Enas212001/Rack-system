@@ -43,10 +43,7 @@ class AddHotelForm extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  'Add New Hotel',
-                  style: CustomTextStyles.text14W500Primary,
-                ),
+                Text('Add Hotel', style: CustomTextStyles.text14W500Primary),
                 SizedBox(height: 20.h),
                 TitleWithTextField(
                   title: 'Hotel Name',

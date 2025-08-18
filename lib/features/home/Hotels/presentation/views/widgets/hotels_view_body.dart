@@ -6,9 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'add_client_widget.dart';
-import 'hotels_list_view.dart';
+import 'hotels_grid_view.dart';
 import 'top_widget.dart';
-import 'user_info.dart';
 
 class HotelsViewBody extends StatelessWidget {
   const HotelsViewBody({super.key});
@@ -31,18 +30,12 @@ class HotelsViewBody extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(16.r),
-              child: Column(
-                children: [
-                  const UserInfo(),
-                  SizedBox(height: 16.h),
-                  const AddClientWidget(),
-                ],
-              ),
+              child: const AddClientWidget(),
             ),
           ),
           SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 16.r),
-            sliver: HotelsSliverListView(), // this is custom below
+            sliver: HotelsSliverGridView(), // this is custom below
           ),
         ],
       ),

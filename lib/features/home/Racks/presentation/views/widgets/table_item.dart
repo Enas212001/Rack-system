@@ -44,7 +44,7 @@ class TableHeadItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Text(
         text,
-        style: CustomTextStyles.text12W500Text,
+        style: CustomTextStyles.text12MeduimText,
         textAlign: TextAlign.center,
       ),
     );

@@ -11,9 +11,14 @@ ThemeData getThemeData() {
 }
 
 abstract class CustomTextStyles {
-  static final text14W600Text = TextStyle(
+  static final text16MeduimText = TextStyle(
     color: AppColors.textColor,
     fontSize: 16.sp,
+    fontWeight: FontWeight.w500,
+  );
+  static final text14W600Text = TextStyle(
+    color: AppColors.textColor,
+    fontSize: 14.sp,
     fontWeight: FontWeight.w600,
   );
 
@@ -33,7 +38,11 @@ abstract class CustomTextStyles {
     fontSize: 12.sp,
     color: AppColors.greyColor,
   );
-  static final text12W500Text = TextStyle(
+  static final text12RegularText = TextStyle(
+    fontSize: 12.sp,
+    color: AppColors.textColor,
+  );
+  static final text12MeduimText = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeight.w500,
     color: AppColors.textColor,

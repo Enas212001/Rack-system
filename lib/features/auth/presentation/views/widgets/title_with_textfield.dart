@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,12 +22,7 @@ class TitleWithTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: CustomTextStyles.text14Regular.copyWith(
-            color: AppColors.textColor,
-          ),
-        ),
+        Text(title, style: CustomTextStyles.text12RegularText),
         SizedBox(height: 8.h),
         CustomTextFormField(
           controller: controller,

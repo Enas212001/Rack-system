@@ -2,7 +2,11 @@
 class Assets {
   Assets._();
   
+  static const String imagesAddHotel = "assets/images/addHotel.svg";
+
   static const String imagesAddIcon = "assets/images/addIcon.png";
+
+  static const String imagesAddUser = "assets/images/addUser.svg";
 
   static const String imagesAdded = "assets/images/added.gif";
 
@@ -22,13 +26,19 @@ class Assets {
 
   static const String imagesConnectivity = "assets/images/Connectivity.png";
 
+  static const String imagesDelete = "assets/images/delete.svg";
+
   static const String imagesDevice = "assets/images/device.svg";
 
   static const String imagesDomina = "assets/images/domina.png";
 
+  static const String imagesEdit = "assets/images/edit.svg";
+
   static const String imagesFlipped = "assets/images/flipped.png";
 
   static const String imagesHelpCenter = "assets/images/help_center.png";
+
+  static const String imagesHome = "assets/images/home.svg";
 
   static const String imagesHotel1 = "assets/images/hotel1.png";
 
@@ -54,6 +64,8 @@ class Assets {
 
   static const String imagesJaz = "assets/images/jaz.png";
 
+  static const String imagesLogOut = "assets/images/logOut.svg";
+
   static const String imagesLogo = "assets/images/logo.png";
 
   static const String imagesLogoSqure = "assets/images/logoSqure.webp";
@@ -63,6 +75,8 @@ class Assets {
   static const String imagesLogoblack = "assets/images/Logoblack.png";
 
   static const String imagesLogoblackIcon = "assets/images/LogoblackIcon.png";
+
+  static const String imagesMenu = "assets/images/menu.svg";
 
   static const String imagesOne = "assets/images/one.png";
 
@@ -85,6 +99,8 @@ class Assets {
   static const String imagesSultanGardens = "assets/images/sultanGardens.png";
 
   static const String imagesSunRise = "assets/images/sunRise.png";
+
+  static const String imagesUsers = "assets/images/users.svg";
 
   static const String imagesWhiteLogo = "assets/images/WhiteLogo.png";
 
