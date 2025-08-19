@@ -4,8 +4,8 @@ import 'package:flutter_application_1/features/auth/presentation/views/widgets/t
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class EditRackForm extends StatelessWidget {
-  const EditRackForm({super.key});
+class AddSummaryForm extends StatelessWidget {
+  const AddSummaryForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,30 +13,30 @@ class EditRackForm extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Edit Rack', style: CustomTextStyles.text14W500Primary),
+          Text('Add Summary', style: CustomTextStyles.text14W500Primary),
           SizedBox(height: 20.h),
           TitleWithTextField(
-            title: 'Rack name',
+            title: 'Select switch',
             controller: TextEditingController(),
           ),
           SizedBox(height: 10.h),
           TitleWithTextField(
-            title: 'Site Name',
+            title: 'CCTV in',
             controller: TextEditingController(),
           ),
           SizedBox(height: 10.h),
           TitleWithTextField(
-            title: 'Rack Size',
+            title: 'CCTV out',
             controller: TextEditingController(),
           ),
           SizedBox(height: 10.h),
           TitleWithTextField(
-            title: 'Rack Model',
+            title: 'Ap Room',
             controller: TextEditingController(),
           ),
           SizedBox(height: 10.h),
           TitleWithTextField(
-            title: 'Switches',
+            title: 'Ap Out',
             controller: TextEditingController(),
           ),
           SizedBox(height: 40.h),

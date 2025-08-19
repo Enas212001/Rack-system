@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/app/my_app_drawer.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
@@ -16,10 +17,10 @@ class RacksView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MyAppDrawer(),
       body: BlocProvider(
         create: (context) =>
-            RackCubit()
-              ..getRacksInfo(buildingRId: buildingModel.buildingRId!),
+            RackCubit()..getRacksInfo(buildingRId: buildingModel.buildingRId!),
         child: RackViewBody(
           hotelModel: hotelModel,
           buildingModel: buildingModel,

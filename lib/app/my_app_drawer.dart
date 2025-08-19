@@ -28,11 +28,6 @@ class MyAppDrawer extends StatelessWidget {
             },
           ),
           DrawerItem(
-            image: Assets.imagesAddHotel,
-            title: 'Add Hotel',
-            onTap: () {},
-          ),
-          DrawerItem(
             image: Assets.imagesUsers,
             title: 'Users',
             onTap: () {

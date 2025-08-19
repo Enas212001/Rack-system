@@ -41,7 +41,6 @@ class RackSwitchWidget extends StatelessWidget {
             title: selectedIndex == 0 ? '+ Add Rack' : '+ Add Switch',
             onTap: () {
               if (selectedIndex == 0) {
-                
                 GoRouter.of(context).push(
                   AppRoutes.addRack,
                   extra: AddRackArgs(

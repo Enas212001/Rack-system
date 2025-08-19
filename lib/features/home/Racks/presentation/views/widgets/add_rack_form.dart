@@ -43,24 +43,6 @@ class AddRackForm extends StatelessWidget {
             children: [
               Text('Add Rack', style: CustomTextStyles.text14W500Primary),
               SizedBox(height: 20.h),
-              // DropdownButtonFormField<String>(
-              //   value: rackCubit.selectedSwitchId,
-              //   decoration: InputDecoration(
-              //     labelText: 'Switch ID',
-              //     border: OutlineInputBorder(
-              //       borderRadius: BorderRadius.circular(8),
-              //     ),
-              //     labelStyle: CustomTextStyles.text12RegularGrey,
-              //   ),
-              //   items: rackCubit.switchIds.map((id) {
-              //     return DropdownMenuItem(value: id, child: Text(id));
-              //   }).toList(),
-              //   onChanged: (value) {
-              //     rackCubit.selectedSwitchId = value;
-              //   },
-              //   validator: (value) => value == null ? 'Required' : null,
-              // ),
-              // SizedBox(height: 10.h),
               TitleWithTextField(
                 title: 'Rack name',
                 controller: rackCubit.productPanelController,

@@ -6,9 +6,12 @@ import 'package:flutter_application_1/features/home/Buildings/data/models/buildi
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'add_tap_bar.dart';
 import 'rack_switch_widget.dart';
 import 'racks_list_view.dart';
+import 'switch_list_view.dart';
 
 class RackViewBody extends StatefulWidget {
   const RackViewBody({
@@ -54,31 +57,22 @@ class _RackViewBodyState extends State<RackViewBody> {
               buildingModel: widget.buildingModel,
             ),
           ),
-          // 🔹 Content depending on tab
-          _buildSelectedContent(),
+          SliverToBoxAdapter(child: SizedBox(height: 16.h)),
+          SliverToBoxAdapter(
+            child: AddTapBar(
+              selectedIndex: selectedIndex,
+              rackCubit: rackCubit,
+              buildingModel: widget.buildingModel,
+            ),
+          ),
+          selectedIndex == 0
+              ? RacksListView(
+                  hotelModel: widget.hotelModel,
+                  buildingModel: widget.buildingModel,
+                )
+              : SwitchListView(buildingModel: widget.buildingModel),
         ],
       ),
     );
-  }
-
-  Widget _buildSelectedContent() {
-    if (selectedIndex == 0) {
-      return RacksListView(
-        hotelModel: widget.hotelModel,
-        buildingModel: widget.buildingModel,
-      );
-    } else {
-      return SwitchListView(buildingModel: widget.buildingModel);
-    }
-  }
-}
-
-class SwitchListView extends StatelessWidget {
-  const SwitchListView({super.key, required this.buildingModel});
-  final BuildingModel buildingModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return const SliverToBoxAdapter();
   }
 }

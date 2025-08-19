@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
-import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
 import 'package:flutter_application_1/core/utils/widget/lost_connection.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
@@ -9,7 +8,6 @@ import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rac
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import 'rack_item.dart';
 
@@ -63,7 +61,7 @@ class RacksListView extends StatelessWidget {
                       width: double.infinity,
                       color: AppColors.backgroundColor,
                       child: Text(
-                        'Building Name',
+                        'Rack Id',
                         style: CustomTextStyles.text14W500Primary,
                       ),
                     ),
@@ -79,14 +77,6 @@ class RacksListView extends StatelessWidget {
                             onTap: () {
                               context.read<RackCubit>().getRacksInfo(
                                 buildingRId: state.racks[index].buildingRId!,
-                              );
-                              GoRouter.of(context).push(
-                                AppRoutes.rackInfo,
-                                extra: GetRackArg(
-                                  hotel: hotelModel,
-                                  buildingModel: buildingModel,
-                                  rackInfoModel: racks[index],
-                                ),
                               );
                             },
                             child: RackItem(

@@ -10,8 +10,9 @@ import 'package:flutter_application_1/features/home/Hotels/presentation/views/ad
 import 'package:flutter_application_1/features/home/Racks/data/models/rack_info_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/add_rack_view.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/views/building_view.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/views/add_summary_view.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/views/add_switch_view.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/edit_rack_view.dart';
-import 'package:flutter_application_1/features/home/Racks/presentation/views/rack_info_view.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/racks_view.dart';
 import 'package:flutter_application_1/features/splash/splash_view.dart';
 import 'package:flutter_application_1/features/users/presentation/views/add_user_view.dart';
@@ -27,7 +28,6 @@ class AppRoutes {
   static const String hotels = '/hotels';
   static const String building = '/building';
   static const String racks = '/racks';
-  static const String rackInfo = '/rack-info';
   static const String addBuilding = '/add_building';
   static const String addRack = '/add_rack';
   static const String addHotel = '/add_hotel';
@@ -35,6 +35,9 @@ class AppRoutes {
   static const String addUser = '/add_user';
   static const String users = '/users';
   static const String editRack = '/edit_rack';
+  static const String addSwitch = '/add_switch';
+  static const String addSummary = '/add_summary';
+
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
@@ -70,20 +73,7 @@ class AppRoutes {
           );
         },
       ),
-      GoRoute(
-        path: rackInfo,
-        builder: (context, state) {
-          final args = state.extra;
-          if (args is! GetRackArg) {
-            return const Scaffold(body: Center(child: Text('Invalid logo')));
-          }
-          return RackInfoView(
-            hotelModel: args.hotel,
-            buildingModel: args.buildingModel,
-            rackInfoModel: args.rackInfoModel,
-          );
-        },
-      ),
+
       GoRoute(
         path: addBuilding,
         builder: (context, state) {
@@ -114,9 +104,7 @@ class AppRoutes {
           );
         },
       ),
-      GoRoute(path: editRack,
-      builder: (context, state) => EditRackView(),
-      ),
+      GoRoute(path: editRack, builder: (context, state) => EditRackView()),
       GoRoute(
         path: addHotel,
         builder: (context, state) {
@@ -138,6 +126,14 @@ class AppRoutes {
         builder: (context, state) {
           return const UsersView();
         },
+      ),
+      GoRoute(
+        path: addSwitch,
+        builder: (context, state) => AddSwitchView(),
+      ),
+      GoRoute(
+        path: addSummary,
+        builder: (context, state) => AddSummaryView(),
       ),
     ],
   );

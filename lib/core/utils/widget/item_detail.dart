@@ -14,9 +14,10 @@ class ItemDetail extends StatelessWidget {
     this.onEdit,
     this.onDelete,
     this.isUser = false,
+    this.isSwitch = false,
   });
   final String? label, value;
-  final bool isAction, isUser;
+  final bool isAction, isUser, isSwitch;
   final VoidCallback? onEdit, onDelete;
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class ItemDetail extends StatelessWidget {
           SizedBox(
             width: 110.w,
             child: Text(
-              '$label:',
+              label ?? '',
               style: CustomTextStyles.text12RegularGrey.copyWith(
                 color: AppColors.textColor,
               ),
@@ -36,20 +37,25 @@ class ItemDetail extends StatelessWidget {
           ),
           Expanded(
             child: isAction
-                ? Row(
-                    children: [
-                      isUser
-                          ? const SizedBox()
-                          : GestureDetector(
-                              onTap: onEdit,
-                              child: SvgPicture.asset(Assets.imagesEdit),
+                ? isSwitch
+                      ? Text(
+                          'Show Report',
+                          style: CustomTextStyles.text14W500Primary,
+                        )
+                      : Row(
+                          children: [
+                            isUser
+                                ? const SizedBox()
+                                : GestureDetector(
+                                    onTap: onEdit,
+                                    child: SvgPicture.asset(Assets.imagesEdit),
+                                  ),
+                            GestureDetector(
+                              onTap: onDelete,
+                              child: SvgPicture.asset(Assets.imagesDelete),
                             ),
-                      GestureDetector(
-                        onTap: onDelete,
-                        child: SvgPicture.asset(Assets.imagesDelete),
-                      ),
-                    ],
-                  )
+                          ],
+                        )
                 : Text(
                     value ?? 'N/A',
                     style: CustomTextStyles.text12RegularGrey,

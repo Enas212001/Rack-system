@@ -40,12 +40,22 @@ class _ExpandableInfoCardState extends State<ExpandableInfoCard>
               ),
               GestureDetector(
                 onTap: () => setState(() => _isExpanded = !_isExpanded),
-                child: Icon(
-                  _isExpanded
-                      ? Icons.keyboard_arrow_up_rounded
-                      : Icons.keyboard_arrow_down_rounded,
-                  size: 18.sp,
-                  color: AppColors.primaryColor,
+                child: Row(
+                  children: [
+                    Text(
+                      _isExpanded ? 'Hide Details' : 'Show Details',
+                      style: CustomTextStyles.text12RegularGrey.copyWith(
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                    Icon(
+                      _isExpanded
+                          ? Icons.keyboard_arrow_up_rounded
+                          : Icons.keyboard_arrow_down_rounded,
+                      size: 18.sp,
+                      color: AppColors.primaryColor,
+                    ),
+                  ],
                 ),
               ),
             ],

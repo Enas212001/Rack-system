@@ -4,8 +4,8 @@ import 'package:flutter_application_1/features/auth/presentation/views/widgets/t
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class EditRackForm extends StatelessWidget {
-  const EditRackForm({super.key});
+class AddSwitchForm extends StatelessWidget {
+  const AddSwitchForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,30 +13,45 @@ class EditRackForm extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Edit Rack', style: CustomTextStyles.text14W500Primary),
+          Text('Add Switch', style: CustomTextStyles.text14W500Primary),
           SizedBox(height: 20.h),
           TitleWithTextField(
-            title: 'Rack name',
+            title: 'Switch Name',
             controller: TextEditingController(),
           ),
           SizedBox(height: 10.h),
           TitleWithTextField(
-            title: 'Site Name',
+            title: 'Serial Number',
             controller: TextEditingController(),
           ),
           SizedBox(height: 10.h),
           TitleWithTextField(
-            title: 'Rack Size',
+            title: 'Mac Address',
             controller: TextEditingController(),
           ),
           SizedBox(height: 10.h),
           TitleWithTextField(
-            title: 'Rack Model',
+            title: 'IP Adress',
             controller: TextEditingController(),
           ),
           SizedBox(height: 10.h),
           TitleWithTextField(
-            title: 'Switches',
+            title: 'Up link core 1',
+            controller: TextEditingController(),
+          ),
+          SizedBox(height: 10.h),
+          TitleWithTextField(
+            title: 'Up link core 2',
+            controller: TextEditingController(),
+          ),
+          SizedBox(height: 10.h),
+          TitleWithTextField(
+            title: 'Port number',
+            controller: TextEditingController(),
+          ),
+          SizedBox(height: 10.h),
+          TitleWithTextField(
+            title: 'Model',
             controller: TextEditingController(),
           ),
           SizedBox(height: 40.h),
