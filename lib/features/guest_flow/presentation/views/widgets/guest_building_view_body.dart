@@ -11,7 +11,7 @@ class GuestBuildingViewBody extends StatelessWidget {
     return CustomScrollView(
       slivers: <Widget>[
         SliverToBoxAdapter(
-          child: TopWithBack(title: 'Building', text: 'Building'),
+          child: TopWithBack(text: 'Buildings', noSearch: true),
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/widget/add_text_button.dart';
+import 'package:flutter_application_1/core/utils/widget/tab_bar_item.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
-import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,9 +31,19 @@ class RackSwitchWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              _buildTab("Racks", 0, selectedIndex == 0),
+              TapBarItem(
+                index: 0,
+                title: "Racks",
+                selected: selectedIndex == 0,
+                onIndexChanged: onIndexChanged,
+              ),
               SizedBox(width: 24.w),
-              _buildTab("Switches", 1, selectedIndex == 1),
+              TapBarItem(
+                index: 1,
+                title: "Switches",
+                selected: selectedIndex == 1,
+                onIndexChanged: onIndexChanged,
+              ),
             ],
           ),
           AddTextButton(
@@ -52,33 +61,6 @@ class RackSwitchWidget extends StatelessWidget {
                 GoRouter.of(context).push(AppRoutes.addSwitch);
               }
             },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTab(String title, int index, bool selected) {
-    return GestureDetector(
-      onTap: () => onIndexChanged(index),
-      child: Column(
-        children: [
-          Text(
-            title,
-            style: CustomTextStyles.text14W500Primary.copyWith(
-              color: selected
-                  ? AppColors.primaryColor
-                  : AppColors.lightGreyColor,
-            ),
-          ),
-          SizedBox(height: 4.h),
-          Container(
-            height: 2.h,
-            width: 40.w,
-            decoration: BoxDecoration(
-              color: selected ? AppColors.primaryColor : Colors.transparent,
-              borderRadius: BorderRadius.circular(1),
-            ),
           ),
         ],
       ),

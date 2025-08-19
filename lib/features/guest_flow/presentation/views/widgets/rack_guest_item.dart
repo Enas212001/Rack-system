@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_assets.dart';
+import 'package:flutter_application_1/features/guest_flow/presentation/views/widgets/guest_item_details.dart';
 
-import 'guest_item_details.dart';
 import 'guest_view_item.dart';
 
-class BuildingGuestItem extends StatelessWidget {
-  const BuildingGuestItem({super.key});
+class RackGuestItem extends StatelessWidget {
+  const RackGuestItem({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GuestViewItem(
-      image: Assets.imagesBuildingGuest,
-      title: 'Building Name',
+      image: Assets.imagesRackGuest,
+      title: 'Rack Name',
       widget: GuestViewItemDetails(),
     );
   }
