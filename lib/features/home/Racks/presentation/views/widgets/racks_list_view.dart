@@ -73,16 +73,9 @@ class RacksListView extends StatelessWidget {
                       itemCount: racks.length,
                       itemBuilder: (context, index) => Column(
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              context.read<RackCubit>().getRacksInfo(
-                                buildingRId: state.racks[index].buildingRId!,
-                              );
-                            },
-                            child: RackItem(
-                              rackInfoModel: racks[index],
-                              buildingModel: buildingModel,
-                            ),
+                          RackItem(
+                            rackInfoModel: racks[index],
+                            buildingModel: buildingModel,
                           ),
                           if (index < racks.length - 1)
                             const Divider(

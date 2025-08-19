@@ -9,19 +9,19 @@ class TopWithBack extends StatelessWidget {
     required this.text,
     this.title,
     this.onSearchChanged,
-    this.isRack,
+    this.noSearch,
   });
 
   final String text;
   final String? title;
   final ValueChanged<String>? onSearchChanged;
-  final bool? isRack;
+  final bool? noSearch;
   @override
   Widget build(BuildContext context) {
     return TopWidget(
       text: title,
       onSearchChanged: onSearchChanged,
-      isRack: isRack,
+      withoutSearch: noSearch,
       isText: true,
       widget: Text(
         text,

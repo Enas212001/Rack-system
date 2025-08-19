@@ -42,7 +42,7 @@ class _RackViewBodyState extends State<RackViewBody> {
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: TopWithBack(text: AppStrings.racks, isRack: true),
+            child: TopWithBack(text: AppStrings.racks, noSearch: true),
           ),
           // 🔹 Tabs (Racks / Switches)
           SliverToBoxAdapter(
@@ -56,6 +56,9 @@ class _RackViewBodyState extends State<RackViewBody> {
               rackCubit: rackCubit,
               buildingModel: widget.buildingModel,
             ),
+          ),
+          SliverToBoxAdapter(
+            child: Divider(height: 1, color: AppColors.borderColor),
           ),
           SliverToBoxAdapter(child: SizedBox(height: 16.h)),
           SliverToBoxAdapter(

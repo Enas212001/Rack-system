@@ -31,7 +31,7 @@ class ItemDetail extends StatelessWidget {
             child: Text(
               label ?? '',
               style: CustomTextStyles.text12RegularGrey.copyWith(
-                color: AppColors.textColor,
+                color: AppColors.darkGreyColor,
               ),
             ),
           ),
@@ -40,9 +40,11 @@ class ItemDetail extends StatelessWidget {
                 ? isSwitch
                       ? Text(
                           'Show Report',
+                          textAlign: TextAlign.center,
                           style: CustomTextStyles.text14W500Primary,
                         )
                       : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             isUser
                                 ? const SizedBox()
@@ -58,7 +60,10 @@ class ItemDetail extends StatelessWidget {
                         )
                 : Text(
                     value ?? 'N/A',
-                    style: CustomTextStyles.text12RegularGrey,
+                    textAlign: TextAlign.center,
+                    style: CustomTextStyles.text12RegularGrey.copyWith(
+                      color: AppColors.darkGreyColor,
+                    ),
                   ),
           ),
         ],

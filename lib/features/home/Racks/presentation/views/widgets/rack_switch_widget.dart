@@ -49,7 +49,7 @@ class RackSwitchWidget extends StatelessWidget {
                   ),
                 );
               } else {
-                
+                GoRouter.of(context).push(AppRoutes.addSwitch);
               }
             },
           ),

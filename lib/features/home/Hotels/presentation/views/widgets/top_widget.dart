@@ -10,18 +10,18 @@ class TopWidget extends StatelessWidget {
     this.isAdd,
     this.text,
     this.onSearchChanged,
-    this.isRack,
+    this.withoutSearch,
     this.isText,
   });
   final Widget widget;
-  final bool? isAdd, isRack, isText;
+  final bool? isAdd, withoutSearch, isText;
   final String? text;
   final ValueChanged<String>? onSearchChanged;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: isRack == true ? 100.h : 141.h,
+      height: withoutSearch == true ? 100.h : 141.h,
       alignment: isAdd == true ? Alignment.center : Alignment.bottomCenter,
       padding:
           EdgeInsets.only(bottom: 12.h, top: isAdd == true ? 16.h : 0) +
@@ -35,7 +35,7 @@ class TopWidget extends StatelessWidget {
       ),
       child: isAdd == true
           ? widget
-          : isRack == true
+          : withoutSearch == true
           ? Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

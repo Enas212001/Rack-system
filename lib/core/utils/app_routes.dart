@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/features/guest_flow/presentation/views/guest_building_view.dart';
+import 'package:flutter_application_1/features/guest_flow/presentation/views/guest_rack_view.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/views/edit_building_view.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
@@ -14,6 +16,10 @@ import 'package:flutter_application_1/features/home/Racks/presentation/views/add
 import 'package:flutter_application_1/features/home/Racks/presentation/views/add_switch_view.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/edit_rack_view.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/racks_view.dart';
+import 'package:flutter_application_1/features/home/devices/presentation/views/add_device_view.dart';
+import 'package:flutter_application_1/features/home/devices/presentation/views/device_details_view.dart';
+import 'package:flutter_application_1/features/home/devices/presentation/views/device_view.dart';
+import 'package:flutter_application_1/features/home/devices/presentation/views/edit_device_view.dart';
 import 'package:flutter_application_1/features/splash/splash_view.dart';
 import 'package:flutter_application_1/features/users/presentation/views/add_user_view.dart';
 import 'package:flutter_application_1/features/users/presentation/views/users_view.dart';
@@ -37,6 +43,12 @@ class AppRoutes {
   static const String editRack = '/edit_rack';
   static const String addSwitch = '/add_switch';
   static const String addSummary = '/add_summary';
+  static const String device = '/device';
+  static const String addDevice = '/add_device';
+  static const String editDevice = '/edit_device';
+  static const String deviceDetails = '/device_details';
+  static const String guestBuilding = '/guest_building';
+  static const String guestRack = '/guest_rack';
 
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
@@ -59,7 +71,6 @@ class AppRoutes {
           return BuildingView(hotelModel: hotel);
         },
       ),
-
       GoRoute(
         path: racks,
         builder: (context, state) {
@@ -73,7 +84,6 @@ class AppRoutes {
           );
         },
       ),
-
       GoRoute(
         path: addBuilding,
         builder: (context, state) {
@@ -127,14 +137,20 @@ class AppRoutes {
           return const UsersView();
         },
       ),
+      GoRoute(path: addSwitch, builder: (context, state) => AddSwitchView()),
+      GoRoute(path: addSummary, builder: (context, state) => AddSummaryView()),
+      GoRoute(path: device, builder: (context, state) => DeviceView()),
+      GoRoute(path: addDevice, builder: (context, state) => AddDeviceView()),
+      GoRoute(path: editDevice, builder: (context, state) => EditDeviceView()),
       GoRoute(
-        path: addSwitch,
-        builder: (context, state) => AddSwitchView(),
+        path: deviceDetails,
+        builder: (context, state) => DeviceDetailsView(),
       ),
       GoRoute(
-        path: addSummary,
-        builder: (context, state) => AddSummaryView(),
+        path: guestBuilding,
+        builder: (context, state) => GuestBuildingView(),
       ),
+      GoRoute(path: guestRack, builder: (context, state) => GuestRackView()),
     ],
   );
 }

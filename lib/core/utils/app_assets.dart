@@ -16,7 +16,9 @@ class Assets {
 
   static const String imagesBarcelo = "assets/images/barcelo.png";
 
-  static const String imagesBuilding = "assets/images/building.svg";
+  static const String imagesBuilding = "assets/images/building.png";
+
+  static const String imagesBuildingGuest = "assets/images/buildingGuest.gif";
 
   static const String imagesBuildings = "assets/images/buildings.png";
 
@@ -30,11 +32,15 @@ class Assets {
 
   static const String imagesDevice = "assets/images/device.svg";
 
+  static const String imagesDeviceGuest = "assets/images/deviceGuest.gif";
+
   static const String imagesDomina = "assets/images/domina.png";
 
   static const String imagesEdit = "assets/images/edit.svg";
 
   static const String imagesFlipped = "assets/images/flipped.png";
+
+  static const String imagesGuestShape = "assets/images/guestShape.svg";
 
   static const String imagesHelpCenter = "assets/images/help_center.png";
 
@@ -88,6 +94,8 @@ class Assets {
 
   static const String imagesRackBack = "assets/images/rackBack.png";
 
+  static const String imagesRackGuest = "assets/images/rackGuest.gif";
+
   static const String imagesSafir = "assets/images/safir.png";
 
   static const String imagesSettings = "assets/images/settings.png";
@@ -99,6 +107,8 @@ class Assets {
   static const String imagesSultanGardens = "assets/images/sultanGardens.png";
 
   static const String imagesSunRise = "assets/images/sunRise.png";
+
+  static const String imagesSwitchGuest = "assets/images/switchGuest.gif";
 
   static const String imagesUsers = "assets/images/users.svg";
 
