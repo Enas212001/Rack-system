@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/widget/top_with_back.dart';
 
+import 'device_body.dart';
 import 'guest_tap_bar.dart';
 import 'rack_body.dart';
+import 'switch_body.dart';
 
 class GuestRackViewBody extends StatefulWidget {
   const GuestRackViewBody({super.key});
@@ -40,11 +42,11 @@ class _GuestRackViewBodyState extends State<GuestRackViewBody> {
       case 0:
         return RacksBody();
       case 1:
-        return const Text('Switches');
+        return SwitchBody();
       case 2:
-        return const Text('Devices');
+        return DeviceBody();
       default:
-        return const Text('Racks');
+        return const SliverToBoxAdapter();
     }
   }
 }
