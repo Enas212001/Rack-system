@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/widget/delete_widget.dart';
 import 'package:flutter_application_1/core/utils/widget/item_detail.dart';
+import 'package:flutter_application_1/features/users/data/models/user_model/user_item.dart';
+import 'package:flutter_application_1/features/users/presentation/manager/cubit/user_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UserDetails extends StatelessWidget {
-  const UserDetails({super.key});
+  const UserDetails({super.key, required this.userModel});
+  final UserItem userModel;
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +17,8 @@ class UserDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ItemDetail(label: 'Email', value: 'email'),
-          ItemDetail(label: 'Role', value: 'role'),
+          ItemDetail(label: 'Email', value: userModel.email!),
+          ItemDetail(label: 'Role', value: userModel.roleId!),
           ItemDetail(
             label: 'Actions',
             isAction: true,
@@ -25,6 +29,9 @@ class UserDetails extends StatelessWidget {
                 builder: (dialogContext) => DeleteWidget(
                   onDelete: () {
                     Navigator.pop(context);
+                    context.read<UserCubit>().deleteUsersInfo(
+                      userId: userModel.id.toString(),
+                    );
                   },
                   title: 'User',
                 ),

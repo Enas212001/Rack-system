@@ -35,16 +35,18 @@ class _RackViewBodyState extends State<RackViewBody> {
     final rackCubit = context.read<RackCubit>();
 
     return RefreshIndicator(
-      onRefresh: () => rackCubit.getRacksInfo(
-        buildingId: widget.buildingModel.id!,
-      ),
+      onRefresh: () =>
+          rackCubit.getRacksInfo(buildingId: widget.buildingModel.id!),
       color: AppColors.primaryColor,
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: TopWithBack(text: AppStrings.racks, noSearch: true),
+            child: TopWithBack(
+              text: AppStrings.racks,
+              onSearchChanged: (value) =>
+                  context.read<RackCubit>().searchRack(value),
+            ),
           ),
-          // 🔹 Tabs (Racks / Switches)
           SliverToBoxAdapter(
             child: RackSwitchWidget(
               selectedIndex: selectedIndex,

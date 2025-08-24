@@ -16,6 +16,7 @@ class AppStrings {
   static String successMessage(messageName) {
     return 'The $messageName has been added successfully';
   }
+
   static String successMessageEdit(messageName) {
     return 'The $messageName has been edited successfully';
   }

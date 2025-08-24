@@ -1,4 +1,5 @@
 class ApiKey {
+  static const String name = 'name';
   static const String email = 'email';
   static const String password = 'password';
   static const String rememberMe = 'remember_me';
@@ -65,4 +66,11 @@ class Endpoints {
   static String deleteBuilding(String buildingId) {
     return '$baseUrl/buildings/delete_building.php?id=$buildingId';
   }
+
+  static String deleteUser(String userId) {
+    return '$baseUrl/users/delete_user.php?id=$userId';
+  }
+
+  static String getUsers = '$baseUrl/users/get_users.php';
+  static String addUser = '$baseUrl/users/add_user.php';
 }
