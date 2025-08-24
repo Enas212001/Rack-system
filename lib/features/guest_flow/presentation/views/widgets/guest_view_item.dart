@@ -54,7 +54,7 @@ class GuestViewItem extends StatelessWidget {
         ),
         Positioned(
           right: 18.w,
-          top: 18.h,
+          top: 16.h,
           child: SvgPicture.asset(Assets.imagesGuestShape),
         ),
       ],

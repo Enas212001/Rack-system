@@ -6,16 +6,19 @@ import 'package:flutter_application_1/theme/theme.dart';
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     super.key,
-    required this.controller,
+    this.controller,
     required this.title,
     this.hintText,
+    this.value,
     this.isPassword = false,
+    this.onChanged,
   });
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String title;
-  final String? hintText;
+  final String? hintText, value;
   final bool isPassword;
+  final Function(String)? onChanged;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -49,6 +52,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         return null;
       },
       obscureText: _obscureText,
+      initialValue: widget.value,
+      onChanged: widget.onChanged,
       decoration: InputDecoration(
         border: borderTextField(),
         focusedBorder: borderTextField(),
@@ -71,5 +76,4 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       ),
     );
   }
-
 }

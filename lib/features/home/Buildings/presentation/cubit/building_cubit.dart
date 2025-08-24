@@ -11,7 +11,9 @@ part 'building_state.dart';
 
 class BuildingCubit extends Cubit<BuildingState> {
   BuildingCubit() : super(BuildingInitial());
-  final BuildingRepo homeRepo = BuildingRepoImpl(api: getIt.get<DioConsumer>());
+  final BuildingRepo buildingRepo = BuildingRepoImpl(
+    api: getIt.get<DioConsumer>(),
+  );
 
   final GlobalKey<FormState> formAddBuildingKey = GlobalKey<FormState>();
   final TextEditingController rackIdController = TextEditingController();
@@ -22,7 +24,7 @@ class BuildingCubit extends Cubit<BuildingState> {
   Future<void> getBuildings({required String hotelId}) async {
     emit(BuildingLoading());
     try {
-      final buildings = await homeRepo.getBuildings(hotelId: hotelId);
+      final buildings = await buildingRepo.getBuildings(hotelId: hotelId);
       buildings.fold(
         (failure) =>
             emit(BuildingFailure(message: failure.failure.errorMessage)),
@@ -56,7 +58,7 @@ class BuildingCubit extends Cubit<BuildingState> {
   Future<void> addBuilding({required String hotelId}) async {
     emit(AddBuildingLoading());
     try {
-      final response = await homeRepo.addBuilding(
+      final response = await buildingRepo.addBuilding(
         buildingName: buildingNameController.text,
         rackId: rackIdController.text,
         buildingRackId: buildingRackIdController.text,
@@ -74,6 +76,60 @@ class BuildingCubit extends Cubit<BuildingState> {
       );
     } catch (e) {
       emit(AddBuildingFailure(message: e.toString()));
+    }
+  }
+
+  final GlobalKey<FormState> formEditBuildingKey = GlobalKey<FormState>();
+  final TextEditingController editRackIdController = TextEditingController();
+  final TextEditingController editBuildingRackIdController =
+      TextEditingController();
+  final TextEditingController editBuildingNameController =
+      TextEditingController();
+  Future<void> editBuilding({required BuildingModel building}) async {
+    emit(EditBuildingLoading());
+    try {
+      final response = await buildingRepo.editBuilding(
+        buildingId: building.id!,
+        buildingName: editBuildingNameController.text.isEmpty
+            ? building.buildingName!
+            : editBuildingNameController.text,
+        rackId: editRackIdController.text.isEmpty
+            ? building.rackId!
+            : editRackIdController.text,
+        buildingRackId: editBuildingRackIdController.text.isEmpty
+            ? building.buildingRId!
+            : editBuildingRackIdController.text,
+      );
+      response.fold(
+        (failure) =>
+            emit(EditBuildingFailure(message: failure.failure.errorMessage)),
+        (building) {
+          emit(EditBuildingSuccess(building: building));
+          editBuildingNameController.clear();
+          editRackIdController.clear();
+          editBuildingRackIdController.clear();
+        },
+      );
+    } catch (e) {
+      emit(EditBuildingFailure(message: e.toString()));
+    }
+  }
+
+  Future<void> deleteBuilding({required String buildingId}) async {
+    emit(DeleteBuildingLoading());
+    try {
+      final response = await buildingRepo.deleteBuilding(
+        buildingId: buildingId,
+      );
+      response.fold(
+        (failure) =>
+            emit(DeleteBuildingFailure(message: failure.failure.errorMessage)),
+        (building) {
+          emit(DeleteBuildingSuccess(building: building));
+        },
+      );
+    } catch (e) {
+      emit(DeleteBuildingFailure(message: e.toString()));
     }
   }
 }

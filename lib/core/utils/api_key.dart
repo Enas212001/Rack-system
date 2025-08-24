@@ -40,6 +40,14 @@ class Endpoints {
   }
 
   static String addBuilding(String hotelId) {
-    return '$baseUrl/add_building.php?hotel_id=$hotelId';
+    return '$baseUrl/buildings/add_building.php?hotel_id=$hotelId';
+  }
+
+  static String editBuilding(String buildingId) {
+    return '$baseUrl/buildings/edit_building.php?id=$buildingId';
+  }
+
+  static String deleteBuilding(String buildingId) {
+    return '$baseUrl/buildings/delete_building.php?id=$buildingId';
   }
 }

@@ -38,6 +38,8 @@ class Assets {
 
   static const String imagesEdit = "assets/images/edit.svg";
 
+  static const String imagesExport = "assets/images/export.svg";
+
   static const String imagesFlipped = "assets/images/flipped.png";
 
   static const String imagesGuestShape = "assets/images/guestShape.svg";

@@ -6,11 +6,21 @@ abstract class BuildingRepo {
   Future<Either<ServerFailure, List<BuildingModel>>> getBuildings({
     required String hotelId,
   });
-  
+
   Future<Either<ServerFailure, BuildingModel>> addBuilding({
     required String buildingName,
     required String rackId,
     required String buildingRackId,
     required String hotelId,
+  });
+
+  Future<Either<ServerFailure, BuildingModel>> editBuilding({
+    required String buildingId,
+    required String buildingName,
+    required String rackId,
+    required String buildingRackId,
+  });
+  Future<Either<ServerFailure, BuildingModel>> deleteBuilding({
+    required String buildingId,
   });
 }

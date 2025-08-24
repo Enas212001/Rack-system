@@ -54,4 +54,42 @@ class BuildingRepoImpl implements BuildingRepo {
       return left(e);
     }
   }
+
+  @override
+  Future<Either<ServerFailure, BuildingModel>> deleteBuilding({
+    required String buildingId,
+  }) async {
+    try {
+      final response = await api.delete(Endpoints.deleteBuilding(buildingId));
+      final building = BuildingModel.fromJson(response);
+      return right(building);
+    } on ServerFailure catch (e) {
+      log('Error parsing buildings: $e');
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, BuildingModel>> editBuilding({
+    required String buildingId,
+    required String buildingName,
+    required String rackId,
+    required String buildingRackId,
+  }) async {
+    try {
+      final response = await api.put(
+        Endpoints.editBuilding(buildingId),
+        data: {
+          ApiKey.buildingName: buildingName,
+          ApiKey.rackId: rackId,
+          ApiKey.buildingRackId: buildingRackId,
+        },
+      );
+      final building = BuildingModel.fromJson(response);
+      return right(building);
+    } on ServerFailure catch (e) {
+      log('Error parsing buildings: $e');
+      return left(e);
+    }
+  }
 }

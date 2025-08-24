@@ -15,10 +15,13 @@ class ItemDetail extends StatelessWidget {
     this.onDelete,
     this.isUser = false,
     this.isSwitch = false,
+    this.isDevice = false,
+    this.showDetails,
+    this.showReport,
   });
   final String? label, value;
-  final bool isAction, isUser, isSwitch;
-  final VoidCallback? onEdit, onDelete;
+  final bool isAction, isUser, isSwitch, isDevice;
+  final VoidCallback? onEdit, onDelete, showDetails, showReport;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,10 +41,22 @@ class ItemDetail extends StatelessWidget {
           Expanded(
             child: isAction
                 ? isSwitch
-                      ? Text(
-                          'Show Report',
-                          textAlign: TextAlign.center,
-                          style: CustomTextStyles.text14W500Primary,
+                      ? GestureDetector(
+                          onTap: showReport,
+                          child: Text(
+                            'Show Report',
+                            textAlign: TextAlign.center,
+                            style: CustomTextStyles.text14W500Primary,
+                          ),
+                        )
+                      : isDevice
+                      ? GestureDetector(
+                          onTap: showDetails,
+                          child: Text(
+                            'Show Details',
+                            textAlign: TextAlign.center,
+                            style: CustomTextStyles.text14W500Primary,
+                          ),
                         )
                       : Row(
                           mainAxisAlignment: MainAxisAlignment.center,

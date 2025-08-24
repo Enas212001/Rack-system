@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/widget/item_detail.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'device_details_widget.dart';
+
 class DeviceGuestItemDetails extends StatelessWidget {
   const DeviceGuestItemDetails({super.key});
 
@@ -17,7 +19,17 @@ class DeviceGuestItemDetails extends StatelessWidget {
         ItemDetail(label: 'Patch Panel :', value: '100'),
         ItemDetail(label: 'Product Number :', value: '100'),
         ItemDetail(label: 'Model :', value: '100'),
-        ItemDetail(label: 'Action :', isAction: true),
+        ItemDetail(
+          label: 'Action :',
+          isAction: true,
+          isDevice: true,
+          showDetails: () {
+            showDialog(
+              context: context,
+              builder: (context) => DeviceDatailsWidget(),
+            );
+          },
+        ),
       ],
     );
   }

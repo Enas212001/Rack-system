@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/guest_flow/presentation/views/guest_building_view.dart';
 import 'package:flutter_application_1/features/guest_flow/presentation/views/guest_rack_view.dart';
+import 'package:flutter_application_1/features/guest_flow/presentation/views/report_view.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/views/edit_building_view.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
@@ -49,6 +50,7 @@ class AppRoutes {
   static const String deviceDetails = '/device_details';
   static const String guestBuilding = '/guest_building';
   static const String guestRack = '/guest_rack';
+  static const String report = '/report';
 
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
@@ -99,7 +101,10 @@ class AppRoutes {
       ),
       GoRoute(
         path: editBuilding,
-        builder: (context, state) => EditBuildingView(),
+        builder: (context, state) {
+          final args = state.extra as BuildingModel;
+          return EditBuildingView(building: args);
+        },
       ),
       GoRoute(
         path: addRack,
@@ -151,6 +156,7 @@ class AppRoutes {
         builder: (context, state) => GuestBuildingView(),
       ),
       GoRoute(path: guestRack, builder: (context, state) => GuestRackView()),
+      GoRoute(path: report, builder: (context, state) => ReportView()),
     ],
   );
 }

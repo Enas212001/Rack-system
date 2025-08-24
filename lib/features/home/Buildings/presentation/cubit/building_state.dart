@@ -8,6 +8,7 @@ sealed class BuildingState extends Equatable {
 }
 
 final class BuildingInitial extends BuildingState {}
+
 final class BuildingLoading extends BuildingState {}
 
 final class BuildingSuccess extends BuildingState {
@@ -40,4 +41,32 @@ final class AddBuildingFailure extends BuildingState {
   final String message;
 
   const AddBuildingFailure({required this.message});
+}
+
+final class EditBuildingLoading extends BuildingState {}
+
+final class EditBuildingSuccess extends BuildingState {
+  final BuildingModel building;
+
+  const EditBuildingSuccess({required this.building});
+}
+
+final class EditBuildingFailure extends BuildingState {
+  final String message;
+
+  const EditBuildingFailure({required this.message});
+}
+
+final class DeleteBuildingLoading extends BuildingState {}
+
+final class DeleteBuildingSuccess extends BuildingState {
+  final BuildingModel building;
+
+  const DeleteBuildingSuccess({required this.building});
+}
+
+final class DeleteBuildingFailure extends BuildingState {
+  final String message;
+
+  const DeleteBuildingFailure({required this.message});
 }

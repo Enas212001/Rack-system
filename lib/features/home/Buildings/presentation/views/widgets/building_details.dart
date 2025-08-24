@@ -3,14 +3,20 @@ import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/core/utils/widget/delete_widget.dart';
 import 'package:flutter_application_1/core/utils/widget/item_detail.dart';
+import 'package:flutter_application_1/features/home/Buildings/presentation/cubit/building_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class BuildingDetails extends StatelessWidget {
-  const BuildingDetails({super.key, required this.building});
+  const BuildingDetails({
+    super.key,
+    required this.building,
+    required this.hotelId,
+  });
 
   final BuildingModel building;
-
+  final String hotelId;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,8 +30,11 @@ class BuildingDetails extends StatelessWidget {
           ItemDetail(
             label: 'Actions',
             isAction: true,
-            onEdit: () {
-              GoRouter.of(context).push(AppRoutes.editBuilding);
+            onEdit: () async {
+              await GoRouter.of(
+                context,
+              ).push(AppRoutes.editBuilding, extra: building);
+              context.read<BuildingCubit>().getBuildings(hotelId: hotelId);
             },
             onDelete: () {
               showDialog(
@@ -33,6 +42,7 @@ class BuildingDetails extends StatelessWidget {
                 builder: (dialogContext) => DeleteWidget(
                   onDelete: () {
                     Navigator.pop(context);
+                    context.read<BuildingCubit>().deleteBuilding(buildingId: building.id!);
                   },
                   title: 'Building',
                 ),

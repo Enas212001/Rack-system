@@ -8,14 +8,17 @@ class TitleWithTextField extends StatelessWidget {
   const TitleWithTextField({
     super.key,
     required this.title,
-    required this.controller,
+    this.controller,
     this.hintText,
     this.isPassword = false,
+    this.value,
+    this.onChanged,
   });
   final String title;
-  final TextEditingController controller;
-  final String? hintText;
+  final TextEditingController? controller;
+  final String? hintText, value;
   final bool isPassword;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,9 @@ class TitleWithTextField extends StatelessWidget {
           controller: controller,
           title: title,
           hintText: hintText,
+          value: value,
           isPassword: isPassword,
+          onChanged: onChanged,
         ),
       ],
     );

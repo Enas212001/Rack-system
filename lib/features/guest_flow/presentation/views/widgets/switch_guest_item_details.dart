@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/widget/item_detail.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class SwitchGuestItemDetails extends StatelessWidget {
   const SwitchGuestItemDetails({super.key});
@@ -15,7 +17,14 @@ class SwitchGuestItemDetails extends StatelessWidget {
         ItemDetail(label: 'IP :', value: '100'),
         ItemDetail(label: 'Port Num :', value: '100'),
         ItemDetail(label: 'Model :', value: '100'),
-        ItemDetail(label: 'Action :', isAction: true),
+        ItemDetail(
+          label: 'Action :',
+          isAction: true,
+          isSwitch: true,
+          showReport: () {
+            context.push(AppRoutes.report);
+          },
+        ),
       ],
     );
   }

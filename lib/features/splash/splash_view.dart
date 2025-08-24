@@ -63,7 +63,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
       }
     } else {
       if (mounted) {
-        GoRouter.of(context).pushReplacement(AppRoutes.guestRack);
+        GoRouter.of(context).pushReplacement(AppRoutes.hotels);
       }
     }
   }
