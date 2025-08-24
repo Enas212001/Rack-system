@@ -3,7 +3,9 @@ import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/widget/delete_widget.dart';
 import 'package:flutter_application_1/core/utils/widget/item_detail.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
-import 'package:flutter_application_1/features/home/Racks/data/models/rack_info_model.dart';
+import 'package:flutter_application_1/features/home/Racks/data/models/rack_model/rack_item.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,7 +15,7 @@ class RackDetails extends StatelessWidget {
     required this.rackInfoModel,
     required this.buildingModel,
   });
-  final RackInfoModel rackInfoModel;
+  final RackItem rackInfoModel;
   final BuildingModel buildingModel;
   @override
   Widget build(BuildContext context) {
@@ -22,14 +24,19 @@ class RackDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ItemDetail(label: 'Size', value: '10'),
-          ItemDetail(label: 'Model', value: rackInfoModel.productModel),
+          ItemDetail(label: 'Size', value: rackInfoModel.rackSize.toString()),
+          ItemDetail(label: 'Model', value: rackInfoModel.rackModel),
           ItemDetail(label: 'Building', value: buildingModel.buildingName),
           ItemDetail(
             label: 'Actions',
             isAction: true,
-            onEdit: () {
-              GoRouter.of(context).go(AppRoutes.editRack);
+            onEdit: () async {
+              await GoRouter.of(
+                context,
+              ).push(AppRoutes.editRack, extra: rackInfoModel);
+              context.read<RackCubit>().getRacksInfo(
+                buildingId: buildingModel.id!,
+              );
             },
             onDelete: () {
               showDialog(
@@ -37,6 +44,7 @@ class RackDetails extends StatelessWidget {
                 builder: (dialogContext) => DeleteWidget(
                   onDelete: () {
                     Navigator.pop(context);
+                    context.read<RackCubit>().deleteRack(rack: rackInfoModel);
                   },
                   title: 'Rack',
                 ),

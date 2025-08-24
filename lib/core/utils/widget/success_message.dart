@@ -5,8 +5,9 @@ import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SuccessMessage extends StatelessWidget {
-  const SuccessMessage({super.key, required this.messageName});
+  const SuccessMessage({super.key, required this.messageName, this.isEdit});
   final String messageName;
+  final bool? isEdit;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -21,7 +22,9 @@ class SuccessMessage extends StatelessWidget {
                 Image.asset(Assets.imagesAdded, width: 50.w, height: 50.h),
                 SizedBox(height: 12.h),
                 Text(
-                  AppStrings.successMessage(messageName),
+                  isEdit == true
+                      ? AppStrings.successMessageEdit(messageName)
+                      : AppStrings.successMessage(messageName),
                   style: CustomTextStyles.text14W500Primary,
                   textAlign: TextAlign.center,
                 ),

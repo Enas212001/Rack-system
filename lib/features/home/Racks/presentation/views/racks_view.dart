@@ -20,7 +20,7 @@ class RacksView extends StatelessWidget {
       drawer: MyAppDrawer(),
       body: BlocProvider(
         create: (context) =>
-            RackCubit()..getRacksInfo(buildingRId: buildingModel.buildingRId!),
+            RackCubit()..getRacksInfo(buildingId: buildingModel.id!),
         child: RackViewBody(
           hotelModel: hotelModel,
           buildingModel: buildingModel,

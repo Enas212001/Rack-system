@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/custom_show_dialog.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
-import 'package:flutter_application_1/features/auth/presentation/views/widgets/title_with_textfield.dart';
-import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
 import 'package:flutter_application_1/core/utils/widget/success_message.dart';
+import 'package:flutter_application_1/features/auth/presentation/views/widgets/title_with_textfield.dart';
+import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,15 +15,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/utils/widget/add_full_button.dart';
 
 class AddRackForm extends StatelessWidget {
-  const AddRackForm({super.key, required this.buildingRId});
-  final String buildingRId;
+  const AddRackForm({super.key, required this.buildingModel});
+  final BuildingModel buildingModel;
   @override
   Widget build(BuildContext context) {
     RackCubit rackCubit = BlocProvider.of<RackCubit>(context);
     return BlocConsumer<RackCubit, RackState>(
       listener: (context, state) {
         if (state is AddRackSuccess) {
-          rackCubit.getRacksInfo(buildingRId: buildingRId);
+          rackCubit.getRacksInfo(buildingId: buildingModel.id!.toString());
           Navigator.pop(context);
           customShowDialog(
             context,
@@ -45,33 +46,28 @@ class AddRackForm extends StatelessWidget {
               SizedBox(height: 20.h),
               TitleWithTextField(
                 title: 'Rack name',
-                controller: rackCubit.productPanelController,
+                controller: rackCubit.rackNameController,
               ),
               SizedBox(height: 10.h),
               TitleWithTextField(
                 title: 'Site Name',
-                controller: rackCubit.productSerialController,
+                controller: rackCubit.siteNameController,
               ),
               SizedBox(height: 10.h),
               TitleWithTextField(
                 title: 'Rack Size',
-                controller: rackCubit.productMacController,
+                controller: rackCubit.rackSizeController,
               ),
               SizedBox(height: 10.h),
               TitleWithTextField(
                 title: 'Rack Model',
-                controller: rackCubit.productModelController,
-              ),
-              SizedBox(height: 10.h),
-              TitleWithTextField(
-                title: 'Switches',
-                controller: rackCubit.productPortController,
+                controller: rackCubit.rackModelController,
               ),
               SizedBox(height: 40.h),
               AddFullSizeButton(
                 onPressed: () {
                   if (rackCubit.formAddRackKey.currentState!.validate()) {
-                    rackCubit.addRack(buildingRId: buildingRId);
+                    rackCubit.addRack(building: buildingModel);
                   }
                 },
                 text: 'Save',

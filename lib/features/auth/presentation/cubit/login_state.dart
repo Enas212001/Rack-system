@@ -1,5 +1,6 @@
 part of 'login_cubit.dart';
-sealed class LoginState extends Equatable{
+
+sealed class LoginState extends Equatable {
   final bool rememberMe;
   const LoginState({this.rememberMe = false});
 

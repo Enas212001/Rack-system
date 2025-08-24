@@ -18,7 +18,7 @@ class RackItemWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(12.r),
       child: ExpandableInfoCard(
-        title: rackInfoModel.id.toString(),
+        title: rackInfoModel.rackName ?? '',
         details: RackDetails(
           rackInfoModel: rackInfoModel,
           buildingModel: buildingModel,

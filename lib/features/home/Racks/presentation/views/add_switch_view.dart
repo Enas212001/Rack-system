@@ -10,10 +10,7 @@ class AddSwitchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       resizeToAvoidBottomInset: true,
-      body: AddFormWidget(
-        title: 'Switch',
-        childWidget: AddSwitchForm(),
-      ),
+      body: AddFormWidget(title: 'Switch', childWidget: AddSwitchForm()),
     );
   }
 }

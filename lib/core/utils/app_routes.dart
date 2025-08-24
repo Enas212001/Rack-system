@@ -7,10 +7,11 @@ import 'package:flutter_application_1/features/home/Buildings/presentation/views
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/cubit/building_cubit.dart';
 import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
+import 'package:flutter_application_1/features/home/Racks/data/models/rack_model/rack_item.dart';
+import 'package:flutter_application_1/features/home/Racks/data/models/rack_model/rack_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/views/add_building_view.dart';
 import 'package:flutter_application_1/features/home/Hotels/presentation/views/add_hotel_view.dart';
-import 'package:flutter_application_1/features/home/Racks/data/models/rack_info_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/add_rack_view.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/views/building_view.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/add_summary_view.dart';
@@ -115,11 +116,17 @@ class AppRoutes {
           }
           return BlocProvider.value(
             value: args.rackCubit,
-            child: AddRackView(buildingRId: args.buildingModel.buildingRId!),
+            child: AddRackView(buildingModel: args.buildingModel),
           );
         },
       ),
-      GoRoute(path: editRack, builder: (context, state) => EditRackView()),
+      GoRoute(
+        path: editRack,
+        builder: (context, state) {
+          final extra = state.extra as RackItem;
+          return EditRackView(rack: extra);
+        },
+      ),
       GoRoute(
         path: addHotel,
         builder: (context, state) {
@@ -171,9 +178,9 @@ class AddBuildingArgs {
 class GetRackArg {
   final HotelModel hotel;
   final BuildingModel buildingModel;
-  final RackInfoModel rackInfoModel;
+  final RackModel rackInfoModel;
   GetRackArg({
-    this.rackInfoModel = const RackInfoModel(),
+    this.rackInfoModel = const RackModel(),
     required this.hotel,
     required this.buildingModel,
   });

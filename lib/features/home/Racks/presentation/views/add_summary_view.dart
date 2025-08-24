@@ -10,10 +10,7 @@ class AddSummaryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       resizeToAvoidBottomInset: true,
-      body: AddFormWidget(
-        title: 'Summary',
-        childWidget: AddSummaryForm(),
-      ),
+      body: AddFormWidget(title: 'Summary', childWidget: AddSummaryForm()),
     );
   }
 }

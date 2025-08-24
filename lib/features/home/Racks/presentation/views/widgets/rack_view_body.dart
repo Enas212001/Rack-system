@@ -36,7 +36,7 @@ class _RackViewBodyState extends State<RackViewBody> {
 
     return RefreshIndicator(
       onRefresh: () => rackCubit.getRacksInfo(
-        buildingRId: widget.buildingModel.buildingRId!,
+        buildingId: widget.buildingModel.id!,
       ),
       color: AppColors.primaryColor,
       child: CustomScrollView(

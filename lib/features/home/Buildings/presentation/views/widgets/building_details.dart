@@ -42,7 +42,9 @@ class BuildingDetails extends StatelessWidget {
                 builder: (dialogContext) => DeleteWidget(
                   onDelete: () {
                     Navigator.pop(context);
-                    context.read<BuildingCubit>().deleteBuilding(buildingId: building.id!);
+                    context.read<BuildingCubit>().deleteBuilding(
+                      buildingId: building.id!,
+                    );
                   },
                   title: 'Building',
                 ),

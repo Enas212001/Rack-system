@@ -3,9 +3,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/api/dio_consumer.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
+import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
+import 'package:flutter_application_1/features/home/Racks/data/models/rack_model/rack_item.dart';
 import 'package:flutter_application_1/features/home/Racks/data/repo/rack_repo.dart';
 import 'package:flutter_application_1/features/home/Racks/data/repo/rack_repo_impl.dart';
-import 'package:flutter_application_1/features/home/Racks/data/models/rack_info_model.dart';
 
 part 'rack_state.dart';
 
@@ -13,24 +14,10 @@ class RackCubit extends Cubit<RackState> {
   RackCubit() : super(RackInitial());
   final RackRepo homeRepo = RackRepoImpl(api: getIt.get<DioConsumer>());
 
-  final GlobalKey<FormState> formAddRackKey = GlobalKey<FormState>();
-
-  final TextEditingController productPanelController = TextEditingController();
-  final TextEditingController productSerialController = TextEditingController();
-  final TextEditingController productMacController = TextEditingController();
-  final TextEditingController productModelController = TextEditingController();
-  final TextEditingController productPortController = TextEditingController();
-  final TextEditingController deviceNameController = TextEditingController();
-  final TextEditingController siteNameController = TextEditingController();
-
-  String? selectedSwitchId;
-
-  List<String> switchIds = ['1', '2', '3'];
-
-  Future<void> getRacksInfo({required String buildingRId}) async {
+  Future<void> getRacksInfo({required String buildingId}) async {
     emit(RacksLoading());
     try {
-      final result = await homeRepo.getRacksInfo(buildingRId: buildingRId);
+      final result = await homeRepo.getRacksInfo(buildingId: buildingId);
       result.fold(
         (failure) => emit(RacksFailure(message: failure.failure.errorMessage)),
         (racks) {
@@ -43,51 +30,119 @@ class RackCubit extends Cubit<RackState> {
     }
   }
 
-  List<RackInfoModel> filteredRacks = [];
+  List<RackItem> filteredRacks = [];
   void searchRack(String query) {
     if (state is! RacksSuccess) return;
     if (query.isEmpty) {
       emit(RacksSuccess(racks: filteredRacks));
       return;
     }
-    final filtered = filteredRacks.where((hotel) {
-      final name = hotel.deviceName?.toLowerCase() ?? '';
+    final filtered = filteredRacks.where((rack) {
+      final name = rack.rackName?.toLowerCase() ?? '';
       return name.contains(query.toLowerCase());
     }).toList();
     emit(RacksSuccess(racks: filtered));
   }
 
-  Future<void> addRack({required String buildingRId}) async {
+  final GlobalKey<FormState> formAddRackKey = GlobalKey<FormState>();
+
+  final TextEditingController rackNameController = TextEditingController();
+  final TextEditingController rackSizeController = TextEditingController();
+  final TextEditingController rackModelController = TextEditingController();
+  final TextEditingController siteNameController = TextEditingController();
+
+  List<int> switchIds = [5];
+  String get switchIdsStr => switchIds.join(",");
+  Future<void> addRack({required BuildingModel building}) async {
     emit(AddRackLoading());
     try {
       final response = await homeRepo.addRack(
-        switchId: selectedSwitchId!,
-        productPanel: productPanelController.text,
-        productSerial: productSerialController.text,
-        productMac: productMacController.text,
-        productModel: productModelController.text,
-        productPort: productPortController.text,
-        deviceName: deviceNameController.text,
+        switchIds: switchIdsStr,
+        buildingId: building.id!.toString(),
+        rackName: rackNameController.text,
+        rackSize: rackSizeController.text,
         siteName: siteNameController.text,
-        buildingRId: buildingRId,
+        rackModel: rackModelController.text,
+        buildingRId: building.buildingRId?.toString() ?? '',
       );
       response.fold(
         (failure) =>
             emit(AddRackFailure(message: failure.failure.errorMessage)),
         (rack) {
           emit(AddRackSuccess(rack: rack));
-          productPanelController.clear();
-          productSerialController.clear();
-          productMacController.clear();
-          productModelController.clear();
-          productPortController.clear();
-          deviceNameController.clear();
+          rackNameController.clear();
+          rackSizeController.clear();
+          rackModelController.clear();
           siteNameController.clear();
-          selectedSwitchId = null;
+          switchIds = [];
         },
       );
     } catch (e) {
       emit(AddRackFailure(message: e.toString()));
+    }
+  }
+
+  final GlobalKey<FormState> formEditRackKey = GlobalKey<FormState>();
+
+  final TextEditingController editRackNameController = TextEditingController();
+  final TextEditingController editRackSizeController = TextEditingController();
+  final TextEditingController editRackModelController = TextEditingController();
+  final TextEditingController editSiteNameController = TextEditingController();
+
+  List<int> editSwitchIds = [5];
+  String get editSwitchIdsStr => editSwitchIds.join(",");
+  Future<void> editRack({required RackItem rack}) async {
+    emit(EditRackLoading());
+    try {
+      final response = await homeRepo.editRack(
+        rackId: rack.id?.toString() ?? '',
+        switchIds: editSwitchIdsStr,
+        rackName: editRackNameController.text.isEmpty
+            ? rack.rackName!
+            : editRackNameController.text,
+        rackSize: editRackSizeController.text.isEmpty
+            ? rack.rackSize.toString()
+            : editRackSizeController.text,
+        siteName: editSiteNameController.text.isEmpty
+            ? rack.siteName!
+            : editSiteNameController.text,
+        rackModel: editRackModelController.text.isEmpty
+            ? rack.rackModel!
+            : editRackModelController.text,
+        buildingRId: rack.buildingRId?.toString() ?? '',
+      );
+      response.fold(
+        (failure) =>
+            emit(EditRackFailure(message: failure.failure.errorMessage)),
+        (rack) {
+          emit(EditRackSuccess(rack: rack));
+          editRackNameController.clear();
+          editRackSizeController.clear();
+          editRackModelController.clear();
+          editSiteNameController.clear();
+          editSwitchIds = [];
+        },
+      );
+    } catch (e) {
+      emit(EditRackFailure(message: e.toString()));
+    }
+  }
+
+  Future<void> deleteRack({required RackItem rack}) async {
+    emit(DeleteRackLoading());
+    try {
+      final response = await homeRepo.deleteRack(
+        rackId: rack.id?.toString() ?? '',
+      );
+      response.fold(
+        (failure) =>
+            emit(DeleteRackFailure(message: failure.failure.errorMessage)),
+        (rack) {
+          emit(DeleteRackSuccess(rack: rack));
+        },
+      );
+    } catch (e) {
+      emit(DeleteRackFailure(message: e.toString()));
     }
   }
 }

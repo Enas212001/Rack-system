@@ -12,7 +12,7 @@ final class RackInitial extends RackState {}
 final class RacksLoading extends RackState {}
 
 final class RacksSuccess extends RackState {
-  final List<RackInfoModel> racks;
+  final List<RackItem> racks;
 
   const RacksSuccess({required this.racks});
 
@@ -38,7 +38,35 @@ final class AddRackFailure extends RackState {
 }
 
 final class AddRackSuccess extends RackState {
-  final RackInfoModel rack;
+  final RackItem rack;
 
   const AddRackSuccess({required this.rack});
+}
+
+final class EditRackLoading extends RackState {}
+
+final class EditRackFailure extends RackState {
+  final String message;
+
+  const EditRackFailure({required this.message});
+}
+
+final class EditRackSuccess extends RackState {
+  final RackItem rack;
+
+  const EditRackSuccess({required this.rack});
+}
+
+final class DeleteRackLoading extends RackState {}
+
+final class DeleteRackFailure extends RackState {
+  final String message;
+
+  const DeleteRackFailure({required this.message});
+}
+
+final class DeleteRackSuccess extends RackState {
+  final RackItem rack;
+
+  const DeleteRackSuccess({required this.rack});
 }

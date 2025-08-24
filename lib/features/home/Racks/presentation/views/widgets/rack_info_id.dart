@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'export_rack_to_pdf.dart';
-
 class RacksInfoId extends StatelessWidget {
   const RacksInfoId({
     super.key,
@@ -37,8 +35,6 @@ class RacksInfoId extends StatelessWidget {
                   context,
                 ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w400),
               ),
-              Spacer(),
-              ExportRackToPDF(hotelName: hotelName),
             ],
           ),
         ],
