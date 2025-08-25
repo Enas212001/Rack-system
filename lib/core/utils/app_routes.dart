@@ -9,6 +9,7 @@ import 'package:flutter_application_1/features/home/Buildings/presentation/cubit
 import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/rack_model/rack_item.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/rack_model/rack_model.dart';
+import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/rack_cubit/rack_cubit.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/views/add_building_view.dart';
 import 'package:flutter_application_1/features/home/Hotels/presentation/views/add_hotel_view.dart';
@@ -157,7 +158,13 @@ class AppRoutes {
         },
       ),
       GoRoute(path: addSummary, builder: (context, state) => AddSummaryView()),
-      GoRoute(path: device, builder: (context, state) => DeviceView()),
+      GoRoute(
+        path: device,
+        builder: (context, state) {
+          final switchItem = state.extra as SwitchItem;
+          return DeviceView(switchItem: switchItem);
+        },
+      ),
       GoRoute(path: addDevice, builder: (context, state) => AddDeviceView()),
       GoRoute(path: editDevice, builder: (context, state) => EditDeviceView()),
       GoRoute(

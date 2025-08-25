@@ -22,7 +22,6 @@ class AddSwitchForm extends StatelessWidget {
         if (state is AddSwitchFailure) {
           showToast(state.message);
         } else if (state is AddSwitchSuccess) {
-          
           Navigator.pop(context);
           customShowDialog(
             context,

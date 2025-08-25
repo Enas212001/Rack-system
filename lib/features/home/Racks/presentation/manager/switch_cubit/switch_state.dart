@@ -44,3 +44,15 @@ final class AddSwitchFailure extends SwitchState {
   final String message;
   const AddSwitchFailure({required this.message});
 }
+
+final class AddSummaryLoading extends SwitchState {}
+
+final class AddSummarySuccess extends SwitchState {
+  final SummaryModel switchs;
+  const AddSummarySuccess({required this.switchs});
+}
+
+final class AddSummaryFailure extends SwitchState {
+  final String message;
+  const AddSummaryFailure({required this.message});
+}

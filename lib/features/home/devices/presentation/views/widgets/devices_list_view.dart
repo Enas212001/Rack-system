@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
+import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
+import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'devive_item.dart';
+import 'device_item_widget.dart';
 
 class DevicesListView extends StatelessWidget {
   const DevicesListView({super.key});
@@ -30,12 +33,27 @@ class DevicesListView extends StatelessWidget {
               ),
             ),
             Divider(height: 1, color: AppColors.borderColor),
-            ListView.builder(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 7,
-              itemBuilder: (context, index) => DeviveItem(),
+            BlocBuilder<DeviceCubit, DeviceState>(
+              builder: (context, state) {
+                if (state is DeviceLoading) {
+                  return CustomLoading();
+                } else if (state is DeviceFailure) {
+                  return Center(child: Text(state.failure));
+                } else if (state is DeviceSuccess) {
+                  if (state.devices.isEmpty) {
+                    return const Center(child: Text('No devices found'));
+                  }
+                  return ListView.builder(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: state.devices.length,
+                    itemBuilder: (context, index) =>
+                        DeviceItemWidget(deviceItem: state.devices[index]),
+                  );
+                }
+                return const SizedBox();
+              },
             ),
           ],
         ),

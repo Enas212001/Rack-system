@@ -16,7 +16,7 @@ class SwitchItemWidget extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            GoRouter.of(context).push(AppRoutes.device);
+            GoRouter.of(context).push(AppRoutes.device, extra: switchItem);
           },
           child: Padding(
             padding: EdgeInsets.all(12.r),

@@ -5,6 +5,7 @@ import 'package:flutter_application_1/core/api/dio_consumer.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/rack_model/rack_item.dart';
+import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
 import 'package:flutter_application_1/features/home/Racks/data/repo/rack_repo.dart';
 import 'package:flutter_application_1/features/home/Racks/data/repo/rack_repo_impl.dart';
 
@@ -46,18 +47,17 @@ class RackCubit extends Cubit<RackState> {
 
   final GlobalKey<FormState> formAddRackKey = GlobalKey<FormState>();
 
+  List<SwitchItem> selectedSwitchs = [];
   final TextEditingController rackNameController = TextEditingController();
   final TextEditingController rackSizeController = TextEditingController();
   final TextEditingController rackModelController = TextEditingController();
   final TextEditingController siteNameController = TextEditingController();
 
-  List<int> switchIds = [5];
-  String get switchIdsStr => switchIds.join(",");
   Future<void> addRack({required BuildingModel building}) async {
     emit(AddRackLoading());
     try {
       final response = await homeRepo.addRack(
-        switchIds: switchIdsStr,
+        switchIds: selectedSwitchs.map((dept) => dept.id!.toString()).toList(),
         buildingId: building.id!.toString(),
         rackName: rackNameController.text,
         rackSize: rackSizeController.text,
@@ -74,7 +74,7 @@ class RackCubit extends Cubit<RackState> {
           rackSizeController.clear();
           rackModelController.clear();
           siteNameController.clear();
-          switchIds = [];
+          selectedSwitchs = [];
         },
       );
     } catch (e) {
@@ -83,20 +83,20 @@ class RackCubit extends Cubit<RackState> {
   }
 
   final GlobalKey<FormState> formEditRackKey = GlobalKey<FormState>();
-
+  List<SwitchItem> editSelectedSwitchs = [];
   final TextEditingController editRackNameController = TextEditingController();
   final TextEditingController editRackSizeController = TextEditingController();
   final TextEditingController editRackModelController = TextEditingController();
   final TextEditingController editSiteNameController = TextEditingController();
 
-  List<int> editSwitchIds = [5];
-  String get editSwitchIdsStr => editSwitchIds.join(",");
   Future<void> editRack({required RackItem rack}) async {
     emit(EditRackLoading());
     try {
       final response = await homeRepo.editRack(
         rackId: rack.id?.toString() ?? '',
-        switchIds: editSwitchIdsStr,
+        switchIds: editSelectedSwitchs
+            .map((dept) => dept.id!.toString())
+            .toList(),
         rackName: editRackNameController.text.isEmpty
             ? rack.rackName!
             : editRackNameController.text,
@@ -120,7 +120,7 @@ class RackCubit extends Cubit<RackState> {
           editRackSizeController.clear();
           editRackModelController.clear();
           editSiteNameController.clear();
-          editSwitchIds = [];
+          editSelectedSwitchs = [];
         },
       );
     } catch (e) {

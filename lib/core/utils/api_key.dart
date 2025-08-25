@@ -34,6 +34,10 @@ class ApiKey {
   static const String upLinkCore2 = 'up_link_core2';
   static const String portNumber = 'port_number';
   static const String model = 'model';
+  static const String apRoom = 'ap_room';
+  static const String apOut = 'ap_out';
+  static const String cctvIn = 'cctv_in';
+  static const String cctvOut = 'cctv_out';
 }
 
 class Endpoints {
@@ -76,4 +80,12 @@ class Endpoints {
       '$baseUrl/switchs/get_switchs.php?hotel_id=$hotelId';
   static String addSwitch(String hotelId) =>
       '$baseUrl/switchs/add_switch.php?hotel_id=$hotelId';
+  static String addSummary = '$baseUrl/summaries/add_summary.php';
+  static String getDevices(String switchId) =>
+      '$baseUrl/devices/get_devices.php?switch_id=$switchId';
+  static String addDevice = '$baseUrl/devices/add_device.php';
+  static String editDevice(String deviceId) =>
+      '$baseUrl/devices/edit_device.php?id=$deviceId';
+  static String deleteDevice(String deviceId) =>
+      '$baseUrl/devices/delete_device.php?id=$deviceId';
 }

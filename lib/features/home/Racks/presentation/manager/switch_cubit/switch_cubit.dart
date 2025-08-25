@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/api/dio_consumer.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
+import 'package:flutter_application_1/features/home/Racks/data/models/summary_model/summary_model.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
 import 'package:flutter_application_1/features/home/Racks/data/repo/switch/switch_repo.dart';
 import 'package:flutter_application_1/features/home/Racks/data/repo/switch/switch_repo_impl.dart';
@@ -72,6 +73,28 @@ class SwitchCubit extends Cubit<SwitchState> {
       (failure) =>
           emit(AddSwitchFailure(message: failure.failure.errorMessage)),
       (switchs) => emit(AddSwitchSuccess(switchs: switchs)),
+    );
+  }
+
+  GlobalKey<FormState> formAddSummaryKey = GlobalKey<FormState>();
+  SwitchItem? switchItem;
+  TextEditingController apRoomController = TextEditingController();
+  TextEditingController apOutController = TextEditingController();
+  TextEditingController cctvInController = TextEditingController();
+  TextEditingController cctvOutController = TextEditingController();
+  Future<void> addSummary() async {
+    emit(AddSummaryLoading());
+    final result = await switchRepo.addSummary(
+      switchId: switchItem?.id.toString() ?? '',
+      apRoom: apRoomController.text,
+      apOut: apOutController.text,
+      cctvIn: cctvInController.text,
+      cctvOut: cctvOutController.text,
+    );
+    result.fold(
+      (failure) =>
+          emit(AddSummaryFailure(message: failure.failure.errorMessage)),
+      (switchs) => emit(AddSummarySuccess(switchs: switchs)),
     );
   }
 }

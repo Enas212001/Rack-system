@@ -13,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/utils/widget/add_full_button.dart';
+import 'switch_multiple_select.dart';
 
 class AddRackForm extends StatelessWidget {
   const AddRackForm({super.key, required this.buildingModel});
@@ -52,6 +53,13 @@ class AddRackForm extends StatelessWidget {
               TitleWithTextField(
                 title: 'Site Name',
                 controller: rackCubit.siteNameController,
+              ),
+              SizedBox(height: 10.h),
+              SwitchMultipleSelect(
+                selectedSwitchs: rackCubit.selectedSwitchs,
+                onConfirm: (values) {
+                  rackCubit.selectedSwitchs = values;
+                },
               ),
               SizedBox(height: 10.h),
               TitleWithTextField(

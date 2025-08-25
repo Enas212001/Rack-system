@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_application_1/core/api/api_consumer.dart';
 import 'package:flutter_application_1/core/error/server_failure.dart';
 import 'package:flutter_application_1/core/utils/api_key.dart';
+import 'package:flutter_application_1/features/home/Racks/data/models/summary_model/summary_model.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
 
 import 'switch_repo.dart';
@@ -66,6 +67,32 @@ class SwitchRepoImpl implements SwitchRepo {
           .map<SwitchItem>((e) => SwitchItem.fromJson(e))
           .toList();
       return right(switchs);
+    } on ServerFailure catch (e) {
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, SummaryModel>> addSummary({
+    required String switchId,
+    required String apRoom,
+    required String apOut,
+    required String cctvIn,
+    required String cctvOut,
+  }) async {
+    try {
+      final response = await api.post(
+        Endpoints.addSummary,
+        data: {
+          ApiKey.switchId: switchId,
+          ApiKey.apRoom: apRoom,
+          ApiKey.apOut: apOut,
+          ApiKey.cctvIn: cctvIn,
+          ApiKey.cctvOut: cctvOut,
+        },
+      );
+      final summaryModel = SummaryModel.fromJson(response);
+      return right(summaryModel);
     } on ServerFailure catch (e) {
       return left(e);
     }

@@ -11,7 +11,7 @@ abstract class RackRepo {
     required String buildingRId,
     required String rackName,
     required String rackSize,
-    required String switchIds,
+    required List<String> switchIds,
     required String siteName,
     required String rackModel,
   });
@@ -20,7 +20,7 @@ abstract class RackRepo {
     required String buildingRId,
     required String rackName,
     required String rackSize,
-    required String switchIds,
+    required List<String> switchIds,
     required String siteName,
     required String rackModel,
   });
