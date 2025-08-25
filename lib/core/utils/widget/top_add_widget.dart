@@ -8,9 +8,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../features/home/Hotels/presentation/views/widgets/top_widget.dart';
 
 class TopAddWidget extends StatelessWidget {
-  const TopAddWidget({super.key, this.title, this.isEdit = false});
+  const TopAddWidget({
+    super.key,
+    this.title,
+    this.isEdit = false,
+    this.isAddUser = false,
+  });
   final String? title;
-  final bool isEdit;
+  final bool isEdit, isAddUser;
   @override
   Widget build(BuildContext context) {
     return TopWidget(
@@ -18,7 +23,14 @@ class TopAddWidget extends StatelessWidget {
       widget: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          BackIcon(),
+          isAddUser
+              ? IconButton(
+                  icon: Icon(Icons.menu, color: AppColors.whiteColor),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                )
+              : BackIcon(),
           Text(
             isEdit ? 'Edit $title' : '${AppStrings.add} $title',
             style: CustomTextStyles.text14W500Primary.copyWith(

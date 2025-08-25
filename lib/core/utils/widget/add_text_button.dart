@@ -22,9 +22,11 @@ class AddTextButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: isRack ? 6.w : 12.w),
         child: Text(
           title,
-          style: CustomTextStyles.text16MeduimText.copyWith(
-            color: AppColors.primaryColor,
-          ),
+          style: isRack
+              ? CustomTextStyles.text14W500Primary
+              : CustomTextStyles.text16MeduimText.copyWith(
+                  color: AppColors.primaryColor,
+                ),
         ),
       ),
     );

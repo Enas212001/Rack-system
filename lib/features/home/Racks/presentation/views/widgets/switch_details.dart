@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/widget/item_detail.dart';
+import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SwitchDetails extends StatelessWidget {
-  const SwitchDetails({super.key});
+  const SwitchDetails({super.key, required this.switchItem});
+  final SwitchItem switchItem;
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +14,14 @@ class SwitchDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ItemDetail(label: 'Serial', value: '101'),
-          ItemDetail(label: 'MAC', value: '1'),
-          ItemDetail(label: 'IP', value: '2'),
-          ItemDetail(label: 'Portal Number', value: '2'),
-          ItemDetail(label: 'Model', value: '2'),
+          ItemDetail(label: 'Serial', value: switchItem.serialNumber),
+          ItemDetail(label: 'MAC', value: switchItem.macAdd),
+          ItemDetail(label: 'IP', value: switchItem.ipAdd),
+          ItemDetail(
+            label: 'Portal Number',
+            value: switchItem.portNumber.toString(),
+          ),
+          ItemDetail(label: 'Model', value: switchItem.model),
           ItemDetail(label: 'Actions', isAction: true, isSwitch: true),
         ],
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/widget/add_form_widget.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/rack_model/rack_item.dart';
-import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/manager/rack_cubit/rack_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'widgets/edit_rack_form.dart';

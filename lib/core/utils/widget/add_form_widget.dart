@@ -10,10 +10,11 @@ class AddFormWidget extends StatelessWidget {
     this.childWidget,
     this.title,
     this.isEdit = false,
+    this.isAddUser = false,
   });
   final Widget? childWidget;
   final String? title;
-  final bool isEdit;
+  final bool isEdit, isAddUser;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -22,7 +23,11 @@ class AddFormWidget extends StatelessWidget {
           top: 0,
           left: 0,
           right: 0,
-          child: TopAddWidget(title: title, isEdit: isEdit),
+          child: TopAddWidget(
+            title: title,
+            isEdit: isEdit,
+            isAddUser: isAddUser,
+          ),
         ),
         Padding(
           padding: EdgeInsets.only(top: 90.h),

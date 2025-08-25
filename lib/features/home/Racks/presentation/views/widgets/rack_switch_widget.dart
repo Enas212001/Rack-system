@@ -3,7 +3,9 @@ import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/widget/add_text_button.dart';
 import 'package:flutter_application_1/core/utils/widget/tab_bar_item.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
-import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/manager/rack_cubit/rack_cubit.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/manager/switch_cubit/switch_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -46,21 +48,29 @@ class RackSwitchWidget extends StatelessWidget {
               ),
             ],
           ),
-          AddTextButton(
-            title: selectedIndex == 0 ? '+ Add Rack' : '+ Add Switch',
-            onTap: () {
-              if (selectedIndex == 0) {
-                GoRouter.of(context).push(
-                  AppRoutes.addRack,
-                  extra: AddRackArgs(
-                    rackCubit: rackCubit,
-                    buildingModel: buildingModel,
-                  ),
-                );
-              } else {
-                GoRouter.of(context).push(AppRoutes.addSwitch);
-              }
-            },
+          Padding(
+            padding: EdgeInsets.only(bottom: 8.h),
+            child: AddTextButton(
+              title: selectedIndex == 0 ? '+ Add Rack' : '+ Add Switch',
+              onTap: () async {
+                if (selectedIndex == 0) {
+                  GoRouter.of(context).push(
+                    AppRoutes.addRack,
+                    extra: AddRackArgs(
+                      rackCubit: rackCubit,
+                      buildingModel: buildingModel,
+                    ),
+                  );
+                } else {
+                  await GoRouter.of(
+                    context,
+                  ).push(AppRoutes.addSwitch, extra: buildingModel);
+                  context.read<SwitchCubit>().getSwitchs(
+                    hotelId: buildingModel.hotelId!,
+                  );
+                }
+              },
+            ),
           ),
         ],
       ),

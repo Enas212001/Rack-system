@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/custom_show_dialog.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
+import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/widget/add_full_button.dart';
 import 'package:flutter_application_1/core/utils/widget/success_message.dart';
 import 'package:flutter_application_1/features/auth/presentation/views/widgets/title_with_textfield.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_application_1/features/users/presentation/manager/cubit/
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class AddUserForm extends StatelessWidget {
   const AddUserForm({super.key});
@@ -20,6 +22,8 @@ class AddUserForm extends StatelessWidget {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
         if (state is UserAddSuccess) {
+          context.read<UserCubit>().getUsersInfo();
+          context.pushReplacement(AppRoutes.users);
           customShowDialog(
             context,
             widget: SuccessMessage(messageName: 'user'),

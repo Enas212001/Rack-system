@@ -11,7 +11,10 @@ class UserItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(12.r),
-      child: ExpandableInfoCard(title: userModel.name!, details: UserDetails(userModel: userModel)),
+      child: ExpandableInfoCard(
+        title: userModel.name!,
+        details: UserDetails(userModel: userModel),
+      ),
     );
   }
 }

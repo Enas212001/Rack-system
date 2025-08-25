@@ -4,7 +4,8 @@ import 'package:flutter_application_1/core/utils/app_strings.dart';
 import 'package:flutter_application_1/core/utils/widget/top_with_back.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
-import 'package:flutter_application_1/features/home/Racks/presentation/cubit/rack_cubit.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/manager/rack_cubit/rack_cubit.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/manager/switch_cubit/switch_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -33,7 +34,6 @@ class _RackViewBodyState extends State<RackViewBody> {
   @override
   Widget build(BuildContext context) {
     final rackCubit = context.read<RackCubit>();
-
     return RefreshIndicator(
       onRefresh: () =>
           rackCubit.getRacksInfo(buildingId: widget.buildingModel.id!),
@@ -42,9 +42,15 @@ class _RackViewBodyState extends State<RackViewBody> {
         slivers: [
           SliverToBoxAdapter(
             child: TopWithBack(
-              text: AppStrings.racks,
-              onSearchChanged: (value) =>
-                  context.read<RackCubit>().searchRack(value),
+              text: selectedIndex == 0 ? AppStrings.racks : 'Switchs',
+              title: selectedIndex == 0 ? 'Racks' : 'Switchs',
+              onSearchChanged: (value) {
+                if (selectedIndex == 0) {
+                  context.read<RackCubit>().searchRack(value);
+                } else {
+                  context.read<SwitchCubit>().searchSwitch(value);
+                }
+              },
             ),
           ),
           SliverToBoxAdapter(

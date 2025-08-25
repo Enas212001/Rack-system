@@ -27,6 +27,13 @@ class ApiKey {
   static const String rackName = 'rack_name';
   static const String rackSize = 'rack_size';
   static const String rackModel = 'rack_model';
+  static const String serialNumber = 'serial_number';
+  static const String macAdd = 'mac_add';
+  static const String ipAdd = 'ip_add';
+  static const String upLinkCore1 = 'up_link_core1';
+  static const String upLinkCore2 = 'up_link_core2';
+  static const String portNumber = 'port_number';
+  static const String model = 'model';
 }
 
 class Endpoints {
@@ -35,42 +42,38 @@ class Endpoints {
   static const String login = '$baseUrl/login.php';
   static const String getHotels = '$baseUrl/get_hotels.php';
   static const String addHotel = '$baseUrl/add_hotel.php';
-  static String addRack(String buildingId) {
-    return '$baseUrl/racks/add_rack.php?building_id=$buildingId';
-  }
+  static String addRack(String buildingId) =>
+      '$baseUrl/racks/add_rack.php?building_id=$buildingId';
 
-  static String getRacksInfo(String buildingId) {
-    return '$baseUrl/racks/get_racks.php?building_id=$buildingId';
-  }
+  static String getRacksInfo(String buildingId) =>
+      '$baseUrl/racks/get_racks.php?building_id=$buildingId';
 
-  static String editRack(String rackId) {
-    return '$baseUrl/racks/edit_rack.php?id=$rackId';
-  }
+  static String editRack(String rackId) =>
+      '$baseUrl/racks/edit_rack.php?id=$rackId';
 
-  static String deleteRack(String rackId) {
-    return '$baseUrl/racks/delete_rack.php?id=$rackId';
-  }
+  static String deleteRack(String rackId) =>
+      '$baseUrl/racks/delete_rack.php?id=$rackId';
 
-  static String getBuildings(String hotelId) {
-    return '$baseUrl/buildings/get_building.php?hotel_id=$hotelId';
-  }
+  static String getBuildings(String hotelId) =>
+      '$baseUrl/buildings/get_building.php?hotel_id=$hotelId';
 
-  static String addBuilding(String hotelId) {
-    return '$baseUrl/buildings/add_building.php?hotel_id=$hotelId';
-  }
+  static String addBuilding(String hotelId) =>
+      '$baseUrl/buildings/add_building.php?hotel_id=$hotelId';
 
-  static String editBuilding(String buildingId) {
-    return '$baseUrl/buildings/edit_building.php?id=$buildingId';
-  }
+  static String editBuilding(String buildingId) =>
+      '$baseUrl/buildings/edit_building.php?id=$buildingId';
 
-  static String deleteBuilding(String buildingId) {
-    return '$baseUrl/buildings/delete_building.php?id=$buildingId';
-  }
+  static String deleteBuilding(String buildingId) =>
+      '$baseUrl/buildings/delete_building.php?id=$buildingId';
 
-  static String deleteUser(String userId) {
-    return '$baseUrl/users/delete_user.php?id=$userId';
-  }
+  static String deleteUser(String userId) =>
+      '$baseUrl/users/delete_user.php?id=$userId';
 
   static String getUsers = '$baseUrl/users/get_users.php';
   static String addUser = '$baseUrl/users/add_user.php';
+  static String getAllSwitchs = '$baseUrl/switchs/get_switchs.php';
+  static String getSwitchs(String hotelId) =>
+      '$baseUrl/switchs/get_switchs.php?hotel_id=$hotelId';
+  static String addSwitch(String hotelId) =>
+      '$baseUrl/switchs/add_switch.php?hotel_id=$hotelId';
 }

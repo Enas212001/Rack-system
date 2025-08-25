@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/manager/switch_cubit/switch_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'switch_item.dart';
+import 'switch_item_widget.dart';
 
 class SwitchListView extends StatelessWidget {
   const SwitchListView({super.key, required this.buildingModel});
@@ -33,12 +35,32 @@ class SwitchListView extends StatelessWidget {
                 ),
               ),
               Divider(height: 1, color: AppColors.borderColor),
-              ListView.builder(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 7,
-                itemBuilder: (context, index) => SwitchItem(),
+              BlocBuilder<SwitchCubit, SwitchState>(
+                builder: (context, state) {
+                  if (state is SwitchSuccess) {
+                    final switchs = state.switchs;
+                    if (switchs.isEmpty) {
+                      return Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(16.r),
+                          child: Text(
+                            'No switchs available',
+                            style: CustomTextStyles.text14W500Primary,
+                          ),
+                        ),
+                      );
+                    }
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: state.switchs.length,
+                      itemBuilder: (context, index) =>
+                          SwitchItemWidget(switchItem: state.switchs[index]),
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
               ),
             ],
           ),
