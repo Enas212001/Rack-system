@@ -13,9 +13,10 @@ class TopAddWidget extends StatelessWidget {
     this.title,
     this.isEdit = false,
     this.isAddUser = false,
+    this.isDeviceDetails = false,
   });
   final String? title;
-  final bool isEdit, isAddUser;
+  final bool isEdit, isAddUser, isDeviceDetails;
   @override
   Widget build(BuildContext context) {
     return TopWidget(
@@ -32,7 +33,11 @@ class TopAddWidget extends StatelessWidget {
                 )
               : BackIcon(),
           Text(
-            isEdit ? 'Edit $title' : '${AppStrings.add} $title',
+            isDeviceDetails
+                ? '$title'
+                : isEdit
+                ? 'Edit $title'
+                : '${AppStrings.add} $title',
             style: CustomTextStyles.text14W500Primary.copyWith(
               color: AppColors.whiteColor,
             ),

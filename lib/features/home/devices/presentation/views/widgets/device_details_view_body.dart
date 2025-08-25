@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
+import 'package:flutter_application_1/core/utils/widget/add_form_widget.dart';
 import 'package:flutter_application_1/core/utils/widget/item_detail.dart';
+import 'package:flutter_application_1/features/home/devices/data/models/device_model/device_item.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DeviceDetailsViewBody extends StatelessWidget {
-  const DeviceDetailsViewBody({super.key});
+  const DeviceDetailsViewBody({super.key, required this.deviceItem});
+
+  final DeviceItem deviceItem;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16.r),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: AppColors.greyColor, width: 1.r),
-          color: AppColors.backgroundColor,
-          borderRadius: BorderRadius.circular(11.r),
-        ),
+    return AddFormWidget(
+      isDeviceDetails: true,
+      title: 'Device Details',
+      childWidget: Padding(
         padding: EdgeInsets.all(16.r),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,14 +29,29 @@ class DeviceDetailsViewBody extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16.h),
-            ItemDetail(label: 'Switch', value: 'bracelo switch'),
-            ItemDetail(label: 'Port Number', value: '2'),
-            ItemDetail(label: 'Device Name', value: '2'),
-            ItemDetail(label: 'Device Serial', value: '2'),
-            ItemDetail(label: 'MAC Address', value: '1'),
-            ItemDetail(label: 'IP Address', value: '2'),
-            ItemDetail(label: 'Patch Panel', value: '2'),
-            ItemDetail(label: 'Device Model', value: '2'),
+            ItemDetail(label: 'Switch', value: deviceItem.switchId.toString()),
+            ItemDetail(
+              label: 'Port Number',
+              value: deviceItem.portNumber.toString(),
+            ),
+            ItemDetail(
+              label: 'Device Name',
+              value: deviceItem.deviceName ?? '',
+            ),
+            ItemDetail(
+              label: 'Device Serial',
+              value: deviceItem.deviceSerial ?? '',
+            ),
+            ItemDetail(
+              label: 'MAC Address',
+              value: deviceItem.macAddress ?? '',
+            ),
+            ItemDetail(label: 'IP Address', value: deviceItem.ipAddress ?? ''),
+            ItemDetail(
+              label: 'Patch Panel',
+              value: deviceItem.patchPanel ?? '',
+            ),
+            ItemDetail(label: 'Device Model', value: deviceItem.deviceModel),
           ],
         ),
       ),

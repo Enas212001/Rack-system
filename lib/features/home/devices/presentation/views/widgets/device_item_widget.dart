@@ -16,7 +16,7 @@ class DeviceItemWidget extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            GoRouter.of(context).push(AppRoutes.deviceDetails);
+            GoRouter.of(context).push(AppRoutes.deviceDetails, extra: deviceItem);
           },
           child: Padding(
             padding: EdgeInsets.all(12.r),

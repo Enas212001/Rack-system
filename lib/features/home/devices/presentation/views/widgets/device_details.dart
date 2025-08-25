@@ -15,12 +15,15 @@ class DeviceDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ItemDetail(label: 'Serial', value: deviceItem.deviceSerial),
-          ItemDetail(label: 'MAC', value: deviceItem.macAddress),
-          ItemDetail(label: 'IP', value: deviceItem.ipAddress),
-          ItemDetail(label: 'Patch Panel', value: deviceItem.patchPanel),
-          ItemDetail(label: 'Product Number', value: deviceItem.productNumber),
-          ItemDetail(label: 'Model', value: deviceItem.deviceModel),
+          ItemDetail(label: 'Serial', value: deviceItem.deviceSerial ?? ''),
+          ItemDetail(label: 'MAC', value: deviceItem.macAddress ?? ''),
+          ItemDetail(label: 'IP', value: deviceItem.ipAddress ?? ''),
+          ItemDetail(label: 'Patch Panel', value: deviceItem.patchPanel ?? ''),
+          ItemDetail(
+            label: 'Product Number',
+            value: deviceItem.productNumber ?? '',
+          ),
+          ItemDetail(label: 'Model', value: deviceItem.deviceModel ?? ''),
           ItemDetail(
             label: 'Actions',
             isAction: true,

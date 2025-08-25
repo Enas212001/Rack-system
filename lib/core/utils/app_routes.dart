@@ -19,6 +19,7 @@ import 'package:flutter_application_1/features/home/Racks/presentation/views/add
 import 'package:flutter_application_1/features/home/Racks/presentation/views/add_switch_view.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/edit_rack_view.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/racks_view.dart';
+import 'package:flutter_application_1/features/home/devices/data/models/device_model/device_item.dart';
 import 'package:flutter_application_1/features/home/devices/presentation/views/add_device_view.dart';
 import 'package:flutter_application_1/features/home/devices/presentation/views/device_details_view.dart';
 import 'package:flutter_application_1/features/home/devices/presentation/views/device_view.dart';
@@ -169,7 +170,8 @@ class AppRoutes {
       GoRoute(path: editDevice, builder: (context, state) => EditDeviceView()),
       GoRoute(
         path: deviceDetails,
-        builder: (context, state) => DeviceDetailsView(),
+        builder: (context, state) =>
+            DeviceDetailsView(deviceItem: state.extra as DeviceItem),
       ),
       GoRoute(
         path: guestBuilding,
