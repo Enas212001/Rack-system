@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
 import 'package:flutter_application_1/core/utils/widget/top_with_back.dart';
+import 'package:flutter_application_1/features/home/Buildings/presentation/cubit/building_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'building_guest_item.dart';
 
@@ -13,10 +16,25 @@ class GuestBuildingViewBody extends StatelessWidget {
         SliverToBoxAdapter(
           child: TopWithBack(text: 'Buildings', noSearch: true),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return BuildingGuestItem();
-          }, childCount: 10),
+        BlocBuilder<BuildingCubit, BuildingState>(
+          builder: (context, state) {
+            if (state is BuildingSuccess) {
+              return SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  return BuildingGuestItem(
+                    buildingItem: state.buildings[index],
+                  );
+                }, childCount: state.buildings.length),
+              );
+            } else if (state is BuildingFailure) {
+              return SliverToBoxAdapter(
+                child: Center(child: Text(state.message)),
+              );
+            } else if (state is BuildingLoading) {
+              return SliverToBoxAdapter(child: CustomLoading());
+            }
+            return SliverToBoxAdapter();
+          },
         ),
       ],
     );

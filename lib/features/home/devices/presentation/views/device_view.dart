@@ -38,10 +38,15 @@ class DeviceViewBody extends StatelessWidget {
                 EdgeInsets.only(top: 16.h),
             child: Row(
               children: [
-                Text(
-                  'Devices for: ${switchItem.name} switch',
-                  style: CustomTextStyles.text16MeduimText.copyWith(
-                    color: AppColors.primaryColor,
+                SizedBox(
+                  width: 220.w,
+                  child: Text(
+                    'Devices for: ${switchItem.name} switch',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: CustomTextStyles.text16MeduimText.copyWith(
+                      color: AppColors.primaryColor,
+                    ),
                   ),
                 ),
                 const Spacer(),

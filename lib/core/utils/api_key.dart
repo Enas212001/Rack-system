@@ -3,7 +3,6 @@ class ApiKey {
   static const String email = 'email';
   static const String password = 'password';
   static const String rememberMe = 'remember_me';
-  static const String isLogin = 'isLogin';
   static const passwordsMap = 'passwordsMap';
   static const emailList = 'emailList';
   static const String loginName = 'name';
@@ -38,6 +37,7 @@ class ApiKey {
   static const String apOut = 'ap_out';
   static const String cctvIn = 'cctv_in';
   static const String cctvOut = 'cctv_out';
+  static const String devices = 'devices';
 }
 
 class Endpoints {
@@ -88,4 +88,11 @@ class Endpoints {
       '$baseUrl/devices/edit_device.php?id=$deviceId';
   static String deleteDevice(String deviceId) =>
       '$baseUrl/devices/delete_device.php?id=$deviceId';
+}
+
+class CacheKey {
+  static const String isLogin = 'isLogin';
+  static const String isGuest = 'isGuest';
+  static const String userHotelId = 'userHotelId';
+  static const String userName = 'userName';
 }

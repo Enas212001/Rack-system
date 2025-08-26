@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_assets.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/widget/item_detail.dart';
+import 'package:flutter_application_1/features/home/devices/data/models/device_model/device_item.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DeviceDatailsWidget extends StatelessWidget {
-  const DeviceDatailsWidget({super.key});
-
+  const DeviceDatailsWidget({super.key, required this.deviceItem});
+  final DeviceItem deviceItem;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -40,14 +41,32 @@ class DeviceDatailsWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 16.h),
-                ItemDetail(label: 'Port :', value: '100'),
-                ItemDetail(label: 'Serial :', value: '100'),
-                ItemDetail(label: 'MAC :', value: '100'),
-                ItemDetail(label: 'IP :', value: '100'),
-                ItemDetail(label: 'Patch Panel :', value: '100'),
-                ItemDetail(label: 'Product Number :', value: '100'),
-                ItemDetail(label: 'Model :', value: '100'),
-                ItemDetail(label: 'Device Serial :', value: '100'),
+                ItemDetail(
+                  label: 'Port :',
+                  value: deviceItem.portNumber!.toString(),
+                ),
+                ItemDetail(
+                  label: 'Serial :',
+                  value: deviceItem.deviceSerial ?? '',
+                ),
+                ItemDetail(label: 'MAC :', value: deviceItem.macAddress ?? ''),
+                ItemDetail(label: 'IP :', value: deviceItem.ipAddress ?? ''),
+                ItemDetail(
+                  label: 'Patch Panel :',
+                  value: deviceItem.patchPanel ?? '',
+                ),
+                ItemDetail(
+                  label: 'Product Number :',
+                  value: deviceItem.productNumber ?? '',
+                ),
+                ItemDetail(
+                  label: 'Model :',
+                  value: deviceItem.deviceModel ?? '',
+                ),
+                ItemDetail(
+                  label: 'Device Serial :',
+                  value: deviceItem.deviceSerial ?? '',
+                ),
               ],
             ),
           ),

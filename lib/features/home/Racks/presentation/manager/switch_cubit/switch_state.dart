@@ -12,8 +12,8 @@ final class SwitchInitial extends SwitchState {}
 final class SwitchLoading extends SwitchState {}
 
 final class SwitchSuccess extends SwitchState {
-  final List<SwitchItem> switchs;
-  const SwitchSuccess({required this.switchs});
+  final List<SwitchItem> switches;
+  const SwitchSuccess({required this.switches});
 }
 
 final class SwitchFailure extends SwitchState {

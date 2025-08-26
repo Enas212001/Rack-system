@@ -38,7 +38,7 @@ class SwitchListView extends StatelessWidget {
               BlocBuilder<SwitchCubit, SwitchState>(
                 builder: (context, state) {
                   if (state is SwitchSuccess) {
-                    final switchs = state.switchs;
+                    final switchs = state.switches;
                     if (switchs.isEmpty) {
                       return Center(
                         child: Padding(
@@ -54,9 +54,9 @@ class SwitchListView extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.switchs.length,
+                      itemCount: state.switches.length,
                       itemBuilder: (context, index) =>
-                          SwitchItemWidget(switchItem: state.switchs[index]),
+                          SwitchItemWidget(switchItem: state.switches[index]),
                     );
                   }
                   return const SizedBox.shrink();

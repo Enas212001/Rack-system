@@ -45,7 +45,8 @@ class InactivityService with WidgetsBindingObserver {
       ),
     );
     final cache = getIt.get<CacheHelper>();
-    await cache.removeData(key: 'isLogin');
+    await cache.removeData(key: CacheKey.isLogin);
+    await cache.removeData(key: CacheKey.isGuest);
     await cache.removeData(key: ApiKey.loginName);
     await cache.removeData(key: ApiKey.roleId);
     Future.delayed(const Duration(seconds: 2), () {

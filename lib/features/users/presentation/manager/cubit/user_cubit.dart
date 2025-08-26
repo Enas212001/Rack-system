@@ -20,6 +20,7 @@ class UserCubit extends Cubit<UserState> {
       (userModel) {
         filteredUsers = userModel;
         emit(UserSuccess(userModel: userModel));
+        
       },
     );
   }

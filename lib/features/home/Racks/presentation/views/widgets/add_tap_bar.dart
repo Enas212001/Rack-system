@@ -27,7 +27,9 @@ class AddTapBar extends StatelessWidget {
           isRack: true,
           onTap: () {
             if (selectedIndex == 0) {
-              GoRouter.of(context).push(AppRoutes.addSwitch);
+              GoRouter.of(
+                context,
+              ).push(AppRoutes.addSwitch, extra: buildingModel);
             } else {
               GoRouter.of(context).push(
                 AppRoutes.addRack,
@@ -39,7 +41,11 @@ class AddTapBar extends StatelessWidget {
             }
           },
         ),
-        AddTextButton(title: '+ Add Device', isRack: true),
+        AddTextButton(
+          title: '+ Add Device',
+          isRack: true,
+          onTap: () => context.push(AppRoutes.addDevice),
+        ),
         AddTextButton(
           title: '+ Add Summary',
           isRack: true,

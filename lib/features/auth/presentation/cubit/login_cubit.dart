@@ -84,6 +84,14 @@ class LoginCubit extends Cubit<LoginState> {
           emailController.clear();
           passwordController.clear();
           rememberMe = false;
+          getIt.get<CacheHelper>().saveData(
+            key: CacheKey.userHotelId,
+            value: user.user!.hotelId,
+          );
+          getIt.get<CacheHelper>().saveData(
+            key: CacheKey.userName,
+            value: user.user!.name,
+          );
         },
       );
     } catch (e) {

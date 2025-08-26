@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/widget/top_with_back.dart';
+import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/manager/rack_cubit/rack_cubit.dart';
+import 'package:flutter_application_1/features/home/Racks/presentation/manager/switch_cubit/switch_cubit.dart';
+import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'device_body.dart';
 import 'guest_tap_bar.dart';
@@ -7,8 +12,8 @@ import 'rack_body.dart';
 import 'switch_body.dart';
 
 class GuestRackViewBody extends StatefulWidget {
-  const GuestRackViewBody({super.key});
-
+  const GuestRackViewBody({super.key, required this.building});
+  final BuildingModel building;
   @override
   State<GuestRackViewBody> createState() => _GuestRackViewBodyState();
 }
@@ -40,11 +45,22 @@ class _GuestRackViewBodyState extends State<GuestRackViewBody> {
   Widget buildRacks(int index) {
     switch (index) {
       case 0:
-        return RacksBody();
+        return BlocProvider(
+          create: (context) =>
+              RackCubit()..getRacksInfo(buildingId: widget.building.id!),
+          child: RacksBody(),
+        );
       case 1:
-        return SwitchBody();
+        return BlocProvider(
+          create: (context) =>
+              SwitchCubit()..getSwitchs(hotelId: widget.building.hotelId!),
+          child: SwitchBody(),
+        );
       case 2:
-        return DeviceBody();
+        return BlocProvider(
+          create: (context) => DeviceCubit()..getDevices(switchId: widget.building.id!),
+          child: DeviceBody(),
+        );
       default:
         return const SliverToBoxAdapter();
     }

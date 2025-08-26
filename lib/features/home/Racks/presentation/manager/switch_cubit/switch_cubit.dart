@@ -29,7 +29,7 @@ class SwitchCubit extends Cubit<SwitchState> {
     final result = await switchRepo.getSwitchs(hotelId: hotelId);
     result.fold(
       (failure) => emit(SwitchFailure(message: failure.failure.errorMessage)),
-      (switchs) => emit(SwitchSuccess(switchs: switchs)),
+      (switchs) => emit(SwitchSuccess(switches: switchs)),
     );
   }
 
@@ -37,14 +37,14 @@ class SwitchCubit extends Cubit<SwitchState> {
   void searchSwitch(String query) {
     if (state is! SwitchSuccess) return;
     if (query.isEmpty) {
-      emit(SwitchSuccess(switchs: filteredSwitchs));
+      emit(SwitchSuccess(switches: filteredSwitchs));
       return;
     }
     final filtered = filteredSwitchs.where((switchs) {
       final name = switchs.name?.toLowerCase() ?? '';
       return name.contains(query.toLowerCase());
     }).toList();
-    emit(SwitchSuccess(switchs: filtered));
+    emit(SwitchSuccess(switches: filtered));
   }
 
   TextEditingController switchNameController = TextEditingController();

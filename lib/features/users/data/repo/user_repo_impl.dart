@@ -72,7 +72,6 @@ class UserRepoImpl implements UserRepo {
       final users = data
           .map((e) => UserItem.fromJson(e as Map<String, dynamic>))
           .toList();
-
       return right(users);
     } on ServerFailure catch (e) {
       return left(e);

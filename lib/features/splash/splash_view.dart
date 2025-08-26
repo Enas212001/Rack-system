@@ -52,18 +52,27 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     await rotateController.forward();
     await revealController.forward();
     final bool isLogin =
-        getIt<CacheHelper>().getData(key: ApiKey.isLogin) ?? false;
-    if (!isLogin) {
+        getIt<CacheHelper>().getData(key: CacheKey.isLogin) ?? false;
+    final bool isGuest =
+        getIt<CacheHelper>().getData(key: CacheKey.isGuest) ?? false;
+    if (isGuest) {
+      // Guest login -> guest path
+      if (mounted) {
+        GoRouter.of(context).pushReplacement(AppRoutes.guestBuilding);
+      }
+    } else if (isLogin) {
+      // Admin/normal login -> hotels path
+      if (mounted) {
+        GoRouter.of(context).pushReplacement(AppRoutes.hotels);
+      }
+    } else {
+      // Not logged in -> show splash, then go to login
       setState(() {
         startSlide = true;
       });
       await Future.delayed(const Duration(milliseconds: 1000));
       if (mounted) {
         GoRouter.of(context).pushReplacement(AppRoutes.login);
-      }
-    } else {
-      if (mounted) {
-        GoRouter.of(context).pushReplacement(AppRoutes.hotels);
       }
     }
   }

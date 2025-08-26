@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/cache/cache_helper.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
+import 'package:flutter_application_1/core/utils/api_key.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
 import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
@@ -27,8 +28,19 @@ class LoginForm extends StatelessWidget {
           showToast(state.message);
           log(state.message);
         } else if (state is LoginSuccess) {
-          GoRouter.of(context).pushReplacement(AppRoutes.hotels);
-          getIt.get<CacheHelper>().saveData(key: 'isLogin', value: true);
+          if (state.user.user?.roleId == 'user') {
+            GoRouter.of(context).pushReplacement(AppRoutes.guestBuilding);
+            getIt.get<CacheHelper>().saveData(
+              key: CacheKey.isGuest,
+              value: true,
+            );
+          } else {
+            GoRouter.of(context).pushReplacement(AppRoutes.hotels);
+            getIt.get<CacheHelper>().saveData(
+              key: CacheKey.isLogin,
+              value: true,
+            );
+          }
         }
       },
       builder: (context, state) {

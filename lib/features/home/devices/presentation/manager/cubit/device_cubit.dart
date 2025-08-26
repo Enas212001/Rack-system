@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_application_1/core/api/dio_consumer.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
+import 'package:flutter_application_1/features/home/devices/data/models/add_device_request.dart';
 import 'package:flutter_application_1/features/home/devices/data/models/device_model/device_item.dart';
 import 'package:flutter_application_1/features/home/devices/data/repo/device_repo.dart';
 import 'package:flutter_application_1/features/home/devices/data/repo/device_repo_impl.dart';
@@ -29,6 +30,15 @@ class DeviceCubit extends Cubit<DeviceState> {
       (failure) =>
           emit(DeviceDeleteFailure(failure: failure.failure.errorMessage)),
       (message) => emit(DeviceDeleteSuccess(message: message)),
+    );
+  }
+
+  Future<void> addDevice({required int switchId, required List<Device> devices}) async {
+    emit(DeviceAddLoading());
+    final result = await deviceRepo.addDevice(switchId: switchId, devices: devices);
+    result.fold(
+      (failure) => emit(DeviceAddFailure(failure: failure.failure.errorMessage)),
+      (device) => emit(DeviceAddSuccess(device: device)),
     );
   }
 }

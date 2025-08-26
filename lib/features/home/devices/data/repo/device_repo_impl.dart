@@ -3,6 +3,7 @@ import 'package:flutter_application_1/core/api/api_consumer.dart';
 
 import 'package:flutter_application_1/core/error/server_failure.dart';
 import 'package:flutter_application_1/core/utils/api_key.dart';
+import 'package:flutter_application_1/features/home/devices/data/models/add_device_request.dart';
 
 import 'package:flutter_application_1/features/home/devices/data/models/device_model/device_item.dart';
 
@@ -12,18 +13,37 @@ class DeviceRepoImpl extends DeviceRepo {
   final ApiConsumer apiConsumer;
   DeviceRepoImpl({required this.apiConsumer});
   @override
-  Future<Either<ServerFailure, DeviceItem>> addDevice({
-    required String portNumber,
-    required String deviceName,
-    required String deviceSerial,
-    required String macAddress,
-    required String ipAddress,
-    required String patchPanel,
-    required String productNumber,
-    required String deviceModel,
+  Future<Either<ServerFailure, List<DeviceItem>>> addDevice({
+    required int switchId,
+    required List<Device> devices,
   }) async {
-    // TODO: implement addDevice
-    throw UnimplementedError();
+    try {
+      final response = await apiConsumer.post(
+        Endpoints.addDevice,
+        data: {
+          ApiKey.switchId: switchId,
+          ApiKey.devices: devices.map((device) => device.toJson()).toList(),
+        },
+      );
+      if (response['message'] == 'success') {
+        return right(
+          (response['data'] as List<dynamic>)
+              .map((item) => DeviceItem.fromJson(item as Map<String, dynamic>))
+              .toList(),
+        );
+      } else {
+        return left(
+          ServerFailure(
+            failure: FailureModel(
+              status: 'false',
+              errorMessage: response['message'] ?? 'Failed to add devices',
+            ),
+          ),
+        );
+      }
+    } on ServerFailure catch (e) {
+      return left(e);
+    }
   }
 
   @override
