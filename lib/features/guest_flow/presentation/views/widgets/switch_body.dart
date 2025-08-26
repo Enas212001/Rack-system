@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
+import 'package:flutter_application_1/core/utils/widget/shimmer_widget.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/switch_cubit/switch_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +21,7 @@ class SwitchBody extends StatelessWidget {
         } else if (state is SwitchFailure) {
           return SliverToBoxAdapter(child: Center(child: Text(state.message)));
         } else if (state is SwitchLoading) {
-          return SliverToBoxAdapter(child: CustomLoading());
+          return ShimmerWidget(height: 275);
         }
         return SliverToBoxAdapter();
       },

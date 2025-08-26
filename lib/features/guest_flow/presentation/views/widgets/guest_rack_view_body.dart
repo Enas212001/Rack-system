@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/cache/cache_helper.dart';
+import 'package:flutter_application_1/core/utils/api_key.dart';
+import 'package:flutter_application_1/core/utils/service_locator.dart';
 import 'package:flutter_application_1/core/utils/widget/top_with_back.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/rack_cubit/rack_cubit.dart';
@@ -25,7 +28,11 @@ class _GuestRackViewBodyState extends State<GuestRackViewBody> {
     return CustomScrollView(
       slivers: <Widget>[
         SliverToBoxAdapter(
-          child: TopWithBack(text: 'Welcome, ...', noSearch: true),
+          child: TopWithBack(
+            text:
+                'Welcome, ${getIt.get<CacheHelper>().getData(key: CacheKey.userName)}',
+            noSearch: true,
+          ),
         ),
         SliverToBoxAdapter(
           child: GuestRackTapBar(
@@ -58,7 +65,8 @@ class _GuestRackViewBodyState extends State<GuestRackViewBody> {
         );
       case 2:
         return BlocProvider(
-          create: (context) => DeviceCubit()..getDevices(switchId: widget.building.id!),
+          create: (context) =>
+              DeviceCubit()..getDevices(switchId: widget.building.id!),
           child: DeviceBody(),
         );
       default:

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_assets.dart';
 import 'package:flutter_application_1/core/utils/widget/top_with_back.dart';
+import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
+import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -10,13 +13,15 @@ import 'switch_information.dart';
 import 'text_primary_16.dart';
 
 class ReportGuestViewBody extends StatelessWidget {
-  const ReportGuestViewBody({super.key});
-
+  const ReportGuestViewBody({super.key, required this.switchItem});
+  final SwitchItem switchItem;
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(child: TopWithBack(text: 'Report', noSearch: true)),
+        SliverToBoxAdapter(
+          child: TopWithBack(text: 'Report', noSearch: true, withDrawer: true),
+        ),
         SliverToBoxAdapter(
           child: Padding(
             padding: EdgeInsets.all(16.r),
@@ -35,7 +40,7 @@ class ReportGuestViewBody extends StatelessWidget {
             ),
           ),
         ),
-        SliverToBoxAdapter(child: SwitchInformation()),
+        SliverToBoxAdapter(child: SwitchInformation(switchItem: switchItem)),
         SliverToBoxAdapter(child: SummaryWidget()),
         SliverToBoxAdapter(
           child: Padding(
@@ -45,7 +50,13 @@ class ReportGuestViewBody extends StatelessWidget {
             ),
           ),
         ),
-        SliverToBoxAdapter(child: DevicesConnectedToSwitch()),
+        SliverToBoxAdapter(
+          child: BlocProvider(
+            create: (context) =>
+                DeviceCubit()..getDevices(switchId: switchItem.id!.toString()),
+            child: DevicesConnectedToSwitch(),
+          ),
+        ),
       ],
     );
   }

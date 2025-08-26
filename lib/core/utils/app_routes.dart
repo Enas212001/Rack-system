@@ -182,7 +182,11 @@ class AppRoutes {
         builder: (context, state) =>
             GuestRackView(building: state.extra as BuildingModel),
       ),
-      GoRoute(path: report, builder: (context, state) => ReportView()),
+      GoRoute(
+        path: report,
+        builder: (context, state) =>
+            ReportView(switchItem: state.extra as SwitchItem),
+      ),
     ],
   );
 }

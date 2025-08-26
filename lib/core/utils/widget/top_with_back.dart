@@ -10,12 +10,13 @@ class TopWithBack extends StatelessWidget {
     this.title,
     this.onSearchChanged,
     this.noSearch,
+    this.withDrawer,
   });
 
   final String text;
   final String? title;
   final ValueChanged<String>? onSearchChanged;
-  final bool? noSearch;
+  final bool? noSearch, withDrawer;
   @override
   Widget build(BuildContext context) {
     return TopWidget(
@@ -23,6 +24,7 @@ class TopWithBack extends StatelessWidget {
       onSearchChanged: onSearchChanged,
       withoutSearch: noSearch,
       isText: true,
+      withDrawer: withDrawer,
       widget: Text(
         text,
         style: CustomTextStyles.text14W500Primary.copyWith(

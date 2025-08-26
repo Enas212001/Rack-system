@@ -17,14 +17,17 @@ class SwitchGuestItemDetails extends StatelessWidget {
         ItemDetail(label: 'Serial :', value: switchItem.serialNumber!),
         ItemDetail(label: 'MAC :', value: switchItem.macAdd!),
         ItemDetail(label: 'IP :', value: switchItem.ipAdd!),
-        ItemDetail(label: 'Port Num :', value: switchItem.portNumber!.toString()),
+        ItemDetail(
+          label: 'Port Num :',
+          value: switchItem.portNumber!.toString(),
+        ),
         ItemDetail(label: 'Model :', value: switchItem.model!),
         ItemDetail(
           label: 'Action :',
           isAction: true,
           isSwitch: true,
           showReport: () {
-            context.push(AppRoutes.report);
+            context.push(AppRoutes.report, extra: switchItem);
           },
         ),
       ],
