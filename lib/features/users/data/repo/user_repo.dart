@@ -9,6 +9,7 @@ abstract class UserRepo {
     required String email,
     required String roleId,
     required String password,
+    required String hotelId,
   });
   Future<Either<ServerFailure, String>> deleteUsersInfo({
     required String userId,

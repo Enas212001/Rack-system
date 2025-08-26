@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/api/dio_consumer.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
+import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_application_1/features/users/data/models/user_model/user_item.dart';
 import 'package:flutter_application_1/features/users/data/repo/user_repo.dart';
 import 'package:flutter_application_1/features/users/data/repo/user_repo_impl.dart';
@@ -20,7 +21,6 @@ class UserCubit extends Cubit<UserState> {
       (userModel) {
         filteredUsers = userModel;
         emit(UserSuccess(userModel: userModel));
-        
       },
     );
   }
@@ -42,15 +42,17 @@ class UserCubit extends Cubit<UserState> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController roleIdController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  String? roleId;
+  HotelModel? hotelId;
   Future<void> addUsersInfo() async {
     emit(UserAddLoading());
     final result = await userRepo.addUsersInfo(
       name: nameController.text,
       email: emailController.text,
-      roleId: roleIdController.text,
+      roleId: roleId!,
       password: passwordController.text,
+      hotelId: hotelId?.id.toString() ?? '',
     );
     result.fold(
       (failure) => emit(UserAddError(message: failure.failure.errorMessage)),

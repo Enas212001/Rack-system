@@ -81,6 +81,8 @@ class Endpoints {
   static String addSwitch(String hotelId) =>
       '$baseUrl/switchs/add_switch.php?hotel_id=$hotelId';
   static String addSummary = '$baseUrl/summaries/add_summary.php';
+  static String getSummary(String switchId) =>
+      '$baseUrl/summaries/get_summaries.php?switch_id=$switchId';
   static String getDevices(String switchId) =>
       '$baseUrl/devices/get_devices.php?switch_id=$switchId';
   static String addDevice = '$baseUrl/devices/add_device.php';

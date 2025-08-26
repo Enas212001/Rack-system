@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'switch_guest_item.dart';
 
 class SwitchBody extends StatelessWidget {
-  const SwitchBody({super.key});
-
+  const SwitchBody({super.key, this.onTap});
+final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SwitchCubit, SwitchState>(
@@ -15,7 +15,9 @@ class SwitchBody extends StatelessWidget {
         if (state is SwitchSuccess) {
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
-              return SwitchGuestItem(switchItem: state.switches[index]);
+              return GestureDetector(
+                onTap: onTap,
+                child: SwitchGuestItem(switchItem: state.switches[index]));
             }, childCount: state.switches.length),
           );
         } else if (state is SwitchFailure) {

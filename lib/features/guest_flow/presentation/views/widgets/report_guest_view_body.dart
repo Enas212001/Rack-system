@@ -41,7 +41,7 @@ class ReportGuestViewBody extends StatelessWidget {
           ),
         ),
         SliverToBoxAdapter(child: SwitchInformation(switchItem: switchItem)),
-        SliverToBoxAdapter(child: SummaryWidget()),
+        SliverToBoxAdapter(child: SummaryWidget(switchItem: switchItem)),
         SliverToBoxAdapter(
           child: Padding(
             padding: EdgeInsets.all(16.r),

@@ -86,7 +86,7 @@ class LoginCubit extends Cubit<LoginState> {
           rememberMe = false;
           getIt.get<CacheHelper>().saveData(
             key: CacheKey.userHotelId,
-            value: user.user!.hotelId,
+            value: user.user!.hotelId ?? '',
           );
           getIt.get<CacheHelper>().saveData(
             key: CacheKey.userName,
@@ -96,6 +96,31 @@ class LoginCubit extends Cubit<LoginState> {
       );
     } catch (e) {
       emit(LoginFailure(message: e.toString()));
+    }
+  }
+
+  Future<void> logout() async {
+    emit(LogoutLoading()); // optional, in case you want a loading state
+
+    try {
+      // Clear all auth-related cache
+      await cache.removeData(key: ApiKey.email);
+      await cache.removeData(key: ApiKey.password);
+      await cache.removeData(key: ApiKey.rememberMe);
+
+      await cache.removeData(key: CacheKey.isLogin);
+      await cache.removeData(key: CacheKey.isGuest);
+      await cache.removeData(key: CacheKey.userHotelId);
+      await cache.removeData(key: CacheKey.userName);
+
+      // Reset controllers
+      emailController.clear();
+      passwordController.clear();
+      rememberMe = false;
+
+      emit(LogoutSuccess()); // back to initial state after logout
+    } catch (e) {
+      emit(LogoutFailure(message: 'Logout failed: ${e.toString()}'));
     }
   }
 }

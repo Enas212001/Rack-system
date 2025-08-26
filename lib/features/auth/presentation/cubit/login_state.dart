@@ -25,3 +25,12 @@ class LoginSuccess extends LoginState {
 class LoginCheckboxChanged extends LoginState {
   const LoginCheckboxChanged({required super.rememberMe});
 }
+
+class LogoutLoading extends LoginState {}
+
+class LogoutSuccess extends LoginState {}
+
+class LogoutFailure extends LoginState {
+  final String message;
+  const LogoutFailure({required this.message});
+}

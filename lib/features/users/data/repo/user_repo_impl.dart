@@ -15,6 +15,7 @@ class UserRepoImpl implements UserRepo {
     required String email,
     required String roleId,
     required String password,
+    required String hotelId,
   }) async {
     try {
       final response = await api.post(
@@ -24,6 +25,7 @@ class UserRepoImpl implements UserRepo {
           ApiKey.email: email,
           ApiKey.roleId: roleId,
           ApiKey.password: password,
+          ApiKey.hotelId: hotelId,
         },
       );
       if (response['status'] == 'success') {

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/cache/cache_helper.dart';
+import 'package:flutter_application_1/core/utils/api_key.dart';
+import 'package:flutter_application_1/core/utils/service_locator.dart';
 import 'package:flutter_application_1/core/utils/widget/shimmer_widget.dart';
 import 'package:flutter_application_1/core/utils/widget/top_with_back.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/cubit/building_cubit.dart';
@@ -14,7 +17,11 @@ class GuestBuildingViewBody extends StatelessWidget {
     return CustomScrollView(
       slivers: <Widget>[
         SliverToBoxAdapter(
-          child: TopWithBack(text: 'Buildings', noSearch: true),
+          child: TopWithBack(
+            text:
+                'Welcome, ${getIt.get<CacheHelper>().getData(key: CacheKey.userName)}',
+            noSearch: true,
+          ),
         ),
         BlocBuilder<BuildingCubit, BuildingState>(
           builder: (context, state) {

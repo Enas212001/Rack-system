@@ -61,7 +61,13 @@ class _GuestRackViewBodyState extends State<GuestRackViewBody> {
         return BlocProvider(
           create: (context) =>
               SwitchCubit()..getSwitchs(hotelId: widget.building.hotelId!),
-          child: SwitchBody(),
+          child: SwitchBody(
+            onTap: () {
+              setState(() {
+                selectedIndex = 2;
+              });
+            },
+          ),
         );
       case 2:
         return BlocProvider(
