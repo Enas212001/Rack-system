@@ -76,29 +76,17 @@ class _GuestRackViewBodyState extends State<GuestRackViewBody> {
   Widget buildRacks(int index) {
     switch (index) {
       case 0:
-        return BlocProvider(
-          create: (context) =>
-              RackCubit()..getRacksInfo(buildingId: widget.building.id!),
-          child: RacksBody(),
-        );
+        return RacksBody();
       case 1:
-        return BlocProvider(
-          create: (context) =>
-              SwitchCubit()..getSwitchs(hotelId: widget.building.hotelId!),
-          child: SwitchBody(
-            onTap: () {
-              setState(() {
-                selectedIndex = 2;
-              });
-            },
-          ),
+        return SwitchBody(
+          onTap: () {
+            setState(() {
+              selectedIndex = 2;
+            });
+          },
         );
       case 2:
-        return BlocProvider(
-          create: (context) =>
-              DeviceCubit()..getDevices(switchId: widget.building.id!),
-          child: DeviceBody(),
-        );
+        return DeviceBody();
       default:
         return const SliverToBoxAdapter();
     }

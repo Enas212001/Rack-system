@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
+import 'package:flutter_application_1/core/utils/widget/lost_connection.dart';
 import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,7 +19,13 @@ class HotelsSliverGridView extends StatelessWidget {
         if (state is HotelLoading) {
           return const SliverToBoxAdapter(child: CustomLoading());
         } else if (state is HotelFailure) {
-          return SliverToBoxAdapter(child: Center(child: Text(state.message)));
+          return SliverFillRemaining(
+            child: Center(
+              child: state.message == 'Connection timed out. Please try again.'
+                  ? LostConnection()
+                  : Text(state.message),
+            ),
+          );
         } else if (state is HotelSuccess) {
           final hotels = state.hotels;
           return SliverGrid(

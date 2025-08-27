@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
+import 'package:flutter_application_1/core/utils/widget/lost_connection.dart';
 import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,7 +52,12 @@ class DevicesConnectedToSwitch extends StatelessWidget {
                 ],
               );
             } else if (state is DeviceFailure) {
-              return Center(child: Text(state.failure));
+              return Center(
+                child:
+                    state.failure == 'Connection timed out. Please try again.'
+                    ? LostConnection()
+                    : Text(state.failure),
+              );
             } else if (state is DeviceLoading) {
               return CustomLoading();
             }

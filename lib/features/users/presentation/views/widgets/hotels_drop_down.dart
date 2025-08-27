@@ -79,7 +79,7 @@ class HotelsDropDown extends StatelessWidget {
           } else if (state is HotelLoading) {
             return const CustomLoading();
           } else if (state is HotelFailure) {
-            return const SizedBox.shrink();
+            return Center(child: Text(state.message));
           }
           return const SizedBox.shrink();
         },

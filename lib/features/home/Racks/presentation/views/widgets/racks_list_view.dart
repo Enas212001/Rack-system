@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
+import 'package:flutter_application_1/core/utils/widget/lost_connection.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/rack_cubit/rack_cubit.dart';
@@ -36,8 +37,13 @@ class RacksListView extends StatelessWidget {
           if (state is RacksLoading) {
             return SliverToBoxAdapter(child: const CustomLoading());
           } else if (state is RacksFailure) {
-            return SliverToBoxAdapter(
-              child: Center(child: Text(state.message)),
+            return SliverFillRemaining(
+              child: Center(
+                child:
+                    state.message == 'Connection timed out. Please try again.'
+                    ? LostConnection()
+                    : Text(state.message),
+              ),
             );
           } else if (state is RacksSuccess) {
             final racks = state.racks;

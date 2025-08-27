@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/widget/lost_connection.dart';
 import 'package:flutter_application_1/core/utils/widget/shimmer_widget.dart';
 import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +20,13 @@ class DeviceBody extends StatelessWidget {
             }, childCount: state.devices.length),
           );
         } else if (state is DeviceFailure) {
-          return SliverToBoxAdapter(child: Center(child: Text(state.failure)));
+          return SliverFillRemaining(
+            child: Center(
+              child: state.failure == 'Connection timed out. Please try again.'
+                  ? LostConnection()
+                  : Text(state.failure),
+            ),
+          );
         } else if (state is DeviceLoading) {
           return ShimmerWidget(height: 350);
         }

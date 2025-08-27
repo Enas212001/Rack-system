@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/widget/lost_connection.dart';
 import 'package:flutter_application_1/core/utils/widget/shimmer_widget.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/rack_cubit/rack_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +20,13 @@ class RacksBody extends StatelessWidget {
             }, childCount: state.racks.length),
           );
         } else if (state is RacksFailure) {
-          return SliverToBoxAdapter(child: Center(child: Text(state.message)));
+          return SliverFillRemaining(
+            child: Center(
+              child: state.message == 'Connection timed out. Please try again.'
+                  ? LostConnection()
+                  : Text(state.message),
+            ),
+          );
         } else if (state is RacksLoading) {
           return ShimmerWidget(height: 165);
         }
