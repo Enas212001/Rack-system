@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/app/my_app_drawer.dart';
-import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/cubit/building_cubit.dart';
+import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'widgets/building_view_body.dart';
@@ -12,7 +11,6 @@ class BuildingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const MyAppDrawer(),
       body: BlocProvider(
         create: (context) =>
             BuildingCubit()..getBuildings(hotelId: hotelModel.id!),

@@ -3,15 +3,18 @@ import 'package:flutter_application_1/core/func/border_text_field.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class PortTextField extends StatelessWidget {
   const PortTextField({
     super.key,
     required this.hintText,
-    required this.controller,
+    required this.initialValue,
+    required this.onChanged,
   });
 
   final String hintText;
-  final TextEditingController controller;
+  final String initialValue;
+  final void Function(String) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,8 @@ class PortTextField extends StatelessWidget {
       child: SizedBox(
         height: 40.h,
         child: TextFormField(
-          controller: controller,
+          initialValue: initialValue,
+          onChanged: onChanged,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter a value';

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
+import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/switch_cubit/switch_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';
@@ -58,6 +60,10 @@ class SwitchListView extends StatelessWidget {
                       itemBuilder: (context, index) =>
                           SwitchItemWidget(switchItem: state.switches[index]),
                     );
+                  } else if (state is SwitchLoading) {
+                    return CustomLoading();
+                  } else if (state is SwitchFailure) {
+                    return showToast(state.message);
                   }
                   return const SizedBox.shrink();
                 },

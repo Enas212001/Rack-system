@@ -7,6 +7,16 @@ sealed class DeviceState extends Equatable {
   List<Object> get props => [];
 }
 
+final class DeviceFormUpdated extends DeviceState {
+  final int switchId;
+  final List<Map<String, String>> portData;
+
+  const DeviceFormUpdated({required this.switchId, required this.portData});
+
+  @override
+  List<Object> get props => [switchId, portData];
+}
+
 final class DeviceInitial extends DeviceState {}
 
 final class DeviceLoading extends DeviceState {}
@@ -14,6 +24,8 @@ final class DeviceLoading extends DeviceState {}
 final class DeviceSuccess extends DeviceState {
   final List<DeviceItem> devices;
   const DeviceSuccess({required this.devices});
+  @override
+  List<Object> get props => [devices];
 }
 
 final class DeviceFailure extends DeviceState {
@@ -24,7 +36,7 @@ final class DeviceFailure extends DeviceState {
 final class DeviceAddLoading extends DeviceState {}
 
 final class DeviceAddSuccess extends DeviceState {
-  final List<DeviceItem> device;
+  final List<Device> device;
   const DeviceAddSuccess({required this.device});
 }
 

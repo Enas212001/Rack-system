@@ -12,7 +12,7 @@ class TopWidget extends StatelessWidget {
     this.onSearchChanged,
     this.withoutSearch,
     this.isText,
-    this.withDrawer = false,
+    this.withDrawer = true,
   });
 
   final Widget widget;
@@ -41,7 +41,7 @@ class TopWidget extends StatelessWidget {
           ? Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                withDrawer == true
+                withDrawer == false
                     ? IconButton(
                         onPressed: () => Navigator.pop(context),
                         icon: Icon(
@@ -66,12 +66,21 @@ class TopWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                      icon: Icon(Icons.menu, color: AppColors.whiteColor),
-                      onPressed: () {
-                        Scaffold.of(context).openDrawer();
-                      },
-                    ),
+                    withDrawer == false
+                        ? IconButton(
+                            onPressed: () => Navigator.pop(context),
+                            icon: Icon(
+                              Icons.arrow_back_ios_new,
+                              color: AppColors.scaffoldBackgroundColor,
+                              size: 16.sp,
+                            ),
+                          )
+                        : IconButton(
+                            icon: Icon(Icons.menu, color: AppColors.whiteColor),
+                            onPressed: () {
+                              Scaffold.of(context).openDrawer();
+                            },
+                          ),
                     widget,
                     SizedBox(width: isText == true ? 36.w : 16.w),
                   ],

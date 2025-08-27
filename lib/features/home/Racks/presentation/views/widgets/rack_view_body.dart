@@ -35,8 +35,20 @@ class _RackViewBodyState extends State<RackViewBody> {
   Widget build(BuildContext context) {
     final rackCubit = context.read<RackCubit>();
     return RefreshIndicator(
-      onRefresh: () =>
-          rackCubit.getRacksInfo(buildingId: widget.buildingModel.id!),
+      onRefresh: () async {
+        switch (selectedIndex) {
+          case 0:
+            context.read<RackCubit>().getRacksInfo(
+              buildingId: widget.buildingModel.id!,
+            );
+            break;
+          case 1:
+            context.read<SwitchCubit>().getSwitchs(
+              hotelId: widget.buildingModel.hotelId!,
+            );
+            break;
+        }
+      },
       color: AppColors.primaryColor,
       child: CustomScrollView(
         slivers: [
@@ -51,6 +63,7 @@ class _RackViewBodyState extends State<RackViewBody> {
                   context.read<SwitchCubit>().searchSwitch(value);
                 }
               },
+              withDrawer: false,
             ),
           ),
           SliverToBoxAdapter(

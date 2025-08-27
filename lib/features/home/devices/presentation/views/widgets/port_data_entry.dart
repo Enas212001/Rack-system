@@ -7,12 +7,14 @@ import 'port_text_field.dart';
 
 class PortDataEntry extends StatelessWidget {
   final int portNumber;
-  final Map<String, TextEditingController> controllers;
+  final Map<String, String> port;
+  final void Function(String key, String value) onChanged;
 
   const PortDataEntry({
     super.key,
     required this.portNumber,
-    required this.controllers,
+    required this.port,
+    required this.onChanged,
   });
 
   @override
@@ -27,36 +29,41 @@ class PortDataEntry extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Port $portNumber',
-            style: CustomTextStyles.text14W500Primary.copyWith(
-              color: AppColors.lightGreyColor,
-            ),
-          ),
+          Text('Port $portNumber', style: CustomTextStyles.text14W500Primary),
           PortTextField(
-            controller: controllers['name']!,
             hintText: 'Device Name',
+            initialValue: port['name'] ?? '',
+            onChanged: (v) => onChanged('name', v),
           ),
           PortTextField(
-            controller: controllers['serial']!,
             hintText: 'Device Serial',
+            initialValue: port['serial'] ?? '',
+            onChanged: (v) => onChanged('serial', v),
           ),
           PortTextField(
-            controller: controllers['mac']!,
             hintText: 'MAC Address',
+            initialValue: port['mac'] ?? '',
+            onChanged: (v) => onChanged('mac', v),
           ),
-          PortTextField(controller: controllers['ip']!, hintText: 'IP Address'),
           PortTextField(
-            controller: controllers['patch']!,
+            hintText: 'IP Address',
+            initialValue: port['ip'] ?? '',
+            onChanged: (v) => onChanged('ip', v),
+          ),
+          PortTextField(
             hintText: 'Patch Panel',
+            initialValue: port['patch'] ?? '',
+            onChanged: (v) => onChanged('patch', v),
           ),
           PortTextField(
-            controller: controllers['product']!,
             hintText: 'Product Number',
+            initialValue: port['product'] ?? '',
+            onChanged: (v) => onChanged('product', v),
           ),
           PortTextField(
-            controller: controllers['model']!,
             hintText: 'Device Model',
+            initialValue: port['model'] ?? '',
+            onChanged: (v) => onChanged('model', v),
           ),
         ],
       ),

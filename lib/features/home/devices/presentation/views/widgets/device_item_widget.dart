@@ -16,12 +16,14 @@ class DeviceItemWidget extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            GoRouter.of(context).push(AppRoutes.deviceDetails, extra: deviceItem);
+            GoRouter.of(
+              context,
+            ).push(AppRoutes.deviceDetails, extra: deviceItem);
           },
           child: Padding(
             padding: EdgeInsets.all(12.r),
             child: ExpandableInfoCard(
-              title: deviceItem.portNumber.toString(),
+              title: deviceItem.deviceName.toString(),
               details: DeviceDetails(deviceItem: deviceItem),
             ),
           ),

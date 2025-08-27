@@ -5,7 +5,7 @@ import 'package:flutter_application_1/core/utils/widget/back_icon.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../features/home/Hotels/presentation/views/widgets/top_widget.dart';
+import 'top_widget.dart';
 
 class TopAddWidget extends StatelessWidget {
   const TopAddWidget({

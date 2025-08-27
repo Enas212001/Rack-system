@@ -28,7 +28,6 @@ class SwitchInformation extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ItemDetail(label: 'MAC :', value: switchItem.macAdd!),
-            // ItemDetail(label: 'Site name :', value: switchItem.siteName!),
             ItemDetail(label: 'Model :', value: switchItem.model!),
             ItemDetail(
               label: 'Switch Port :',

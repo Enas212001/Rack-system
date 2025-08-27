@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/app/my_app_drawer.dart';
+import 'package:flutter_application_1/app/guest_drawer.dart';
 import 'package:flutter_application_1/core/cache/cache_helper.dart';
 import 'package:flutter_application_1/core/utils/api_key.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
@@ -14,7 +14,7 @@ class GuestBuildingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyAppDrawer(),
+      drawer: GuestDrawer(),
       body: BlocProvider(
         create: (context) => BuildingCubit()
           ..getBuildings(

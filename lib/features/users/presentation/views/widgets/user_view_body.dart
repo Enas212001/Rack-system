@@ -13,31 +13,34 @@ class UserViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: TopWithBack(
-            title: 'Users',
-            text: 'Users',
-            onSearchChanged: (value) =>
-                context.read<UserCubit>().searchUser(value),
+    return RefreshIndicator(
+      onRefresh: () => context.read<UserCubit>().getUsersInfo(),
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: TopWithBack(
+              title: 'Users',
+              text: 'Users',
+              onSearchChanged: (value) =>
+                  context.read<UserCubit>().searchUser(value),
+            ),
           ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: 16.r) +
-                EdgeInsets.only(top: 16.h),
-            child: Text(
-              'All User',
-              style: CustomTextStyles.text14Regular.copyWith(
-                color: AppColors.primaryColor,
+          SliverToBoxAdapter(
+            child: Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: 16.r) +
+                  EdgeInsets.only(top: 16.h),
+              child: Text(
+                'All User',
+                style: CustomTextStyles.text14Regular.copyWith(
+                  color: AppColors.primaryColor,
+                ),
               ),
             ),
           ),
-        ),
-        UserListView(),
-      ],
+          UserListView(),
+        ],
+      ),
     );
   }
 }

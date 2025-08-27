@@ -24,6 +24,7 @@ class BuildingViewBody extends StatelessWidget {
             child: TopWithBack(
               onSearchChanged: buildingCubit.searchBuildings,
               title: 'Building',
+              withDrawer: false,
               text:
                   hotelModel.name![0].toUpperCase() +
                   hotelModel.name!.substring(1),

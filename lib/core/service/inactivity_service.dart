@@ -14,7 +14,7 @@ class InactivityService with WidgetsBindingObserver {
   InactivityService._internal();
 
   Timer? _timer;
-  final Duration timeout = const Duration(minutes: 60);
+  final Duration timeout = const Duration(minutes: 10);
 
   void initialize(BuildContext context) {
     WidgetsBinding.instance.addObserver(this);

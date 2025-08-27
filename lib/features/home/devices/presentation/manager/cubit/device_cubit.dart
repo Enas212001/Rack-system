@@ -19,8 +19,28 @@ class DeviceCubit extends Cubit<DeviceState> {
     final result = await deviceRepo.getDevices(switchId: switchId);
     result.fold(
       (failure) => emit(DeviceFailure(failure: failure.failure.errorMessage)),
-      (devices) => emit(DeviceSuccess(devices: devices)),
+      (devices) {
+        devicesList = devices;
+        emit(DeviceSuccess(devices: devices));
+      },
     );
+  }
+
+  List<DeviceItem> devicesList = [];
+  void searchDevices(String query) {
+    if (state is! DeviceSuccess) return;
+
+    if (query.isEmpty) {
+      emit(DeviceSuccess(devices: devicesList));
+      return;
+    }
+
+    final filtered = devicesList.where((device) {
+      final name = device.deviceName?.toLowerCase() ?? '';
+      return name.contains(query.toLowerCase());
+    }).toList();
+
+    emit(DeviceSuccess(devices: filtered));
   }
 
   Future<void> deleteDevice({required String deviceId}) async {
@@ -33,12 +53,61 @@ class DeviceCubit extends Cubit<DeviceState> {
     );
   }
 
-  Future<void> addDevice({required int switchId, required List<Device> devices}) async {
-    emit(DeviceAddLoading());
-    final result = await deviceRepo.addDevice(switchId: switchId, devices: devices);
-    result.fold(
-      (failure) => emit(DeviceAddFailure(failure: failure.failure.errorMessage)),
-      (device) => emit(DeviceAddSuccess(device: device)),
+  List<Map<String, String>> _currentPorts = [];
+
+  void initPorts(int switchId, int count) {
+    _currentPorts = List.generate(
+      count,
+      (_) => {
+        'name': '',
+        'serial': '',
+        'mac': '',
+        'ip': '',
+        'patch': '',
+        'product': '',
+        'model': '',
+      },
     );
+    emit(DeviceFormUpdated(switchId: switchId, portData: _currentPorts));
+  }
+
+  void updatePortField(int index, String key, String value) {
+    _currentPorts[index][key] = value;
+    emit(
+      DeviceFormUpdated(
+        switchId: state is DeviceFormUpdated
+            ? (state as DeviceFormUpdated).switchId
+            : 0,
+        portData: List.from(_currentPorts),
+      ),
+    );
+  }
+
+  Future<void> addDevice(int switchId) async {
+    emit(DeviceAddLoading());
+    try {
+      final devices = _currentPorts.asMap().entries.map((entry) {
+        final i = entry.key;
+        final data = entry.value;
+        return Device(
+          portNumber: i + 1,
+          deviceName: data['name'] ?? '',
+          deviceSerial: data['serial'] ?? '',
+          macAddress: data['mac'] ?? '',
+          ipAddress: data['ip'] ?? '',
+          patchPanel: data['patch'] ?? '',
+          productNumber: data['product'] ?? '',
+          deviceModel: data['model'] ?? '',
+        );
+      }).toList();
+
+      // call repository (simulate)
+      await Future.delayed(const Duration(seconds: 1));
+      deviceRepo.addDevice(switchId: switchId, devices: devices);
+
+      emit(DeviceAddSuccess(device: devices));
+    } catch (e) {
+      emit(DeviceAddFailure(failure: e.toString()));
+    }
   }
 }

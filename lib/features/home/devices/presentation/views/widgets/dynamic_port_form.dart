@@ -1,18 +1,15 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/custom_show_dialog.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/widget/add_full_button.dart';
 import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
 import 'package:flutter_application_1/core/utils/widget/success_message.dart';
-import 'package:flutter_application_1/features/home/devices/data/models/add_device_request.dart';
 import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'port_data_entry.dart';
 
-class DynamicPortForm extends StatefulWidget {
+class DynamicPortForm extends StatelessWidget {
   final int switchId;
   final int portCount;
 
@@ -23,85 +20,10 @@ class DynamicPortForm extends StatefulWidget {
   });
 
   @override
-  State<DynamicPortForm> createState() => _DynamicPortFormState();
-}
-
-class _DynamicPortFormState extends State<DynamicPortForm> {
-  List<Map<String, TextEditingController>> portControllers = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _buildControllers();
-  }
-
-  @override
-  void didUpdateWidget(covariant DynamicPortForm oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    // if switch changed or port count changed, rebuild controllers
-    if (oldWidget.switchId != widget.switchId ||
-        oldWidget.portCount != widget.portCount) {
-      _disposeControllers();
-      _buildControllers();
-    }
-  }
-
-  void _buildControllers() {
-    portControllers = List.generate(widget.portCount, (_) {
-      return {
-        'name': TextEditingController(),
-        'serial': TextEditingController(),
-        'mac': TextEditingController(),
-        'ip': TextEditingController(),
-        'patch': TextEditingController(),
-        'product': TextEditingController(),
-        'model': TextEditingController(),
-      };
-    });
-    setState(() {});
-  }
-
-  void _disposeControllers() {
-    for (var map in portControllers) {
-      for (var controller in map.values) {
-        controller.dispose();
-      }
-    }
-    portControllers.clear();
-  }
-
-  @override
-  void dispose() {
-    _disposeControllers();
-    super.dispose();
-  }
-
-  void _onSave() {
-    final cubit = context.read<DeviceCubit>();
-    final devices = <Device>[];
-
-    for (int i = 0; i < portControllers.length; i++) {
-      final c = portControllers[i];
-      devices.add(
-        Device(
-          portNumber: i + 1,
-          deviceName: c['name']!.text,
-          deviceSerial: c['serial']!.text,
-          macAddress: c['mac']!.text,
-          ipAddress: c['ip']!.text,
-          patchPanel: c['patch']!.text,
-          productNumber: c['product']!.text,
-          deviceModel: c['model']!.text,
-        ),
-      );
-    }
-
-    cubit.addDevice(switchId: widget.switchId, devices: devices);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final cubit = context.read<DeviceCubit>();
+    cubit.initPorts(switchId, portCount);
+
     return BlocConsumer<DeviceCubit, DeviceState>(
       listener: (context, state) {
         if (state is DeviceAddSuccess) {
@@ -112,23 +34,34 @@ class _DynamicPortFormState extends State<DynamicPortForm> {
           );
         } else if (state is DeviceAddFailure) {
           showToast(state.failure);
-          log(state.failure);
-        } else if (state is DeviceAddLoading) {
-          CustomLoading();
         }
       },
       builder: (context, state) {
-        return Column(
-          children: [
-            ...portControllers.asMap().entries.map(
-              (entry) => PortDataEntry(
-                portNumber: entry.key + 1,
-                controllers: entry.value,
+        if (state is DeviceAddLoading) {
+          return const CustomLoading();
+        }
+        if (state is DeviceFormUpdated) {
+          return Column(
+            children: [
+              ...state.portData.asMap().entries.map((entry) {
+                final index = entry.key;
+                final port = entry.value;
+                return PortDataEntry(
+                  portNumber: index + 1,
+                  port: port,
+                  onChanged: (key, value) {
+                    cubit.updatePortField(index, key, value);
+                  },
+                );
+              }),
+              AddFullSizeButton(
+                onPressed: () => cubit.addDevice(switchId),
+                text: 'Save',
               ),
-            ),
-            AddFullSizeButton(onPressed: _onSave, text: 'Save'),
-          ],
-        );
+            ],
+          );
+        }
+        return const SizedBox.shrink();
       },
     );
   }
