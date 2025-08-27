@@ -22,7 +22,7 @@ Future<pw.Document> exportSwitchAsPdf({
   );
 
   // Colors & Styles
-  final yellowHeader = PdfColors.lime;
+  final yellowHeader = PdfColors.yellow;
 
   pdf.addPage(
     pw.MultiPage(

@@ -76,7 +76,7 @@ class ExportSwitchInfo extends StatelessWidget {
                                       onPressed: () {
                                         if (summaryState is SummarySuccess &&
                                             deviceState is DeviceSuccess) {
-                                          generateStyledExcel(
+                                          generateSingleSheetExcel(
                                             switchItem: switchItem,
                                             summaries: summaryState.summaries,
                                             devices: deviceState.devices,
