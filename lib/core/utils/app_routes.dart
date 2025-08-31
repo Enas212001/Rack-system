@@ -167,7 +167,11 @@ class AppRoutes {
         },
       ),
       GoRoute(path: addDevice, builder: (context, state) => AddDeviceView()),
-      GoRoute(path: editDevice, builder: (context, state) => EditDeviceView()),
+      GoRoute(
+        path: editDevice,
+        builder: (context, state) =>
+            EditDeviceView(deviceItem: state.extra as DeviceItem),
+      ),
       GoRoute(
         path: deviceDetails,
         builder: (context, state) =>

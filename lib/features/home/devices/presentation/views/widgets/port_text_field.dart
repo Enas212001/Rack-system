@@ -8,12 +8,10 @@ class PortTextField extends StatelessWidget {
   const PortTextField({
     super.key,
     required this.hintText,
-    required this.initialValue,
     required this.onChanged,
   });
 
   final String hintText;
-  final String initialValue;
   final void Function(String) onChanged;
 
   @override
@@ -22,15 +20,8 @@ class PortTextField extends StatelessWidget {
       padding: EdgeInsets.only(top: 16.h),
       child: SizedBox(
         height: 40.h,
-        child: TextFormField(
-          initialValue: initialValue,
+        child: TextField(
           onChanged: onChanged,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter a value';
-            }
-            return null;
-          },
           decoration: InputDecoration(
             border: borderTextField(),
             focusedBorder: borderTextField(),

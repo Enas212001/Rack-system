@@ -32,37 +32,30 @@ class PortDataEntry extends StatelessWidget {
           Text('Port $portNumber', style: CustomTextStyles.text14W500Primary),
           PortTextField(
             hintText: 'Device Name',
-            initialValue: port['name'] ?? '',
             onChanged: (v) => onChanged('name', v),
           ),
           PortTextField(
             hintText: 'Device Serial',
-            initialValue: port['serial'] ?? '',
             onChanged: (v) => onChanged('serial', v),
           ),
           PortTextField(
             hintText: 'MAC Address',
-            initialValue: port['mac'] ?? '',
             onChanged: (v) => onChanged('mac', v),
           ),
           PortTextField(
             hintText: 'IP Address',
-            initialValue: port['ip'] ?? '',
             onChanged: (v) => onChanged('ip', v),
           ),
           PortTextField(
             hintText: 'Patch Panel',
-            initialValue: port['patch'] ?? '',
             onChanged: (v) => onChanged('patch', v),
           ),
           PortTextField(
             hintText: 'Product Number',
-            initialValue: port['product'] ?? '',
             onChanged: (v) => onChanged('product', v),
           ),
           PortTextField(
             hintText: 'Device Model',
-            initialValue: port['model'] ?? '',
             onChanged: (v) => onChanged('model', v),
           ),
         ],

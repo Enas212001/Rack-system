@@ -36,7 +36,7 @@ final class DeviceFailure extends DeviceState {
 final class DeviceAddLoading extends DeviceState {}
 
 final class DeviceAddSuccess extends DeviceState {
-  final List<Device> device;
+  final List<DeviceItem> device;
   const DeviceAddSuccess({required this.device});
 }
 

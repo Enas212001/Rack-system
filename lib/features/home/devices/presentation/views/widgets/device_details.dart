@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
+import 'package:flutter_application_1/core/utils/widget/delete_widget.dart';
 import 'package:flutter_application_1/core/utils/widget/item_detail.dart';
 import 'package:flutter_application_1/features/home/devices/data/models/device_model/device_item.dart';
+import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,8 +30,27 @@ class DeviceDetails extends StatelessWidget {
           ItemDetail(
             label: 'Actions',
             isAction: true,
-            onEdit: () {
-              GoRouter.of(context).push(AppRoutes.editDevice);
+            onDelete: () {
+              showDialog(
+                context: context,
+                builder: (dialogContext) => DeleteWidget(
+                  onDelete: () {
+                    Navigator.pop(context);
+                    context.read<DeviceCubit>().deleteDevice(
+                      deviceId: deviceItem.id.toString(),
+                    );
+                  },
+                  title: 'Device',
+                ),
+              );
+            },
+            onEdit: () async {
+              await GoRouter.of(
+                context,
+              ).push(AppRoutes.editDevice, extra: deviceItem);
+              context.read<DeviceCubit>().getDevices(
+                switchId: deviceItem.switchId.toString(),
+              );
             },
           ),
         ],

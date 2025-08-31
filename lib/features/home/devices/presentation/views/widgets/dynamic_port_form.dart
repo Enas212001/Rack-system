@@ -22,7 +22,9 @@ class DynamicPortForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<DeviceCubit>();
-    cubit.initPorts(switchId, portCount);
+    if (!cubit.isInitializedForSwitch(switchId)) {
+      cubit.initPorts(switchId, portCount);
+    }
 
     return BlocConsumer<DeviceCubit, DeviceState>(
       listener: (context, state) {
@@ -50,7 +52,7 @@ class DynamicPortForm extends StatelessWidget {
                   portNumber: index + 1,
                   port: port,
                   onChanged: (key, value) {
-                    cubit.updatePortField(index, key, value);
+                    cubit.updatePortField(switchId, index, key, value);
                   },
                 );
               }),

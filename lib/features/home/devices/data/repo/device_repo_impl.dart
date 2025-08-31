@@ -54,7 +54,7 @@ class DeviceRepoImpl extends DeviceRepo {
       final response = await apiConsumer.delete(
         Endpoints.deleteDevice(deviceId),
       );
-      if (response.statusCode == 200) {
+      if (response['message'] == 'success') {
         return right(response['message']);
       } else {
         return left(
@@ -74,6 +74,7 @@ class DeviceRepoImpl extends DeviceRepo {
   @override
   Future<Either<ServerFailure, DeviceItem>> editDevice({
     required String deviceId,
+    required int switchId,
     required String portNumber,
     required String deviceName,
     required String deviceSerial,
@@ -82,9 +83,38 @@ class DeviceRepoImpl extends DeviceRepo {
     required String patchPanel,
     required String productNumber,
     required String deviceModel,
-  }) {
-    // TODO: implement editDevice
-    throw UnimplementedError();
+  }) async {
+    try {
+      final response = await apiConsumer.put(
+        Endpoints.editDevice(deviceId),
+        data: {
+          ApiKey.switchId: switchId,
+          ApiKey.portNumber: portNumber,
+          ApiKey.deviceName: deviceName,
+          ApiKey.deviceSerial: deviceSerial,
+          ApiKey.macAddress: macAddress,
+          ApiKey.ipAddress: ipAddress,
+          ApiKey.patchPanel: patchPanel,
+          ApiKey.productNumber: productNumber,
+          ApiKey.deviceModel: deviceModel,
+        },
+      );
+      if (response['status'] == 'success') {
+        final device = DeviceItem.fromJson(response['data']);
+        return right(device);
+      } else {
+        return left(
+          ServerFailure(
+            failure: FailureModel(
+              status: 'false',
+              errorMessage: response['message'],
+            ),
+          ),
+        );
+      }
+    } on ServerFailure catch (e) {
+      return left(e);
+    }
   }
 
   @override

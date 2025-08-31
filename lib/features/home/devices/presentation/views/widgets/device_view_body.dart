@@ -57,8 +57,8 @@ class DeviceViewBody extends StatelessWidget {
                   AddTextButton(
                     title: '+ Add Device',
                     onTap: () async {
-                      GoRouter.of(context).push(AppRoutes.addDevice);
-                      await context.read<DeviceCubit>().getDevices(
+                      await context.push(AppRoutes.addDevice);
+                      return context.read<DeviceCubit>().getDevices(
                         switchId: switchItem.id.toString(),
                       );
                     },
@@ -67,7 +67,9 @@ class DeviceViewBody extends StatelessWidget {
               ),
             ),
           ),
-          SliverToBoxAdapter(child: DevicesListView()),
+          SliverToBoxAdapter(
+            child: DevicesListView(switchId: switchItem.id.toString()),
+          ),
         ],
       ),
     );

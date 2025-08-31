@@ -19,6 +19,12 @@ class ApiKey {
   static const String productModel = 'product_model';
   static const String productPort = 'product_port';
   static const String deviceName = 'device_name';
+  static const String deviceSerial = 'device_serial';
+  static const String macAddress = 'mac_address';
+  static const String ipAddress = 'ip_address';
+  static const String patchPanel = 'patch_panel';
+  static const String productNumber = 'product_number';
+  static const String deviceModel = 'device_model';
   static const String siteName = 'site_name';
   static const String image = 'logo';
   static const String buildingNumber = 'building_id';

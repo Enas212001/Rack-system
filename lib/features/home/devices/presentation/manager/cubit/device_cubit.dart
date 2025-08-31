@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/api/dio_consumer.dart';
 import 'package:flutter_application_1/core/utils/service_locator.dart';
+import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
 import 'package:flutter_application_1/features/home/devices/data/models/add_device_request.dart';
 import 'package:flutter_application_1/features/home/devices/data/models/device_model/device_item.dart';
 import 'package:flutter_application_1/features/home/devices/data/repo/device_repo.dart';
@@ -53,40 +55,61 @@ class DeviceCubit extends Cubit<DeviceState> {
     );
   }
 
-  List<Map<String, String>> _currentPorts = [];
+  Map<int, List<Map<String, String>>> switchPortData = {};
 
-  void initPorts(int switchId, int count) {
-    _currentPorts = List.generate(
-      count,
-      (_) => {
-        'name': '',
-        'serial': '',
-        'mac': '',
-        'ip': '',
-        'patch': '',
-        'product': '',
-        'model': '',
-      },
-    );
-    emit(DeviceFormUpdated(switchId: switchId, portData: _currentPorts));
+  bool isInitializedForSwitch(int switchId) {
+    return switchPortData.containsKey(switchId);
   }
 
-  void updatePortField(int index, String key, String value) {
-    _currentPorts[index][key] = value;
+  void initPorts(int switchId, int portCount) {
+    if (!switchPortData.containsKey(switchId)) {
+      // If switch is new, copy from last selected switch if exists
+      if (switchPortData.isNotEmpty) {
+        final lastSwitchId = switchPortData.keys.last;
+        final lastPorts = switchPortData[lastSwitchId]!;
+
+        // Copy values, but only into empty fields
+        switchPortData[switchId] = List.generate(
+          portCount,
+          (index) => Map.from(lastPorts[index]),
+        );
+      } else {
+        // Fresh init
+        switchPortData[switchId] = List.generate(
+          portCount,
+          (index) => {
+            'name': '',
+            'serial': '',
+            'mac': '',
+            'ip': '',
+            'patch': '',
+            'product': '',
+            'model': '',
+          },
+        );
+      }
+    }
+
     emit(
       DeviceFormUpdated(
-        switchId: state is DeviceFormUpdated
-            ? (state as DeviceFormUpdated).switchId
-            : 0,
-        portData: List.from(_currentPorts),
+        switchId: switchId,
+        portData: switchPortData[switchId]!,
       ),
     );
+  }
+
+  void updatePortField(int switchId, int index, String key, String value) {
+    final ports = switchPortData[switchId];
+    if (ports != null) {
+      ports[index][key] = value;
+      emit(DeviceFormUpdated(portData: ports, switchId: switchId));
+    }
   }
 
   Future<void> addDevice(int switchId) async {
     emit(DeviceAddLoading());
     try {
-      final devices = _currentPorts.asMap().entries.map((entry) {
+      final devices = switchPortData[switchId]!.asMap().entries.map((entry) {
         final i = entry.key;
         final data = entry.value;
         return Device(
@@ -100,14 +123,78 @@ class DeviceCubit extends Cubit<DeviceState> {
           deviceModel: data['model'] ?? '',
         );
       }).toList();
+      final result = await deviceRepo.addDevice(
+        switchId: switchId,
+        devices: devices,
+      );
 
-      // call repository (simulate)
-      await Future.delayed(const Duration(seconds: 1));
-      deviceRepo.addDevice(switchId: switchId, devices: devices);
-
-      emit(DeviceAddSuccess(device: devices));
+      // Handle the result properly
+      return result.fold(
+        (failure) =>
+            emit(DeviceAddFailure(failure: failure.failure.errorMessage)),
+        (updatedDevices) async {
+          // After successful add, fetch the latest devices
+          final devicesResult = await deviceRepo.getDevices(
+            switchId: switchId.toString(),
+          );
+          devicesResult.fold(
+            (failure) =>
+                emit(DeviceAddFailure(failure: failure.failure.errorMessage)),
+            (devicesList) {
+              emit(DeviceAddSuccess(device: devicesList));
+            },
+          );
+        },
+      );
     } catch (e) {
       emit(DeviceAddFailure(failure: e.toString()));
     }
+  }
+
+  TextEditingController deviceNameController = TextEditingController();
+  TextEditingController portController = TextEditingController();
+  TextEditingController deviceSerialController = TextEditingController();
+  TextEditingController macAddressController = TextEditingController();
+  TextEditingController ipAddressController = TextEditingController();
+  TextEditingController patchPanelController = TextEditingController();
+  TextEditingController productNumberController = TextEditingController();
+  TextEditingController deviceModelController = TextEditingController();
+  SwitchItem? switchItem;
+
+  Future<void> editDevice({required DeviceItem device}) async {
+    emit(DeviceEditLoading());
+    final result = await deviceRepo.editDevice(
+      deviceId: device.id.toString(),
+      switchId: switchItem?.id ?? device.switchId!,
+      portNumber: portController.text.isEmpty
+          ? device.portNumber.toString()
+          : portController.text,
+      deviceName: deviceNameController.text.isEmpty
+          ? device.deviceName.toString()
+          : deviceNameController.text,
+      deviceSerial: deviceSerialController.text.isEmpty
+          ? device.deviceSerial.toString()
+          : deviceSerialController.text,
+      macAddress: macAddressController.text.isEmpty
+          ? device.macAddress.toString()
+          : macAddressController.text,
+      ipAddress: ipAddressController.text.isEmpty
+          ? device.ipAddress.toString()
+          : ipAddressController.text,
+      patchPanel: patchPanelController.text.isEmpty
+          ? device.patchPanel.toString()
+          : patchPanelController.text,
+      productNumber: productNumberController.text.isEmpty
+          ? device.productNumber.toString()
+          : productNumberController.text,
+      deviceModel: deviceModelController.text.isEmpty
+          ? device.deviceModel.toString()
+          : deviceModelController.text,
+    );
+    result.fold(
+      (failure) =>
+          emit(DeviceEditFailure(failure: failure.failure.errorMessage)),
+      (device) => emit(DeviceEditSuccess(device: device)),
+    );
   }
 }

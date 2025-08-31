@@ -10,6 +10,7 @@ abstract class DeviceRepo {
   });
   Future<Either<ServerFailure, DeviceItem>> editDevice({
     required String deviceId,
+    required int switchId,
     required String portNumber,
     required String deviceName,
     required String deviceSerial,
