@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/api/dio_consumer.dart';
 import 'package:flutter_application_1/core/func/upload_image_to_api.dart';
-import 'package:flutter_application_1/core/utils/service_locator.dart';
+import 'package:flutter_application_1/core/service/service_locator.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/repo/hotel_repo.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/repo/hotel_repo_impl.dart';

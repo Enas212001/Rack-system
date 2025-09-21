@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
-import 'package:flutter_application_1/core/utils/widget/add_text_button.dart';
-import 'package:flutter_application_1/core/utils/widget/top_with_back.dart';
+import 'package:flutter_application_1/core/widget/add_text_button.dart';
+import 'package:flutter_application_1/core/widget/top_with_back.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
 import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';

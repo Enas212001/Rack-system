@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
-import 'package:flutter_application_1/core/utils/widget/expand_info_card.dart';
+import 'package:flutter_application_1/core/widget/expand_info_card.dart';
 import 'package:flutter_application_1/features/home/devices/data/models/device_model/device_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';

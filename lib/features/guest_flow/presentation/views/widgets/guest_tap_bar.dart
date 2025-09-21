@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/utils/widget/tab_bar_item.dart';
+import 'package:flutter_application_1/core/widget/tab_bar_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GuestRackTapBar extends StatelessWidget {

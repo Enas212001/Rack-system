@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
-import 'package:flutter_application_1/core/utils/widget/delete_widget.dart';
-import 'package:flutter_application_1/core/utils/widget/item_detail.dart';
+import 'package:flutter_application_1/core/widget/delete_widget.dart';
+import 'package:flutter_application_1/core/widget/item_detail.dart';
 import 'package:flutter_application_1/features/home/devices/data/models/device_model/device_item.dart';
 import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

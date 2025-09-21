@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/api/dio_consumer.dart';
-import 'package:flutter_application_1/core/utils/service_locator.dart';
+import 'package:flutter_application_1/core/service/service_locator.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/rack_model/rack_item.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';

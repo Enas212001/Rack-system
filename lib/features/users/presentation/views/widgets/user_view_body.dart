@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
-import 'package:flutter_application_1/core/utils/widget/top_with_back.dart';
+import 'package:flutter_application_1/core/widget/top_with_back.dart';
 import 'package:flutter_application_1/features/users/presentation/manager/cubit/user_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

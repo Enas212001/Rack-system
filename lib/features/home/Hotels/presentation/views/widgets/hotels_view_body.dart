@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'add_client_widget.dart';
 import 'hotels_grid_view.dart';
-import '../../../../../../core/utils/widget/top_widget.dart';
+import '../../../../../../core/widget/top_widget.dart';
 
 class HotelsViewBody extends StatelessWidget {
   const HotelsViewBody({super.key});

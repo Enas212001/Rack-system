@@ -2,7 +2,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/border_text_field.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
-import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
+import 'package:flutter_application_1/core/widget/custom_loading.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';

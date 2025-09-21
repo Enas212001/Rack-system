@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/my_app_drawer.dart';
-import 'package:flutter_application_1/core/utils/widget/add_form_widget.dart';
+import 'package:flutter_application_1/core/widget/add_form_widget.dart';
 import 'package:flutter_application_1/features/users/presentation/manager/cubit/user_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

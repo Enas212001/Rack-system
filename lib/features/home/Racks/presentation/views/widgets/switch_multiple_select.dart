@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
-import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
+import 'package:flutter_application_1/core/widget/custom_loading.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/switch_cubit/switch_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';
@@ -39,7 +39,7 @@ class SwitchMultipleSelect extends StatelessWidget {
                     .toList(),
                 backgroundColor: AppColors.backgroundColor,
                 itemsTextStyle: CustomTextStyles.text12MeduimText,
-                
+
                 buttonIcon: const Icon(Icons.arrow_drop_down),
                 decoration: BoxDecoration(
                   border: Border.all(color: AppColors.borderColor),

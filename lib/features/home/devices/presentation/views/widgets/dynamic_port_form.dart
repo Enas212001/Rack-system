@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/custom_show_dialog.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
-import 'package:flutter_application_1/core/utils/widget/add_full_button.dart';
-import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
-import 'package:flutter_application_1/core/utils/widget/success_message.dart';
+import 'package:flutter_application_1/core/widget/add_full_button.dart';
+import 'package:flutter_application_1/core/widget/custom_loading.dart';
+import 'package:flutter_application_1/core/widget/success_message.dart';
 import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

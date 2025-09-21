@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/utils/widget/add_form_widget.dart';
+import 'package:flutter_application_1/core/widget/add_form_widget.dart';
 
 import 'widgets/add_building_form.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/guest_drawer.dart';
 import 'package:flutter_application_1/core/cache/cache_helper.dart';
 import 'package:flutter_application_1/core/utils/api_key.dart';
-import 'package:flutter_application_1/core/utils/service_locator.dart';
+import 'package:flutter_application_1/core/service/service_locator.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/cubit/building_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

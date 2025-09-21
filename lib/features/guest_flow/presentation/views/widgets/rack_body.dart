@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/utils/widget/lost_connection.dart';
-import 'package:flutter_application_1/core/utils/widget/shimmer_widget.dart';
+import 'package:flutter_application_1/core/widget/lost_connection.dart';
+import 'package:flutter_application_1/core/widget/shimmer_widget.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/rack_cubit/rack_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

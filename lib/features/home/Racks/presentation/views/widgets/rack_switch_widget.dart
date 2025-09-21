@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
-import 'package:flutter_application_1/core/utils/widget/add_text_button.dart';
-import 'package:flutter_application_1/core/utils/widget/tab_bar_item.dart';
+import 'package:flutter_application_1/core/widget/add_text_button.dart';
+import 'package:flutter_application_1/core/widget/tab_bar_item.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/rack_cubit/rack_cubit.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/switch_cubit/switch_cubit.dart';

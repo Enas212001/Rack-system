@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/custom_show_dialog.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/app_strings.dart';
-import 'package:flutter_application_1/core/utils/widget/custom_loading.dart';
+import 'package:flutter_application_1/core/widget/custom_loading.dart';
 import 'package:flutter_application_1/features/auth/presentation/views/widgets/title_with_textfield.dart';
 import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
-import 'package:flutter_application_1/core/utils/widget/success_message.dart';
+import 'package:flutter_application_1/core/widget/success_message.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../core/utils/widget/add_full_button.dart';
-import '../../../../../../core/utils/widget/upload_hotel_image.dart';
+import '../../../../../../core/widget/add_full_button.dart';
+import '../../../../../../core/widget/upload_hotel_image.dart';
 
 class AddHotelForm extends StatelessWidget {
   const AddHotelForm({super.key});

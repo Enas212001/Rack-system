@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/core/utils/widget/item_detail.dart';
+import 'package:flutter_application_1/core/widget/item_detail.dart';
 import 'package:flutter_application_1/features/home/devices/data/models/device_model/device_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/api/dio_consumer.dart';
-import 'package:flutter_application_1/core/utils/service_locator.dart';
+import 'package:flutter_application_1/core/service/service_locator.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_application_1/features/users/data/models/user_model/user_item.dart';
 import 'package:flutter_application_1/features/users/data/repo/user_repo.dart';

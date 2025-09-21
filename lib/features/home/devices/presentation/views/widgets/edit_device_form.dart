@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/custom_show_dialog.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
-import 'package:flutter_application_1/core/utils/widget/add_full_button.dart';
-import 'package:flutter_application_1/core/utils/widget/success_message.dart';
+import 'package:flutter_application_1/core/widget/add_full_button.dart';
+import 'package:flutter_application_1/core/widget/success_message.dart';
 import 'package:flutter_application_1/features/auth/presentation/views/widgets/title_with_textfield.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/views/widgets/switch_drop_down.dart';
 import 'package:flutter_application_1/features/home/devices/data/models/device_model/device_item.dart';
