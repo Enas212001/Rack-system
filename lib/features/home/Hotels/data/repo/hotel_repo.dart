@@ -9,4 +9,11 @@ abstract class HotelRepo {
     required String buildingNumber,
     required dynamic image,
   });
+  Future<Either<ServerFailure, String>> updateHotel({
+    String? hotelName,
+    String? buildingNumber,
+    dynamic image,
+    required String hotelId,
+  });
+  Future<Either<ServerFailure, String>> deleteHotel({required String hotelId});
 }

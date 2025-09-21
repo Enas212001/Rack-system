@@ -78,6 +78,49 @@ class HotelCubit extends Cubit<HotelState> {
     }
   }
 
+  TextEditingController hotelNameEditController = TextEditingController();
+  TextEditingController buildingNumberEditController = TextEditingController();
+  XFile? imageFromGalleryEdit;
+  Future<void> editHotel({required HotelModel hotel}) async {
+    emit(EditHotelLoading());
+    try {
+      final response = await homeRepo.updateHotel(
+        hotelId: hotel.id!,
+        hotelName: hotelNameEditController.text,
+        buildingNumber: buildingNumberEditController.text,
+        image: await upLoadImageToApi(imageFromGalleryEdit!),
+      );
+      response.fold(
+        (failure) =>
+            emit(EditHotelFailure(message: failure.failure.errorMessage)),
+        (hotel) {
+          emit(EditHotelSuccess(message: hotel));
+          hotelNameController.clear();
+          buildingNumberController.clear();
+          imageFromGallery = null;
+        },
+      );
+    } catch (e) {
+      emit(EditHotelFailure(message: e.toString()));
+    }
+  }
+
+  Future<void> deleteHotel({required HotelModel hotel}) async {
+    emit(DeleteHotelLoading());
+    try {
+      final response = await homeRepo.deleteHotel(hotelId: hotel.id!);
+      response.fold(
+        (failure) =>
+            emit(DeleteHotelFailure(message: failure.failure.errorMessage)),
+        (hotel) {
+          emit(DeleteHotelSuccess(message: hotel));
+        },
+      );
+    } catch (e) {
+      emit(DeleteHotelFailure(message: e.toString()));
+    }
+  }
+
   Future<void> pickImageWithGallery() async {
     try {
       final returnedImage = await ImagePicker().pickImage(
@@ -87,6 +130,7 @@ class HotelCubit extends Cubit<HotelState> {
       if (returnedImage == null) return;
 
       imageFromGallery = XFile(returnedImage.path);
+      imageFromGalleryEdit = XFile(returnedImage.path);
     } catch (e) {
       log(e.toString());
     }

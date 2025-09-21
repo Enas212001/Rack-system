@@ -52,4 +52,42 @@ class HotelRepoImpl implements HotelRepo {
       return left(e);
     }
   }
+
+  @override
+  Future<Either<ServerFailure, String>> updateHotel({
+    String? hotelName,
+    String? buildingNumber,
+    image,
+    required String hotelId,
+  }) async {
+    final response = await api.put(
+      Endpoints.updateHotel(hotelId),
+      data: {
+        ApiKey.hotelName: hotelName,
+        ApiKey.buildingNumber: buildingNumber,
+        ApiKey.image: image,
+      },
+    );
+    try {
+      final hotel = response['message'];
+      return right(hotel);
+    } on ServerFailure catch (e) {
+      log('Error parsing hotels: $e');
+      return left(e);
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, String>> deleteHotel({
+    required String hotelId,
+  }) async {
+    final response = await api.delete(Endpoints.deleteHotel(hotelId));
+    try {
+      final hotel = response['message'];
+      return right(hotel);
+    } on ServerFailure catch (e) {
+      log('Error parsing hotels: $e');
+      return left(e);
+    }
+  }
 }

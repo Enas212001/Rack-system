@@ -78,7 +78,10 @@ class Endpoints {
 
   static String deleteUser(String userId) =>
       '$baseUrl/users/delete_user.php?id=$userId';
-
+  static String updateHotel(String hotelId) =>
+      '$baseUrl/hotels/edit_hotel.php?id=$hotelId';
+  static String deleteHotel(String hotelId) =>
+      '$baseUrl/hotels/delete_hotel.php?hotel_id=$hotelId';
   static String getUsers = '$baseUrl/users/get_users.php';
   static String addUser = '$baseUrl/users/add_user.php';
   static String getAllSwitchs = '$baseUrl/switchs/get_switchs.php';

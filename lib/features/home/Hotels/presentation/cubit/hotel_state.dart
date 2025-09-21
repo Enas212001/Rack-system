@@ -43,6 +43,34 @@ final class AddHotelFailure extends HotelState {
   const AddHotelFailure({required this.message});
 }
 
+final class EditHotelLoading extends HotelState {}
+
+final class EditHotelSuccess extends HotelState {
+  final String message;
+
+  const EditHotelSuccess({required this.message});
+}
+
+final class EditHotelFailure extends HotelState {
+  final String message;
+
+  const EditHotelFailure({required this.message});
+}
+
+final class DeleteHotelLoading extends HotelState {}
+
+final class DeleteHotelSuccess extends HotelState {
+  final String message;
+
+  const DeleteHotelSuccess({required this.message});
+}
+
+final class DeleteHotelFailure extends HotelState {
+  final String message;
+
+  const DeleteHotelFailure({required this.message});
+}
+
 final class PickHotelFromGalleryLoading extends HotelState {}
 
 final class PickHotelFromGallerySuccess extends HotelState {}
