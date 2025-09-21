@@ -49,20 +49,6 @@ class EditBuildingForm extends StatelessWidget {
                       buildingCubit.editBuildingNameController.text = value,
                   value: building.buildingName!,
                 ),
-                SizedBox(height: 10.h),
-                TitleWithTextField(
-                  title: 'Rack ID',
-                  onChanged: (value) =>
-                      buildingCubit.editRackIdController.text = value,
-                  value: building.rackId!,
-                ),
-                SizedBox(height: 10.h),
-                TitleWithTextField(
-                  title: 'Building Rack ID',
-                  onChanged: (value) =>
-                      buildingCubit.editBuildingRackIdController.text = value,
-                  value: building.buildingRId,
-                ),
                 SizedBox(height: 60.h),
                 AddFullSizeButton(
                   onPressed: () {

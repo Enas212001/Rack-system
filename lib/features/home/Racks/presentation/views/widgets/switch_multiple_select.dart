@@ -37,6 +37,9 @@ class SwitchMultipleSelect extends StatelessWidget {
                       ),
                     )
                     .toList(),
+                backgroundColor: AppColors.backgroundColor,
+                itemsTextStyle: CustomTextStyles.text12MeduimText,
+                
                 buttonIcon: const Icon(Icons.arrow_drop_down),
                 decoration: BoxDecoration(
                   border: Border.all(color: AppColors.borderColor),

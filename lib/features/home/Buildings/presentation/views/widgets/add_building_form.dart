@@ -48,18 +48,6 @@ class AddBuildingForm extends StatelessWidget {
                   controller: buildingCubit.buildingNameController,
                   hintText: 'Enter Building Name',
                 ),
-                SizedBox(height: 10.h),
-                TitleWithTextField(
-                  title: 'Rack ID',
-                  controller: buildingCubit.rackIdController,
-                  hintText: 'Enter your Rack ID',
-                ),
-                SizedBox(height: 10.h),
-                TitleWithTextField(
-                  title: 'Building Rack ID',
-                  controller: buildingCubit.buildingRackIdController,
-                  hintText: 'Enter Building Rack ID',
-                ),
                 SizedBox(height: 60.h),
                 AddFullSizeButton(
                   onPressed: () {

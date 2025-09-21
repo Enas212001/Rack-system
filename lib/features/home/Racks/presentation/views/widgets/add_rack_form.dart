@@ -43,7 +43,7 @@ class AddRackForm extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Add Rack', style: CustomTextStyles.text14W500Primary),
+              Text('Add New Rack', style: CustomTextStyles.text14W500Primary),
               SizedBox(height: 20.h),
               TitleWithTextField(
                 title: 'Rack name',

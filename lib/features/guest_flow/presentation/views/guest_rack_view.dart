@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/rack_cubit/rack_cubit.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/switch_cubit/switch_cubit.dart';
-import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'widgets/guest_rack_view_body.dart';
@@ -21,9 +20,9 @@ class GuestRackView extends StatelessWidget {
           BlocProvider(
             create: (context) => SwitchCubit()..getSwitchs(hotelId: building.hotelId!),
           ),
-          BlocProvider(
-            create: (context) => DeviceCubit()..getDevices(switchId: building.id!),
-          ),
+          // BlocProvider(
+          //   create: (context) => DeviceCubit()..getDevices(switchId: building.id!),
+          // ),
         ],
         child: GuestRackViewBody(building: building),
       ),

@@ -27,7 +27,7 @@ class TopWidget extends StatelessWidget {
       alignment: isAdd == true ? Alignment.center : Alignment.bottomCenter,
       padding:
           EdgeInsets.only(bottom: 12.h, top: isAdd == true ? 16.h : 0) +
-          EdgeInsets.symmetric(horizontal: 16.w),
+          EdgeInsets.symmetric(horizontal: 12.w),
       decoration: BoxDecoration(
         color: AppColors.primaryColor,
         borderRadius: BorderRadius.only(

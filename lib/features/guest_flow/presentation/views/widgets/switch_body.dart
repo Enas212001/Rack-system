@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/utils/widget/lost_connection.dart';
 import 'package:flutter_application_1/core/utils/widget/shimmer_widget.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/switch_cubit/switch_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'switch_guest_item.dart';
 
 class SwitchBody extends StatelessWidget {
-  const SwitchBody({super.key, this.onTap});
-  final void Function()? onTap;
+  const SwitchBody({
+    super.key,
+    // this.onTap
+  });
+  // final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SwitchCubit, SwitchState>(
@@ -17,7 +22,13 @@ class SwitchBody extends StatelessWidget {
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               return GestureDetector(
-                onTap: onTap,
+                onTap: () {
+                  // onTap!();
+                  context.push(
+                    AppRoutes.guestDevice,
+                    extra: state.switches[index],
+                  );
+                },
                 child: SwitchGuestItem(switchItem: state.switches[index]),
               );
             }, childCount: state.switches.length),

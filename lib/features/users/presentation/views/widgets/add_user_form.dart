@@ -70,7 +70,7 @@ class _AddUserFormState extends State<AddUserForm> {
                 ),
                 SizedBox(height: 10.h),
                 DropdownButtonFormField<String>(
-                  value: userCubit.roleId,
+                  initialValue: userCubit.roleId,
                   decoration: InputDecoration(
                     labelText: 'Role',
                     border: borderTextField(),
@@ -81,7 +81,6 @@ class _AddUserFormState extends State<AddUserForm> {
                     DropdownMenuItem(value: 'admin', child: Text('Admin')),
                     DropdownMenuItem(value: 'user', child: Text('User')),
                   ],
-
                   onChanged: (value) {
                     setState(() {
                       selectedRole = value;

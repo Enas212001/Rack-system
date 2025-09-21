@@ -16,9 +16,6 @@ class BuildingCubit extends Cubit<BuildingState> {
   );
 
   final GlobalKey<FormState> formAddBuildingKey = GlobalKey<FormState>();
-  final TextEditingController rackIdController = TextEditingController();
-  final TextEditingController buildingRackIdController =
-      TextEditingController();
   final TextEditingController buildingNameController = TextEditingController();
 
   Future<void> getBuildings({required String hotelId}) async {
@@ -60,8 +57,6 @@ class BuildingCubit extends Cubit<BuildingState> {
     try {
       final response = await buildingRepo.addBuilding(
         buildingName: buildingNameController.text,
-        rackId: rackIdController.text,
-        buildingRackId: buildingRackIdController.text,
         hotelId: hotelId,
       );
       response.fold(
@@ -70,8 +65,6 @@ class BuildingCubit extends Cubit<BuildingState> {
         (building) {
           emit(AddBuildingSuccess(building: building));
           buildingNameController.clear();
-          rackIdController.clear();
-          buildingRackIdController.clear();
         },
       );
     } catch (e) {
@@ -80,9 +73,7 @@ class BuildingCubit extends Cubit<BuildingState> {
   }
 
   final GlobalKey<FormState> formEditBuildingKey = GlobalKey<FormState>();
-  final TextEditingController editRackIdController = TextEditingController();
-  final TextEditingController editBuildingRackIdController =
-      TextEditingController();
+  
   final TextEditingController editBuildingNameController =
       TextEditingController();
   Future<void> editBuilding({required BuildingModel building}) async {
@@ -93,12 +84,7 @@ class BuildingCubit extends Cubit<BuildingState> {
         buildingName: editBuildingNameController.text.isEmpty
             ? building.buildingName!
             : editBuildingNameController.text,
-        rackId: editRackIdController.text.isEmpty
-            ? building.rackId!
-            : editRackIdController.text,
-        buildingRackId: editBuildingRackIdController.text.isEmpty
-            ? building.buildingRId!
-            : editBuildingRackIdController.text,
+        
       );
       response.fold(
         (failure) =>
@@ -106,8 +92,7 @@ class BuildingCubit extends Cubit<BuildingState> {
         (building) {
           emit(EditBuildingSuccess(building: building));
           editBuildingNameController.clear();
-          editRackIdController.clear();
-          editBuildingRackIdController.clear();
+          
         },
       );
     } catch (e) {

@@ -42,6 +42,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
       cursorColor: AppColors.primaryColor,
       enableSuggestions: true,
       controller: widget.controller,

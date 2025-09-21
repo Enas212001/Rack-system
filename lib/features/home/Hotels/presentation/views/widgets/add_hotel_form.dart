@@ -52,9 +52,9 @@ class AddHotelForm extends StatelessWidget {
                 ),
                 SizedBox(height: 10.h),
                 TitleWithTextField(
-                  title: 'Building Number',
+                  title: 'Buildings Count',
                   controller: hotelCubit.buildingNumberController,
-                  hintText: 'e.g R1, Tower -3',
+                  hintText: 'Enter Buildings Count',
                 ),
                 UploadHotelImage(),
                 SizedBox(height: 20.h),

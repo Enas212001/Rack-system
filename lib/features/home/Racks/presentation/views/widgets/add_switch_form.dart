@@ -35,7 +35,7 @@ class AddSwitchForm extends StatelessWidget {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Add Switch', style: CustomTextStyles.text14W500Primary),
+            Text('Add New Switch', style: CustomTextStyles.text14W500Primary),
             SizedBox(height: 20.h),
             TitleWithTextField(
               title: 'Switch Name',
@@ -63,7 +63,7 @@ class AddSwitchForm extends StatelessWidget {
             ),
             SizedBox(height: 10.h),
             TitleWithTextField(
-              title: 'Up link core 2',
+              title: 'Up link core 2 (optional)',
               controller: cubit.upLinkCore2Controller,
             ),
             SizedBox(height: 10.h),
@@ -73,7 +73,7 @@ class AddSwitchForm extends StatelessWidget {
             ),
             SizedBox(height: 10.h),
             TitleWithTextField(
-              title: 'Model',
+              title: 'Model (optional)',
               controller: cubit.switchModelController,
             ),
             SizedBox(height: 40.h),

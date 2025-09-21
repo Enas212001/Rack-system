@@ -30,13 +30,6 @@ class GuestRackTapBar extends StatelessWidget {
             selected: selectedIndex == 1,
             onIndexChanged: onIndexChanged,
           ),
-          SizedBox(width: 24.w),
-          TapBarItem(
-            title: 'Devices',
-            index: 2,
-            selected: selectedIndex == 2,
-            onIndexChanged: onIndexChanged,
-          ),
         ],
       ),
     );

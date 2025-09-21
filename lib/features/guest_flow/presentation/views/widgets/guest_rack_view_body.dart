@@ -7,10 +7,8 @@ import 'package:flutter_application_1/core/utils/widget/top_with_back.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/rack_cubit/rack_cubit.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/switch_cubit/switch_cubit.dart';
-import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'device_body.dart';
 import 'guest_tap_bar.dart';
 import 'rack_body.dart';
 import 'switch_body.dart';
@@ -39,11 +37,11 @@ class _GuestRackViewBodyState extends State<GuestRackViewBody> {
               hotelId: widget.building.hotelId!,
             );
             break;
-          case 2:
-            context.read<DeviceCubit>().getDevices(
-              switchId: widget.building.id!,
-            );
-            break;
+          // case 2:
+          //   context.read<DeviceCubit>().getDevices(
+          //     switchId: widget.building.id!,
+          //   );
+          // break;
         }
       },
       color: AppColors.primaryColor,
@@ -79,14 +77,14 @@ class _GuestRackViewBodyState extends State<GuestRackViewBody> {
         return RacksBody();
       case 1:
         return SwitchBody(
-          onTap: () {
-            setState(() {
-              selectedIndex = 2;
-            });
-          },
+          // onTap: () {
+          //   setState(() {
+          //     selectedIndex = 2;
+          //   });
+          // },
         );
-      case 2:
-        return DeviceBody();
+      // case 2:
+      //   return DeviceBody();
       default:
         return const SliverToBoxAdapter();
     }

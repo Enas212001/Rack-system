@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/features/guest_flow/presentation/views/device_guest_view.dart';
 import 'package:flutter_application_1/features/guest_flow/presentation/views/guest_building_view.dart';
 import 'package:flutter_application_1/features/guest_flow/presentation/views/guest_rack_view.dart';
 import 'package:flutter_application_1/features/guest_flow/presentation/views/report_view.dart';
@@ -54,7 +55,7 @@ class AppRoutes {
   static const String guestBuilding = '/guest_building';
   static const String guestRack = '/guest_rack';
   static const String report = '/report';
-
+  static const String guestDevice = '/guest_device';
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
@@ -190,6 +191,11 @@ class AppRoutes {
         path: report,
         builder: (context, state) =>
             ReportView(switchItem: state.extra as SwitchItem),
+      ),
+      GoRoute(
+        path: guestDevice,
+        builder: (context, state) =>
+            DeviceGuestView(switchItem: state.extra as SwitchItem),
       ),
     ],
   );

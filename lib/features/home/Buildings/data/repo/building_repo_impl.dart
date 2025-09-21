@@ -17,8 +17,6 @@ class BuildingRepoImpl implements BuildingRepo {
   @override
   Future<Either<ServerFailure, BuildingModel>> addBuilding({
     required String buildingName,
-    required String rackId,
-    required String buildingRackId,
     required String hotelId,
   }) async {
     try {
@@ -26,8 +24,6 @@ class BuildingRepoImpl implements BuildingRepo {
         Endpoints.addBuilding(hotelId),
         data: {
           ApiKey.buildingName: buildingName,
-          ApiKey.rackId: rackId,
-          ApiKey.buildingRackId: buildingRackId,
         },
       );
       final building = BuildingModel.fromJson(response);
@@ -73,16 +69,12 @@ class BuildingRepoImpl implements BuildingRepo {
   Future<Either<ServerFailure, BuildingModel>> editBuilding({
     required String buildingId,
     required String buildingName,
-    required String rackId,
-    required String buildingRackId,
   }) async {
     try {
       final response = await api.put(
         Endpoints.editBuilding(buildingId),
         data: {
           ApiKey.buildingName: buildingName,
-          ApiKey.rackId: rackId,
-          ApiKey.buildingRackId: buildingRackId,
         },
       );
       final building = BuildingModel.fromJson(response);

@@ -16,6 +16,11 @@ class DeviceBody extends StatelessWidget {
         if (state is DeviceSuccess) {
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
+              if (state.devices.isEmpty) {
+                return const SliverToBoxAdapter(
+                  child: Center(child: Text('No devices found')),
+                );
+              }
               return DeviceGuetItem(deviceItem: state.devices[index]);
             }, childCount: state.devices.length),
           );
