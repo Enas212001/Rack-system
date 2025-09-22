@@ -3,72 +3,72 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/custom_show_dialog.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
+import 'package:flutter_application_1/core/utils/api_key.dart';
 import 'package:flutter_application_1/core/utils/app_strings.dart';
+import 'package:flutter_application_1/core/widget/add_full_button.dart';
 import 'package:flutter_application_1/core/widget/custom_loading.dart';
-import 'package:flutter_application_1/features/auth/presentation/views/widgets/title_with_textfield.dart';
-import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:flutter_application_1/core/widget/success_message.dart';
+import 'package:flutter_application_1/core/widget/upload_hotel_image.dart';
+import 'package:flutter_application_1/features/auth/presentation/views/widgets/title_with_textfield.dart';
+import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
+import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../core/widget/add_full_button.dart';
-import '../../../../../../core/widget/upload_hotel_image.dart';
-
-class AddHotelForm extends StatelessWidget {
-  const AddHotelForm({super.key});
+class EditHotelForm extends StatelessWidget {
+  const EditHotelForm({super.key, required this.hotel});
+  final HotelModel hotel;
   @override
   Widget build(BuildContext context) {
     HotelCubit hotelCubit = BlocProvider.of<HotelCubit>(context);
     return BlocConsumer<HotelCubit, HotelState>(
       listener: (context, state) {
-        if (state is AddHotelSuccess) {
+        if (state is EditHotelSuccess) {
           hotelCubit.getHotels();
           Navigator.pop(context);
           customShowDialog(
             context,
-            widget: SuccessMessage(messageName: AppStrings.hotel),
+            widget: SuccessMessage(messageName: AppStrings.hotel, isEdit: true),
           );
-        } else if (state is AddHotelFailure) {
+        } else if (state is EditHotelFailure) {
           log(state.message);
           showToast('Failed to add Hotel');
-        } else if (state is AddHotelLoading) {
+        } else if (state is EditHotelLoading) {
           CustomLoading();
         }
       },
       builder: (context, state) {
         return Form(
-          key: hotelCubit.formAddHotelKey,
+          key: hotelCubit.formEditHotelKey,
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  'Add New Hotel',
-                  style: CustomTextStyles.text14W500Primary,
-                ),
+                Text('Edit Hotel', style: CustomTextStyles.text14W500Primary),
                 SizedBox(height: 20.h),
                 TitleWithTextField(
                   title: 'Hotel Name',
-                  controller: hotelCubit.hotelNameController,
-                  hintText: 'Enter hotel Name',
+                  value: hotel.name,
+                  onChanged: (value) =>
+                      hotelCubit.hotelNameEditController.text = value,
                 ),
                 SizedBox(height: 10.h),
                 TitleWithTextField(
                   title: 'Buildings Count',
-                  controller: hotelCubit.buildingNumberController,
-                  hintText: 'Enter Buildings Count',
+                  value: hotel.buildingId.toString(),
+                  onChanged: (value) =>
+                      hotelCubit.buildingNumberEditController.text = value,
                 ),
-                UploadHotelImage(),
+                UploadHotelImage(
+                  currentImageUrl:
+                      '${Endpoints.baseUrlImage}/${hotel.logo?.trim()}',
+                ),
                 SizedBox(height: 20.h),
                 AddFullSizeButton(
                   onPressed: () {
-                    if (hotelCubit.formAddHotelKey.currentState!.validate()) {
-                      if (hotelCubit.imageFromGallery == null) {
-                        showToast("Please upload an image for the hotel");
-                        return;
-                      }
-                      hotelCubit.addHotel();
+                    if (hotelCubit.formEditHotelKey.currentState!.validate()) {
+                      hotelCubit.editHotel(hotel: hotel);
                     }
                   },
                 ),

@@ -29,7 +29,10 @@ class SwitchCubit extends Cubit<SwitchState> {
     final result = await switchRepo.getSwitchs(hotelId: hotelId);
     result.fold(
       (failure) => emit(SwitchFailure(message: failure.failure.errorMessage)),
-      (switchs) => emit(SwitchSuccess(switches: switchs)),
+      (switchs) {
+        filteredSwitchs = switchs;
+        emit(SwitchSuccess(switches: switchs));
+      },
     );
   }
 

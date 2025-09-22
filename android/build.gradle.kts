@@ -11,7 +11,13 @@ rootProject.layout.buildDirectory.value(newBuildDir)
 subprojects {
     val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
     project.layout.buildDirectory.value(newSubprojectBuildDir)
+
+    // Only add compiler args, don't override sourceCompatibility
+    tasks.withType<JavaCompile> {
+        options.compilerArgs.add("-Xlint:-options")
+    }
 }
+
 subprojects {
     project.evaluationDependsOn(":app")
 }

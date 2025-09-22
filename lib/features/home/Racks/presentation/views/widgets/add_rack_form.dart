@@ -78,7 +78,6 @@ class AddRackForm extends StatelessWidget {
                     rackCubit.addRack(building: buildingModel);
                   }
                 },
-                text: 'Save',
               ),
             ],
           ),

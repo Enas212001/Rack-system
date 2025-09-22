@@ -5,11 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'custom_button.dart';
 
-class DeleteWidget extends StatelessWidget {
-  const DeleteWidget({super.key, required this.onDelete, required this.title});
+class LogoutWidget extends StatelessWidget {
+  const LogoutWidget({super.key, required this.onLogout});
 
-  final VoidCallback onDelete;
-  final String title;
+  final VoidCallback onLogout;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -34,14 +33,14 @@ class DeleteWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Delete $title',
+                'Logout',
                 style: CustomTextStyles.text16MeduimText.copyWith(
                   color: AppColors.primaryColor,
                 ),
               ),
               SizedBox(height: 14.h),
               Text(
-                'Are you sure you need to delete this $title ?',
+                'Are you sure you want to logout ?',
                 style: CustomTextStyles.text16MeduimText.copyWith(
                   color: AppColors.lightGreyColor,
                 ),
@@ -61,11 +60,9 @@ class DeleteWidget extends StatelessWidget {
                   SizedBox(width: 16.w),
                   Expanded(
                     child: CustomButton(
-                      text: 'Delete',
+                      text: 'Logout',
                       isPrimary: true,
-                      onPressed: () {
-                        onDelete();
-                      },
+                      onPressed: onLogout,
                     ),
                   ),
                 ],

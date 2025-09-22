@@ -30,7 +30,7 @@ class HotelsViewBody extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(16.r),
-              child: const AddClientWidget(),
+              child: const AddHotelButton(),
             ),
           ),
           SliverPadding(

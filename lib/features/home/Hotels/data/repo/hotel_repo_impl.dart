@@ -60,8 +60,9 @@ class HotelRepoImpl implements HotelRepo {
     image,
     required String hotelId,
   }) async {
-    final response = await api.put(
+    final response = await api.post(
       Endpoints.updateHotel(hotelId),
+      isFormData: true,
       data: {
         ApiKey.hotelName: hotelName,
         ApiKey.buildingNumber: buildingNumber,

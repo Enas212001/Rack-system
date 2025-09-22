@@ -23,7 +23,7 @@ class EditBuildingForm extends StatelessWidget {
           Navigator.pop(context);
           customShowDialog(
             context,
-            widget: SuccessMessage(messageName: 'Building'),
+            widget: SuccessMessage(messageName: 'Building', isEdit: true),
           );
         } else if (state is EditBuildingFailure) {
           showToast('Failed to edit building');
@@ -57,7 +57,6 @@ class EditBuildingForm extends StatelessWidget {
                       buildingCubit.editBuilding(building: building);
                     }
                   },
-                  text: 'Submit',
                 ),
               ],
             ),

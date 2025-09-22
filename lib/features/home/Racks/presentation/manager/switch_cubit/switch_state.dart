@@ -14,6 +14,8 @@ final class SwitchLoading extends SwitchState {}
 final class SwitchSuccess extends SwitchState {
   final List<SwitchItem> switches;
   const SwitchSuccess({required this.switches});
+  @override
+  List<Object> get props => [switches];
 }
 
 final class SwitchFailure extends SwitchState {

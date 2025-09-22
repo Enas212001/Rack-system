@@ -11,7 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UploadHotelImage extends StatefulWidget {
-  const UploadHotelImage({super.key});
+  final String? currentImageUrl; // <-- pass hotel.logo here if editing
+
+  const UploadHotelImage({super.key, this.currentImageUrl});
 
   @override
   State<UploadHotelImage> createState() => _UploadHotelImageState();
@@ -25,6 +27,7 @@ class _UploadHotelImageState extends State<UploadHotelImage> {
     if (picked != null) {
       final cubit = context.read<HotelCubit>();
       cubit.imageFromGallery = XFile(picked.path);
+      cubit.imageFromGalleryEdit = XFile(picked.path);
       setState(() {
         selectedImage = File(picked.path);
       });
@@ -33,6 +36,24 @@ class _UploadHotelImageState extends State<UploadHotelImage> {
 
   @override
   Widget build(BuildContext context) {
+    final showImage = selectedImage != null
+        ? Image.file(selectedImage!, fit: BoxFit.cover)
+        : (widget.currentImageUrl != null
+              ? Image.network(widget.currentImageUrl!, fit: BoxFit.cover)
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.file_upload_outlined,
+                      color: AppColors.greyColor,
+                    ),
+                    Text(
+                      AppStrings.uploadImage,
+                      style: CustomTextStyles.text12RegularGrey,
+                    ),
+                  ],
+                ));
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -58,28 +79,10 @@ class _UploadHotelImageState extends State<UploadHotelImage> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.r),
               ),
-              child: selectedImage != null
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.file(
-                        selectedImage!,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                    )
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.file_upload_outlined,
-                          color: AppColors.greyColor,
-                        ),
-                        Text(
-                          AppStrings.uploadImage,
-                          style: CustomTextStyles.text12RegularGrey,
-                        ),
-                      ],
-                    ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: showImage,
+              ),
             ),
           ),
         ),

@@ -45,7 +45,7 @@ class DeviceViewBody extends StatelessWidget {
                   SizedBox(
                     width: 220.w,
                     child: Text(
-                      'Devices for: ${switchItem.name} switch',
+                      'Devices for: ${switchItem.name}',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: CustomTextStyles.text16MeduimText.copyWith(

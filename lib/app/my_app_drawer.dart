@@ -3,6 +3,7 @@ import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/app_assets.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
+import 'package:flutter_application_1/core/widget/logout_widget.dart';
 import 'package:flutter_application_1/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,7 +60,16 @@ class MyAppDrawer extends StatelessWidget {
                   image: Assets.imagesLogOut,
                   title: 'Logout',
                   onTap: () {
-                    context.read<LoginCubit>().logout();
+                    showDialog(
+                      context: context,
+                      builder: (dialogContext) {
+                        return LogoutWidget(
+                          onLogout: () {
+                            context.read<LoginCubit>().logout();
+                          },
+                        );
+                      },
+                    );
                   },
                 );
               },

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/guest_flow/presentation/views/device_guest_view.dart';
 import 'package:flutter_application_1/features/guest_flow/presentation/views/guest_building_view.dart';
 import 'package:flutter_application_1/features/guest_flow/presentation/views/guest_rack_view.dart';
-import 'package:flutter_application_1/features/guest_flow/presentation/views/report_view.dart';
+import 'package:flutter_application_1/features/report/view/report_view.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/views/edit_building_view.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/cubit/building_cubit.dart';
 import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
+import 'package:flutter_application_1/features/home/Hotels/presentation/views/edit_hotel_view.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/rack_model/rack_item.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/rack_model/rack_model.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
@@ -42,6 +43,7 @@ class AppRoutes {
   static const String addBuilding = '/add_building';
   static const String addRack = '/add_rack';
   static const String addHotel = '/add_hotel';
+  static const String editHotel = '/edit_hotel';
   static const String editBuilding = '/edit_building';
   static const String addUser = '/add_user';
   static const String users = '/users';
@@ -138,6 +140,12 @@ class AppRoutes {
             value: hotelCubit,
             child: const AddHotelView(),
           );
+        },
+      ),
+      GoRoute(
+        path: editHotel,
+        builder: (context, state) {
+          return EditHotelView(hotel: state.extra as HotelModel);
         },
       ),
       GoRoute(

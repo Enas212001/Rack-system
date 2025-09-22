@@ -102,7 +102,6 @@ class EditDeviceForm extends StatelessWidget {
               onPressed: () {
                 deviceCubit.editDevice(device: deviceItem);
               },
-              text: 'Save',
             ),
           ],
         );

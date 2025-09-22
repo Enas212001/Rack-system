@@ -81,7 +81,6 @@ class AddSwitchForm extends StatelessWidget {
               onPressed: () {
                 cubit.addSwitch(hotelId: buildingModel.hotelId!);
               },
-              text: 'Save',
             ),
           ],
         );

@@ -70,7 +70,6 @@ class EditRackForm extends StatelessWidget {
                     cubit.editRack(rack: rack);
                   }
                 },
-                text: 'Save',
               ),
             ],
           ),

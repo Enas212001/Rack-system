@@ -4,9 +4,8 @@ import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddFullSizeButton extends StatelessWidget {
-  const AddFullSizeButton({super.key, required this.text, this.onPressed});
+  const AddFullSizeButton({super.key, this.onPressed});
 
-  final String text;
   final void Function()? onPressed;
 
   @override
@@ -20,7 +19,7 @@ class AddFullSizeButton extends StatelessWidget {
           backgroundColor: AppColors.primaryColor,
         ),
         child: Text(
-          text,
+          'Submit',
           style: CustomTextStyles.text14Regular.copyWith(
             color: AppColors.whiteColor,
           ),

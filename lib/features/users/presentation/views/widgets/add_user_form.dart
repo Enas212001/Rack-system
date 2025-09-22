@@ -111,7 +111,6 @@ class _AddUserFormState extends State<AddUserForm> {
                       userCubit.addUsersInfo();
                     }
                   },
-                  text: 'Save',
                 ),
               ],
             ),

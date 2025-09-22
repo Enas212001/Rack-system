@@ -41,14 +41,17 @@ class AddBuildingForm extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Add Building', style: CustomTextStyles.text14W500Primary),
+                Text(
+                  'Add New Building',
+                  style: CustomTextStyles.text14W500Primary,
+                ),
                 SizedBox(height: 20.h),
                 TitleWithTextField(
                   title: 'Building Name',
                   controller: buildingCubit.buildingNameController,
                   hintText: 'Enter Building Name',
                 ),
-                SizedBox(height: 60.h),
+                SizedBox(height: 20.h),
                 AddFullSizeButton(
                   onPressed: () {
                     if (buildingCubit.formAddBuildingKey.currentState!
@@ -56,7 +59,6 @@ class AddBuildingForm extends StatelessWidget {
                       buildingCubit.addBuilding(hotelId: hotelId);
                     }
                   },
-                  text: 'Submit',
                 ),
               ],
             ),

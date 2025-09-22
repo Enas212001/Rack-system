@@ -78,26 +78,35 @@ class HotelCubit extends Cubit<HotelState> {
     }
   }
 
+  final GlobalKey<FormState> formEditHotelKey = GlobalKey<FormState>();
   TextEditingController hotelNameEditController = TextEditingController();
   TextEditingController buildingNumberEditController = TextEditingController();
   XFile? imageFromGalleryEdit;
   Future<void> editHotel({required HotelModel hotel}) async {
     emit(EditHotelLoading());
     try {
+      final newImage = imageFromGalleryEdit != null
+          ? await upLoadImageToApi(imageFromGalleryEdit!)
+          : hotel.logo; // keep old logo if no new image
+
       final response = await homeRepo.updateHotel(
         hotelId: hotel.id!,
-        hotelName: hotelNameEditController.text,
-        buildingNumber: buildingNumberEditController.text,
-        image: await upLoadImageToApi(imageFromGalleryEdit!),
+        hotelName: hotelNameEditController.text.isNotEmpty
+            ? hotelNameEditController.text
+            : hotel.name,
+        buildingNumber: buildingNumberEditController.text.isNotEmpty
+            ? buildingNumberEditController.text
+            : hotel.buildingId,
+        image: newImage,
       );
       response.fold(
         (failure) =>
             emit(EditHotelFailure(message: failure.failure.errorMessage)),
         (hotel) {
           emit(EditHotelSuccess(message: hotel));
-          hotelNameController.clear();
-          buildingNumberController.clear();
-          imageFromGallery = null;
+          hotelNameEditController.clear();
+          buildingNumberEditController.clear();
+          imageFromGalleryEdit = null;
         },
       );
     } catch (e) {

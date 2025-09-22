@@ -54,7 +54,7 @@ class DeviceRepoImpl extends DeviceRepo {
       final response = await apiConsumer.delete(
         Endpoints.deleteDevice(deviceId),
       );
-      if (response['message'] == 'success') {
+      if (response['status'] == 'success') {
         return right(response['message']);
       } else {
         return left(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/widget/custom_loading.dart';
 import 'package:flutter_application_1/core/widget/lost_connection.dart';
@@ -14,42 +15,54 @@ class HotelsSliverGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HotelCubit, HotelState>(
-      builder: (context, state) {
-        if (state is HotelLoading) {
-          return const SliverToBoxAdapter(child: CustomLoading());
-        } else if (state is HotelFailure) {
-          return SliverFillRemaining(
-            child: Center(
-              child: state.message == 'Connection timed out. Please try again.'
-                  ? LostConnection()
-                  : Text(state.message),
-            ),
-          );
-        } else if (state is HotelSuccess) {
-          final hotels = state.hotels;
-          return SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 16.h,
-              crossAxisSpacing: 16.w,
-              childAspectRatio: 1.1,
-            ),
-            delegate: SliverChildBuilderDelegate((context, index) {
-              final hotel = hotels[index];
-              return GestureDetector(
-                onTap: () {
-                  GoRouter.of(context).push(AppRoutes.building, extra: hotel);
-                },
-                child: HotelItem(hotel: hotel),
-              );
-            }, childCount: hotels.length),
-          );
+    return BlocListener<HotelCubit, HotelState>(
+      listener: (context, state) {
+        if (state is DeleteHotelSuccess) {
+          context.read<HotelCubit>().getHotels();
+        } else if (state is DeleteHotelFailure) {
+          showToast(state.message);
         }
-        return SliverToBoxAdapter(
-          child: Center(child: Center(child: Text('Something went wrong'))),
-        );
       },
+      child: BlocBuilder<HotelCubit, HotelState>(
+        builder: (context, state) {
+          if (state is HotelLoading) {
+            return const SliverToBoxAdapter(child: CustomLoading());
+          } else if (state is HotelFailure) {
+            return SliverFillRemaining(
+              child: Center(
+                child:
+                    state.message == 'Connection timed out. Please try again.'
+                    ? LostConnection()
+                    : Text(state.message),
+              ),
+            );
+          } else if (state is HotelSuccess) {
+            final hotels = state.hotels;
+            return SliverGrid(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 16.h,
+                crossAxisSpacing: 16.w,
+                childAspectRatio: 1.1,
+              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final hotel = hotels[index];
+                return GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).push(AppRoutes.building, extra: hotel);
+                  },
+                  child: HotelItem(hotel: hotel),
+                );
+              }, childCount: hotels.length),
+            );
+          } else if (state is DeleteHotelLoading) {
+            return const SliverToBoxAdapter(child: CustomLoading());
+          }
+          return const SliverToBoxAdapter(
+            child: Center(child: Center(child: Text('Something went wrong'))),
+          );
+        },
+      ),
     );
   }
 }

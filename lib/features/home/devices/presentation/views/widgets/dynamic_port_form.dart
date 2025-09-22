@@ -56,10 +56,7 @@ class DynamicPortForm extends StatelessWidget {
                   },
                 );
               }),
-              AddFullSizeButton(
-                onPressed: () => cubit.addDevice(switchId),
-                text: 'Save',
-              ),
+              AddFullSizeButton(onPressed: () => cubit.addDevice(switchId)),
             ],
           );
         }

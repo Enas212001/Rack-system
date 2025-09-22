@@ -4,7 +4,7 @@ import 'package:flutter_application_1/core/func/export_switch_pdf.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/widget/custom_button.dart';
 import 'package:flutter_application_1/features/guest_flow/presentation/manager/cubit/summary_cubit.dart';
-import 'package:flutter_application_1/features/guest_flow/presentation/views/widgets/text_primary_16.dart';
+import 'package:flutter_application_1/features/report/view/widgets/text_primary_16.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
 import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';

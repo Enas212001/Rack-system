@@ -64,10 +64,7 @@ class AddSummaryForm extends StatelessWidget {
                 controller: switchCubit.apOutController,
               ),
               SizedBox(height: 40.h),
-              AddFullSizeButton(
-                onPressed: () => switchCubit.addSummary(),
-                text: 'Save',
-              ),
+              AddFullSizeButton(onPressed: () => switchCubit.addSummary()),
             ],
           ),
         );

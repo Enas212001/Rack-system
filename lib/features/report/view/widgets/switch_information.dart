@@ -3,7 +3,7 @@ import 'package:flutter_application_1/core/widget/item_detail.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'card_details.dart';
+import '../../../guest_flow/presentation/views/widgets/card_details.dart';
 import 'text_primary_16.dart';
 
 class SwitchInformation extends StatelessWidget {
@@ -20,18 +20,18 @@ class SwitchInformation extends StatelessWidget {
           children: [
             Text16MeduimPrimaryColor(text: 'Switch information'),
             SizedBox(height: 16.h),
-            ItemDetail(label: 'Device Name :', value: switchItem.name!),
-            ItemDetail(label: 'Serial :', value: switchItem.serialNumber!),
+            ItemDetail(label: 'Device Name :', value: switchItem.name ?? ''),
+            ItemDetail(label: 'Serial :', value: switchItem.serialNumber ?? ''),
           ],
         ),
         bottomCard: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ItemDetail(label: 'MAC :', value: switchItem.macAdd!),
-            ItemDetail(label: 'Model :', value: switchItem.model!),
+            ItemDetail(label: 'MAC :', value: switchItem.macAdd ?? ''),
+            ItemDetail(label: 'Model :', value: switchItem.model ?? ''),
             ItemDetail(
               label: 'Switch Port :',
-              value: switchItem.portNumber!.toString(),
+              value: switchItem.portNumber?.toString() ?? '0',
             ),
             // ItemDetail(label: 'Patch Panel Port :', value: switchItem.patchPanelPort!),
           ],

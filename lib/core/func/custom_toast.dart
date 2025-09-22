@@ -7,8 +7,8 @@ showToast(String msg) {
     msg: msg,
     toastLength: Toast.LENGTH_LONG,
     gravity: ToastGravity.BOTTOM,
-    backgroundColor: AppColors.whiteColor,
-    textColor: AppColors.blackColor,
+    backgroundColor: AppColors.primaryColor,
+    textColor: AppColors.whiteColor,
     fontSize: 16.sp,
   );
 }

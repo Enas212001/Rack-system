@@ -23,7 +23,9 @@ class DeviceItemWidget extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(12.r),
             child: ExpandableInfoCard(
-              title: deviceItem.deviceName.toString(),
+              title: deviceItem.deviceName.toString() == 'null'
+                  ? ''
+                  : deviceItem.deviceName.toString(),
               details: DeviceDetails(deviceItem: deviceItem),
             ),
           ),

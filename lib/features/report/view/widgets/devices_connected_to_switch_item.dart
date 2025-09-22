@@ -12,7 +12,7 @@ class DevicesConnectedToSwitchItem extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(12.r),
       child: ExpandableInfoCard(
-        title: deviceItem.deviceName!,
+        title: deviceItem.deviceName ?? '',
         details: Padding(
           padding: EdgeInsets.only(top: 10.h),
           child: Column(
@@ -20,11 +20,17 @@ class DevicesConnectedToSwitchItem extends StatelessWidget {
             children: [
               ItemDetail(
                 label: 'Serial Number',
-                value: deviceItem.deviceSerial!,
+                value: deviceItem.deviceSerial ?? '',
               ),
-              ItemDetail(label: 'MAC Address', value: deviceItem.macAddress!),
-              ItemDetail(label: 'IP Address', value: deviceItem.ipAddress!),
-              ItemDetail(label: 'Model', value: deviceItem.deviceModel!),
+              ItemDetail(
+                label: 'MAC Address',
+                value: deviceItem.macAddress ?? '',
+              ),
+              ItemDetail(
+                label: 'IP Address',
+                value: deviceItem.ipAddress ?? '',
+              ),
+              ItemDetail(label: 'Model', value: deviceItem.deviceModel ?? ''),
             ],
           ),
         ),

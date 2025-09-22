@@ -37,7 +37,7 @@ class DevicesListView extends StatelessWidget {
               ),
             ),
             Divider(height: 1, color: AppColors.borderColor),
-            BlocConsumer<DeviceCubit, DeviceState>(
+            BlocListener<DeviceCubit, DeviceState>(
               listener: (context, state) {
                 if (state is DeviceDeleteSuccess) {
                   context.read<DeviceCubit>().getDevices(switchId: switchId);
@@ -45,36 +45,34 @@ class DevicesListView extends StatelessWidget {
                   showToast(state.failure);
                 }
               },
-              builder: (context, state) {
-                return BlocBuilder<DeviceCubit, DeviceState>(
-                  builder: (context, state) {
-                    if (state is DeviceLoading) {
-                      return CustomLoading();
-                    } else if (state is DeviceFailure) {
-                      return Center(
-                        child:
-                            state.failure ==
-                                'Connection timed out. Please try again.'
-                            ? LostConnection()
-                            : Text(state.failure),
-                      );
-                    } else if (state is DeviceSuccess) {
-                      if (state.devices.isEmpty) {
-                        return const Center(child: Text('No devices found'));
-                      }
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: state.devices.length,
-                        itemBuilder: (context, index) =>
-                            DeviceItemWidget(deviceItem: state.devices[index]),
-                      );
+              child: BlocBuilder<DeviceCubit, DeviceState>(
+                builder: (context, state) {
+                  if (state is DeviceLoading) {
+                    return CustomLoading();
+                  } else if (state is DeviceFailure) {
+                    return Center(
+                      child:
+                          state.failure ==
+                              'Connection timed out. Please try again.'
+                          ? LostConnection()
+                          : Text(state.failure),
+                    );
+                  } else if (state is DeviceSuccess) {
+                    if (state.devices.isEmpty) {
+                      return const Center(child: Text('No devices found'));
                     }
-                    return const SizedBox();
-                  },
-                );
-              },
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: state.devices.length,
+                      itemBuilder: (context, index) =>
+                          DeviceItemWidget(deviceItem: state.devices[index]),
+                    );
+                  }
+                  return const SizedBox();
+                },
+              ),
             ),
           ],
         ),

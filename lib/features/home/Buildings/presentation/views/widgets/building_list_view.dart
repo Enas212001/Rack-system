@@ -26,8 +26,6 @@ class BuildingListView extends StatelessWidget {
           showToast('Building deleted successfully');
         } else if (state is DeleteBuildingFailure) {
           showToast('Failed to delete building');
-        } else if (state is DeleteBuildingLoading) {
-          SliverToBoxAdapter(child: CustomLoading());
         }
       },
       child: BlocBuilder<BuildingCubit, BuildingState>(
@@ -120,6 +118,8 @@ class BuildingListView extends StatelessWidget {
                 ),
               ),
             );
+          } else if (state is DeleteBuildingLoading) {
+            return SliverToBoxAdapter(child: CustomLoading());
           }
           return SliverToBoxAdapter(
             child: Center(child: Text('Something went wrong')),

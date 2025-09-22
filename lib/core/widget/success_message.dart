@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_assets.dart';
+import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/app_strings.dart';
 import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,6 +15,7 @@ class SuccessMessage extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(35.r),
         child: Card(
+          color: AppColors.scaffoldBackgroundColor,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 45.w, vertical: 20.h),
             child: Column(
