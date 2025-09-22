@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/widget/top_with_back.dart';
 import 'package:flutter_application_1/features/guest_flow/presentation/views/widgets/device_body.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
@@ -11,6 +12,8 @@ class DeviceGuestViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
+      backgroundColor: AppColors.primaryColor,
+      color: AppColors.whiteColor,
       onRefresh: () async {
         context.read<DeviceCubit>().getDevices(
           switchId: switchItem.id!.toString(),

@@ -23,7 +23,8 @@ class DeviceViewBody extends StatelessWidget {
       onRefresh: () => context.read<DeviceCubit>().getDevices(
         switchId: switchItem.id.toString(),
       ),
-      color: AppColors.primaryColor,
+      backgroundColor: AppColors.primaryColor,
+      color: AppColors.whiteColor,
       child: CustomScrollView(
         slivers: <Widget>[
           SliverToBoxAdapter(

@@ -51,7 +51,8 @@ class _RackViewBodyState extends State<RackViewBody> {
             break;
         }
       },
-      color: AppColors.primaryColor,
+      backgroundColor: AppColors.primaryColor,
+      color: AppColors.whiteColor,
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(

@@ -17,7 +17,8 @@ class BuildingViewBody extends StatelessWidget {
     final buildingCubit = context.read<BuildingCubit>();
     return RefreshIndicator(
       onRefresh: () => buildingCubit.getBuildings(hotelId: hotelModel.id!),
-      color: AppColors.primaryColor,
+      backgroundColor: AppColors.primaryColor,
+      color: AppColors.whiteColor,
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(

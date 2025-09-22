@@ -44,7 +44,8 @@ class _GuestRackViewBodyState extends State<GuestRackViewBody> {
           // break;
         }
       },
-      color: AppColors.primaryColor,
+      backgroundColor: AppColors.primaryColor,
+      color: AppColors.whiteColor,
       child: CustomScrollView(
         slivers: <Widget>[
           SliverToBoxAdapter(

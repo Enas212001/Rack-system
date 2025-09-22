@@ -23,7 +23,8 @@ class GuestBuildingViewBody extends StatelessWidget {
             .getData(key: CacheKey.userHotelId)
             .toString(),
       ),
-      color: AppColors.primaryColor,
+      backgroundColor: AppColors.primaryColor,
+      color: AppColors.whiteColor,
       child: CustomScrollView(
         slivers: <Widget>[
           SliverToBoxAdapter(

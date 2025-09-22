@@ -15,6 +15,8 @@ class UserViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () => context.read<UserCubit>().getUsersInfo(),
+      backgroundColor: AppColors.primaryColor,
+      color: AppColors.whiteColor,
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(

@@ -17,7 +17,8 @@ class HotelsViewBody extends StatelessWidget {
     final hotelCubit = context.read<HotelCubit>();
     return RefreshIndicator(
       onRefresh: () => hotelCubit.getHotels(),
-      color: AppColors.primaryColor,
+      backgroundColor: AppColors.primaryColor,
+      color: AppColors.whiteColor,
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
