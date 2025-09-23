@@ -11,6 +11,8 @@ import 'package:flutter_application_1/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'switch_multiple_select.dart';
+
 class EditRackForm extends StatelessWidget {
   const EditRackForm({super.key, required this.rack});
   final RackItem rack;
@@ -49,6 +51,13 @@ class EditRackForm extends StatelessWidget {
                 title: 'Site Name',
                 value: rack.siteName,
                 onChanged: (value) => cubit.editSiteNameController.text = value,
+              ),
+              SizedBox(height: 10.h),
+              SwitchMultipleSelect(
+                selectedSwitchs: cubit.editSelectedSwitchs,
+                onConfirm: (values) {
+                  cubit.editSelectedSwitchs = values;
+                },
               ),
               SizedBox(height: 10.h),
               TitleWithTextField(

@@ -1,7 +1,9 @@
 import 'dart:io';
-import 'package:excel/excel.dart';
-import 'package:open_filex/open_filex.dart';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart' as xlsio;
+
 import 'package:flutter_application_1/features/home/Racks/data/models/summary_model/summary_item.dart';
 import 'package:flutter_application_1/features/home/Racks/data/models/switch_model/switch_item.dart';
 import 'package:flutter_application_1/features/home/devices/data/models/device_model/device_item.dart';
@@ -11,112 +13,160 @@ Future<void> generateSingleSheetExcel({
   required List<SummaryItem> summaries,
   required List<DeviceItem> devices,
 }) async {
-  final excel = Excel.createExcel();
-  final sheet = excel['Report']; // this reuses "Sheet1" but renames it
-  excel.rename('Sheet1', 'Report');
+  final workbook = xlsio.Workbook();
+  final sheet = workbook.worksheets[0];
+  sheet.name = 'Report';
 
-  final headerStyle = CellStyle(
-    bold: true,
-    backgroundColorHex: ExcelColor.fromHexString("#FFFF00"),
-    fontColorHex: ExcelColor.fromHexString("#000000"),
-    horizontalAlign: HorizontalAlign.Center,
-    verticalAlign: VerticalAlign.Center,
-    fontSize: 8,
+  // ===== Load Logo =====
+  final ByteData logoBytes = await rootBundle.load(
+    'assets/images/PowerSMTPLogo.png',
   );
+  final List<int> logo = logoBytes.buffer.asUint8List();
 
-  // ===== Title =====
-  sheet.appendRow([TextCellValue("${switchItem.name}")]);
-  sheet.merge(CellIndex.indexByString("A1"), CellIndex.indexByString("G1"));
+  // Add image at row 1, col 1
+  final picture = sheet.pictures.addStream(1, 1, logo);
+  picture.height = 60;
+  picture.width = 60;
+
+  // Place title in col 3 so it doesn't overlap
+  final titleCell = sheet.getRangeByName('C1');
+  titleCell.setText(switchItem.name ?? '');
+  titleCell.cellStyle.bold = true;
+  titleCell.cellStyle.fontSize = 16;
+  sheet.getRangeByName('C1:H1').merge();
+
   // ===== Summary Section =====
-  sheet.appendRow([]); // empty row
+  int currentRow = 5;
+  sheet.getRangeByIndex(currentRow, 1).setText('Summary');
+  sheet.getRangeByIndex(currentRow, 1).cellStyle.backColor = '#FFFF00';
+  sheet
+      .getRangeByIndex(currentRow, 1, currentRow, summaries.length + 1)
+      .merge();
+  currentRow++;
 
-  // Title row
-  sheet.appendRow([TextCellValue("Summary")]);
-  final lastRowIndex = sheet.maxRows - 1;
-  final summaryColumns = 1 + summaries.length; // 1 for "name" + N for values
+  // Header row style
+  final headerStyle = workbook.styles.add('headerStyle');
+  headerStyle.bold = true;
+  headerStyle.backColor = '#FFFF00';
+  headerStyle.hAlign = xlsio.HAlignType.center;
 
-  sheet.merge(
-    CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: lastRowIndex),
-    CellIndex.indexByColumnRow(
-      columnIndex: summaryColumns,
-      rowIndex: lastRowIndex,
-    ),
-  );
+  // Summary rows
+  final labels = ['AP Room', 'AP Out', 'CCTV In', 'CCTV Out'];
+  for (final label in labels) {
+    sheet.getRangeByIndex(currentRow, 1).setText(label);
+    int col = 2;
+    for (var summary in summaries) {
+      switch (label) {
+        case 'AP Room':
+          sheet
+              .getRangeByIndex(currentRow, col)
+              .setText(summary.apRoom?.toString() ?? "0");
 
-  sheet.row(sheet.maxRows - 1).forEach((c) => c?.cellStyle = headerStyle);
-
-  // Prepare rows for each field (CellValue list, not Data)
-  List<CellValue?> apRoomRow = [TextCellValue("AP Room")];
-  List<CellValue?> apOutRow = [TextCellValue("AP Out")];
-  List<CellValue?> cctvInRow = [TextCellValue("CCTV In")];
-  List<CellValue?> cctvOutRow = [TextCellValue("CCTV Out")];
-
-  // Fill them with values from all summaries
-  for (var summary in summaries) {
-    apRoomRow.add(TextCellValue(summary.apRoom?.toString() ?? "0"));
-    apOutRow.add(TextCellValue(summary.apOut?.toString() ?? "0"));
-    cctvInRow.add(TextCellValue(summary.cctvIn?.toString() ?? "0"));
-    cctvOutRow.add(TextCellValue(summary.cctvOut?.toString() ?? "0"));
+          break;
+        case 'AP Out':
+          sheet
+              .getRangeByIndex(currentRow, col)
+              .setText(summary.apOut?.toString() ?? '0');
+          break;
+        case 'CCTV In':
+          sheet
+              .getRangeByIndex(currentRow, col)
+              .setText(summary.cctvIn?.toString() ?? '0');
+          break;
+        case 'CCTV Out':
+          sheet
+              .getRangeByIndex(currentRow, col)
+              .setText(summary.cctvOut?.toString() ?? '0');
+          break;
+      }
+      col++;
+    }
+    currentRow++;
   }
 
-  // Append rows
-  sheet.appendRow(apRoomRow);
-  sheet.appendRow(apOutRow);
-  sheet.appendRow(cctvInRow);
-  sheet.appendRow(cctvOutRow);
+  currentRow++;
 
   // ===== Switch Info Section =====
-  sheet.appendRow([]); // empty row
-  sheet.appendRow([
-    TextCellValue("DEVICE NAME"),
-    TextCellValue("SERIAL NUMBER"),
-    TextCellValue("MAC ADDRESS"),
-    TextCellValue("IP ADDRESS"),
-    TextCellValue("MODEL"),
-    TextCellValue("Uplink Port for Core 1"),
-    TextCellValue("Uplink Port for Core 2"),
-  ]);
-  sheet.row(sheet.maxRows - 1).forEach((c) => c?.cellStyle = headerStyle);
+  final switchHeaders = [
+    'DEVICE NAME',
+    'SERIAL NUMBER',
+    'MAC ADDRESS',
+    'IP ADDRESS',
+    'MODEL',
+    'Uplink Port for Core 1',
+    'Uplink Port for Core 2',
+  ];
+  sheet.importList(switchHeaders, currentRow, 1, false);
+  sheet
+          .getRangeByIndex(currentRow, 1, currentRow, switchHeaders.length)
+          .cellStyle =
+      headerStyle;
+  currentRow++;
 
-  sheet.appendRow([
-    TextCellValue(switchItem.name ?? ''),
-    TextCellValue(switchItem.serialNumber ?? ''),
-    TextCellValue(switchItem.macAdd ?? ''),
-    TextCellValue(switchItem.ipAdd ?? ''),
-    TextCellValue(switchItem.model ?? ''),
-    TextCellValue(switchItem.upLinkCore1?.toString() ?? ''),
-    TextCellValue(switchItem.upLinkCore2?.toString() ?? ''),
-  ]);
+  sheet.importList(
+    [
+      switchItem.name ?? '',
+      switchItem.serialNumber ?? '',
+      switchItem.macAdd ?? '',
+      switchItem.ipAdd ?? '',
+      switchItem.model ?? '',
+      switchItem.upLinkCore1?.toString() ?? '',
+      switchItem.upLinkCore2?.toString() ?? '',
+    ],
+    currentRow,
+    1,
+    false,
+  );
+
+  currentRow += 2;
 
   // ===== Devices Section =====
-  sheet.appendRow([]); // empty row
-  sheet.appendRow([
-    TextCellValue("DEVICE NAME"),
-    TextCellValue("SERIAL NUMBER"),
-    TextCellValue("MAC ADDRESS"),
-    TextCellValue("MODEL"),
-    TextCellValue("Switch Port"),
-    TextCellValue("Patch Panel Port"),
-  ]);
-  sheet.row(sheet.maxRows - 1).forEach((c) => c?.cellStyle = headerStyle);
+  final deviceHeaders = [
+    'DEVICE NAME',
+    'SERIAL NUMBER',
+    'MAC ADDRESS',
+    'MODEL',
+    'Switch Port',
+    'Patch Panel Port',
+  ];
+  sheet.importList(deviceHeaders, currentRow, 1, false);
+  sheet
+          .getRangeByIndex(currentRow, 1, currentRow, deviceHeaders.length)
+          .cellStyle =
+      headerStyle;
+  currentRow++;
 
   for (var d in devices) {
-    sheet.appendRow([
-      TextCellValue(d.deviceName ?? ''),
-      TextCellValue(d.deviceSerial ?? ''),
-      TextCellValue(d.macAddress ?? ''),
-      TextCellValue(d.deviceModel ?? ''),
-      TextCellValue(d.portNumber?.toString() ?? ''),
-      TextCellValue(d.patchPanel ?? ''),
-    ]);
+    sheet.importList(
+      [
+        d.deviceName ?? '',
+        d.deviceSerial ?? '',
+        d.macAddress ?? '',
+        d.deviceModel ?? '',
+        d.portNumber?.toString() ?? '',
+        d.patchPanel ?? '',
+      ],
+      currentRow,
+      1,
+      false,
+    );
+    currentRow++;
+  }
+
+  // ===== Auto-fit columns =====
+  sheet.autoFitColumn(1);
+  for (int i = 1; i <= 7; i++) {
+    sheet.autoFitColumn(i);
   }
 
   // ===== Save File =====
+  final List<int> bytes = workbook.saveAsStream();
+  workbook.dispose();
+
   final dir = await getApplicationDocumentsDirectory();
   final file = File('${dir.path}/switch_report.xlsx')
-    ..createSync(recursive: true);
-  await file.writeAsBytes(excel.encode()!, flush: true);
+    ..createSync(recursive: true)
+    ..writeAsBytesSync(bytes, flush: true);
 
-  // 👉 Open Excel file in external viewer
   await OpenFilex.open(file.path);
 }
