@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/widget/empty_widget.dart';
 import 'package:flutter_application_1/core/widget/lost_connection.dart';
 import 'package:flutter_application_1/core/widget/shimmer_widget.dart';
 import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
@@ -14,6 +15,11 @@ class DeviceBody extends StatelessWidget {
     return BlocBuilder<DeviceCubit, DeviceState>(
       builder: (context, state) {
         if (state is DeviceSuccess) {
+          if (state.devices.isEmpty) {
+            return SliverFillRemaining(
+              child: const EmptyWidget(text: 'Devices'),
+            );
+          }
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               if (state.devices.isEmpty) {

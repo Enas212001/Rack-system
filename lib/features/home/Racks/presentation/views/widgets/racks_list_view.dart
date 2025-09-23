@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/widget/custom_loading.dart';
+import 'package:flutter_application_1/core/widget/empty_widget.dart';
 import 'package:flutter_application_1/core/widget/lost_connection.dart';
 import 'package:flutter_application_1/features/home/Buildings/data/models/building_model.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
@@ -48,17 +49,7 @@ class RacksListView extends StatelessWidget {
           } else if (state is RacksSuccess) {
             final racks = state.racks;
             if (racks.isEmpty) {
-              return SliverToBoxAdapter(
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(16.r),
-                    child: Text(
-                      'No racks available',
-                      style: CustomTextStyles.text14W500Primary,
-                    ),
-                  ),
-                ),
-              );
+              return SliverFillRemaining(child: EmptyWidget(text: 'Racks'));
             }
             return SliverToBoxAdapter(
               child: Padding(

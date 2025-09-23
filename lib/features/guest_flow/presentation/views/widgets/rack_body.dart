@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/core/widget/empty_widget.dart';
 import 'package:flutter_application_1/core/widget/lost_connection.dart';
 import 'package:flutter_application_1/core/widget/shimmer_widget.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/rack_cubit/rack_cubit.dart';
@@ -14,6 +15,9 @@ class RacksBody extends StatelessWidget {
     return BlocBuilder<RackCubit, RackState>(
       builder: (context, state) {
         if (state is RacksSuccess) {
+          if (state.racks.isEmpty) {
+            return SliverFillRemaining(child: const EmptyWidget(text: 'Racks'));
+          }
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               return RackGuestItem(rackItem: state.racks[index]);

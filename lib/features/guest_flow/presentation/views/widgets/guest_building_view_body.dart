@@ -3,6 +3,7 @@ import 'package:flutter_application_1/core/cache/cache_helper.dart';
 import 'package:flutter_application_1/core/utils/api_key.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/service/service_locator.dart';
+import 'package:flutter_application_1/core/widget/empty_widget.dart';
 import 'package:flutter_application_1/core/widget/lost_connection.dart';
 import 'package:flutter_application_1/core/widget/shimmer_widget.dart';
 import 'package:flutter_application_1/core/widget/top_with_back.dart';
@@ -37,6 +38,11 @@ class GuestBuildingViewBody extends StatelessWidget {
           BlocBuilder<BuildingCubit, BuildingState>(
             builder: (context, state) {
               if (state is BuildingSuccess) {
+                if (state.buildings.isEmpty) {
+                  return SliverFillRemaining(
+                    child: const EmptyWidget(text: 'Buildings'),
+                  );
+                }
                 return SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return BuildingGuestItem(

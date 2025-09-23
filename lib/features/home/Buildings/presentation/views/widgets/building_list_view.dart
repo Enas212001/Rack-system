@@ -3,6 +3,7 @@ import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/widget/custom_loading.dart';
+import 'package:flutter_application_1/core/widget/empty_widget.dart';
 import 'package:flutter_application_1/core/widget/lost_connection.dart';
 import 'package:flutter_application_1/features/home/Buildings/presentation/cubit/building_cubit.dart';
 import 'package:flutter_application_1/features/home/Hotels/data/models/hotel_model.dart';
@@ -44,17 +45,7 @@ class BuildingListView extends StatelessWidget {
           } else if (state is BuildingSuccess) {
             final buildings = state.buildings;
             if (buildings.isEmpty) {
-              return SliverToBoxAdapter(
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(16.r),
-                    child: Text(
-                      'No buildings available',
-                      style: CustomTextStyles.text14W500Primary,
-                    ),
-                  ),
-                ),
-              );
+              return SliverFillRemaining(child: EmptyWidget(text: 'Buildings'));
             }
             return SliverToBoxAdapter(
               child: Padding(

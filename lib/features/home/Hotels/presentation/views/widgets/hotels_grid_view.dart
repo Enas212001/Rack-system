@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
 import 'package:flutter_application_1/core/widget/custom_loading.dart';
+import 'package:flutter_application_1/core/widget/empty_widget.dart';
 import 'package:flutter_application_1/core/widget/lost_connection.dart';
 import 'package:flutter_application_1/features/home/Hotels/presentation/cubit/hotel_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,6 +39,11 @@ class HotelsSliverGridView extends StatelessWidget {
             );
           } else if (state is HotelSuccess) {
             final hotels = state.hotels;
+            if (hotels.isEmpty) {
+              return const SliverFillRemaining(
+                child: EmptyWidget(text: 'Hotels'),
+              );
+            }
             return SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,

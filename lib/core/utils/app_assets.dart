@@ -40,6 +40,8 @@ class Assets {
 
   static const String imagesEdit = "assets/images/edit.svg";
 
+  static const String imagesEmpty = "assets/images/empty.svg";
+
   static const String imagesExport = "assets/images/export.svg";
 
   static const String imagesEye = "assets/images/eye.svg";

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/func/custom_toast.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/widget/custom_loading.dart';
+import 'package:flutter_application_1/core/widget/empty_widget.dart';
 import 'package:flutter_application_1/core/widget/lost_connection.dart';
 import 'package:flutter_application_1/features/home/devices/presentation/manager/cubit/device_cubit.dart';
 import 'package:flutter_application_1/theme/theme.dart';
@@ -59,7 +60,7 @@ class DevicesListView extends StatelessWidget {
                     );
                   } else if (state is DeviceSuccess) {
                     if (state.devices.isEmpty) {
-                      return const Center(child: Text('No devices found'));
+                      return EmptyWidget(text: 'Devices');
                     }
                     return ListView.builder(
                       padding: EdgeInsets.zero,

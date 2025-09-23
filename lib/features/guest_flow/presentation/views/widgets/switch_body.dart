@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_routes.dart';
+import 'package:flutter_application_1/core/widget/empty_widget.dart';
 import 'package:flutter_application_1/core/widget/lost_connection.dart';
 import 'package:flutter_application_1/core/widget/shimmer_widget.dart';
 import 'package:flutter_application_1/features/home/Racks/presentation/manager/switch_cubit/switch_cubit.dart';
@@ -19,6 +20,11 @@ class SwitchBody extends StatelessWidget {
     return BlocBuilder<SwitchCubit, SwitchState>(
       builder: (context, state) {
         if (state is SwitchSuccess) {
+          if (state.switches.isEmpty) {
+            return SliverFillRemaining(
+              child: const EmptyWidget(text: 'Switches'),
+            );
+          }
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               return GestureDetector(
