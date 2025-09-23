@@ -18,10 +18,16 @@ class ItemDetail extends StatelessWidget {
     this.isDevice = false,
     this.showDetails,
     this.showReport,
+    this.isRack = false,
+    this.showRackDetails,
   });
   final String? label, value;
-  final bool isAction, isUser, isSwitch, isDevice;
-  final VoidCallback? onEdit, onDelete, showDetails, showReport;
+  final bool isAction, isUser, isSwitch, isDevice, isRack;
+  final VoidCallback? onEdit,
+      onDelete,
+      showDetails,
+      showReport,
+      showRackDetails;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -71,6 +77,12 @@ class ItemDetail extends StatelessWidget {
                               onTap: onDelete,
                               child: SvgPicture.asset(Assets.imagesDelete),
                             ),
+                            isRack
+                                ? GestureDetector(
+                                    onTap: showRackDetails,
+                                    child: SvgPicture.asset(Assets.imagesEye),
+                                  )
+                                : const SizedBox(),
                           ],
                         )
                 : Text(

@@ -9,6 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import 'rack_switch_details.dart';
+
 class RackDetails extends StatelessWidget {
   const RackDetails({
     super.key,
@@ -30,6 +32,15 @@ class RackDetails extends StatelessWidget {
           ItemDetail(
             label: 'Actions',
             isAction: true,
+            isRack: true,
+            showRackDetails: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return RackSwitchDetails(rackInfoModel: rackInfoModel);
+                },
+              );
+            },
             onEdit: () async {
               await GoRouter.of(
                 context,

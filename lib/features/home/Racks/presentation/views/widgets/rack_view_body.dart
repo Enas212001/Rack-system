@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/core/utils/app_colors.dart';
 import 'package:flutter_application_1/core/utils/app_strings.dart';
@@ -64,7 +62,6 @@ class _RackViewBodyState extends State<RackViewBody> {
                   context.read<RackCubit>().searchRack(value);
                 } else {
                   context.read<SwitchCubit>().searchSwitch(value);
-                  log('message');
                 }
               },
               withDrawer: false,
